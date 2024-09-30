@@ -56,7 +56,7 @@ class WindowMain:
 class WindowSettings(WindowMain):
     def __init__(self, master):
         self.master = master
-        self.master.geometry("300x300+1500+700")
+        self.master.geometry("300x150+1500+700")
         self.master.resizable(False,False)
         maximize_minimize_button.hide(self.master)
         self.master.title("writeLate - Settings")
@@ -64,41 +64,62 @@ class WindowSettings(WindowMain):
         self.show_widgets()
 
     def show_widgets(self):
+        # Create comboboxes
+        self.create_combobox("Source", 0)
+        self.create_combobox("Destination", 1)
+
+        # Create a frame to hold the buttons
+        button_frame = ctk.CTkFrame(self.master, fg_color="#242424")
+        button_frame.pack(side="bottom", padx=10, pady=10)
+
+        # Save button with command to print selected values
         self.quit_button = ctk.CTkButton(
-            self.master, 
-            text=f"Save",
-            command=self.close_window).pack(side="bottom", padx=10, pady=20)
-        self.create_combobox()
+            button_frame, 
+            text="Save",
+            font=("Material Symbols Rounded", 20),
+            width=80,
+            command=self.save_selection  # Assign the save function here
+        ).pack(side="left", padx=10)
+        
+        self.info_button = ctk.CTkButton(
+            button_frame,
+            text="info", 
+            font=("Material Symbols Rounded", 20),
+            width=30,
+            command=self.save_selection 
+        ).pack(side="right", padx=10) 
 
-
-    def create_combobox(self):
+    def create_combobox(self, language_type, default_value):
         # Sample options for the combobox
-        options = ["Auto","English", "Turkish", "German", "Spanish"]
+        options = ["Auto", "English", "Turkish", "German", "Spanish"]
 
-        self.combobox_var_Language_src = ctk.StringVar(value=options[0])  # Default value for source language
-        self.combobox_var_Language_dest = ctk.StringVar(value=options[1]) # Default value for destination language
+        # Create a frame to hold the buttons and label
+        combo_frame = ctk.CTkFrame(self.master, fg_color="#242424")
+        combo_frame.pack(side="top", pady=10,padx=15, fill="x")
 
-        ctk.CTkLabel(self.master, text="Source Language:").pack()
-        
+        # Label for combobox
+        ctk.CTkLabel(combo_frame, text=language_type + " Language:").pack(side="left", padx=0)
 
-        self.combobox_src = ctk.CTkComboBox(
-            self.master,
+        # Create a StringVar for each combobox to store selected values
+        if language_type == "Source":
+            self.source_combobox_var = ctk.StringVar(value=options[default_value])
+        else:
+            self.destination_combobox_var = ctk.StringVar(value=options[default_value])
+
+        # Create combobox with associated variable
+        self.combobox = ctk.CTkComboBox(
+            combo_frame,
             values=options,
-            variable=self.combobox_var_Language_src,
-            command=lambda event: print("src: "+ self.combobox_var_Language_src.get()) # in here first language detect
-        ).pack(pady=(0,20))
-        
-        ctk.CTkLabel(self.master, text="Destination Language:").pack()
+            width=130,
+            variable=(self.source_combobox_var if language_type == "Source" else self.destination_combobox_var)
+        ).pack(side="right", padx=0)
 
-        self.combobox_dest = ctk.CTkComboBox(
-            self.master,
-            values=options,
-            variable=self.combobox_var_Language_dest,
-            command=lambda event: print("dest: "+self.combobox_var_Language_dest.get()) # in here first language detect
-        ).pack(pady=(0,20))
+    def save_selection(self):
+        # Print the selected values of both comboboxes
+        print(f"Source: {self.source_combobox_var.get()}")
+        print(f"Destination: {self.destination_combobox_var.get()}")
 
-        
-    
+
 
 root = ctk.CTk()  # Create the main window using customtkinter
 app = WindowMain(root)
