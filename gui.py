@@ -27,7 +27,7 @@ class WindowMain:
             fg_color="#222222"
         ).place(x=0,y=0)
 
-    def create_button(self, text, _class):
+    def create_button(self, text, _class,width=40,height=40):
         ctk.CTkButton(  # Use CTkButton
             self.master,
             text="SETTINGS",
@@ -39,7 +39,7 @@ class WindowMain:
             command=lambda: self.new_window(_class)).pack(side="right")
 
     def new_window(self, _class):
-        global windowSettings
+        global windowSettings, windowInfo
 
         try:
             if _class == WindowSettings:
@@ -48,6 +48,14 @@ class WindowMain:
         except:
             windowSettings = ctk.CTkToplevel(self.master)  # Use CTkToplevel
             _class(windowSettings)
+        try:
+            if _class == WindowInfo:
+                if windowInfo.state() == "normal":
+                    windowInfo.focus()
+        except:
+            windowInfo = ctk.CTkToplevel(self.master)  # Use CTkToplevel
+            _class(windowInfo)
+
 
     def close_window(self):
         self.master.destroy()
@@ -56,7 +64,7 @@ class WindowMain:
 class WindowSettings(WindowMain):
     def __init__(self, master):
         self.master = master
-        self.master.geometry("300x150+1500+700")
+        self.master.geometry("300x150+1400+650")
         self.master.resizable(False,False)
         maximize_minimize_button.hide(self.master)
         self.master.title("writeLate - Settings")
@@ -81,13 +89,14 @@ class WindowSettings(WindowMain):
             command=self.save_selection  # Assign the save function here
         ).pack(side="left", padx=10)
         
+        # Normally we could get this from main, but there is no need
         self.info_button = ctk.CTkButton(
             button_frame,
             text="info", 
             font=("Material Symbols Rounded", 20),
-            width=30,
-            command=self.save_selection 
+            width=30,command=lambda: self.new_window(WindowInfo)
         ).pack(side="right", padx=10) 
+
 
     def create_combobox(self, language_type, default_value):
         # Sample options for the combobox
@@ -119,6 +128,23 @@ class WindowSettings(WindowMain):
         print(f"Source: {self.source_combobox_var.get()}")
         print(f"Destination: {self.destination_combobox_var.get()}")
 
+
+#--------------------------------------  info  ------------------------------
+
+class WindowInfo(WindowMain):
+    def __init__(self, master):
+        self.master = master
+        self.master.geometry("300x150+2000+650")
+        self.master.resizable(False,False)
+        maximize_minimize_button.hide(self.master)
+        self.master.title("writeLate - Info")
+        title_bar_color.set(self.master,"#242424")
+        self.show_widgets()
+    
+    def show_widgets(self):
+        ctk.CTkLabel(self.master, text="Created by Yusuf Emre Albayrak with love ❤️").pack(side="bottom", fill="x")
+    
+    
 
 
 root = ctk.CTk()  # Create the main window using customtkinter
