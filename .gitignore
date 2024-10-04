@@ -8,3 +8,9 @@ env.bak/
 venv.bak/
 
 case.py
+
+test/
+assets/
+
+__pycache__/
+

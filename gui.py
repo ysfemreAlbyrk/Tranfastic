@@ -1,5 +1,6 @@
 import customtkinter as ctk  # Import customtkinter
 from hPyT import *
+import webbrowser
 ctk.set_appearance_mode("dark")
 class WindowMain:
     def __init__(self, master):
@@ -78,16 +79,16 @@ class WindowSettings(WindowMain):
 
         # Create a frame to hold the buttons
         button_frame = ctk.CTkFrame(self.master, fg_color="#242424")
-        button_frame.pack(side="bottom", padx=10, pady=10)
+        button_frame.pack(side="bottom", padx=10, pady=10,fill="x")
 
         # Save button with command to print selected values
         self.quit_button = ctk.CTkButton(
             button_frame, 
             text="Save",
             font=("Material Symbols Rounded", 20),
-            width=80,
+            width=100,
             command=self.save_selection  # Assign the save function here
-        ).pack(side="left", padx=10)
+        ).pack(side="left", padx=0)
         
         # Normally we could get this from main, but there is no need
         self.info_button = ctk.CTkButton(
@@ -95,7 +96,7 @@ class WindowSettings(WindowMain):
             text="info", 
             font=("Material Symbols Rounded", 20),
             width=30,command=lambda: self.new_window(WindowInfo)
-        ).pack(side="right", padx=10) 
+        ).pack(side="right", padx=0) 
 
 
     def create_combobox(self, language_type, default_value):
@@ -142,8 +143,19 @@ class WindowInfo(WindowMain):
         self.show_widgets()
     
     def show_widgets(self):
-        ctk.CTkLabel(self.master, text="Created by Yusuf Emre Albayrak with love ❤️").pack(side="bottom", fill="x")
+        info_frame = ctk.CTkFrame(self.master, fg_color="#333333")
+        info_frame.pack(side="top", padx=10, pady=10)
+        self.quit_button = ctk.CTkButton(
+            info_frame, 
+            text="github",
+            font=("arial", 16),
+            width=80,
+            command=lambda: webbrowser.open_new("http://subjectstudio.xyz")  
+        ).pack(pady=30,padx=60)
     
+        ctk.CTkLabel(self.master, text="Created by Yusuf Emre Albayrak with love ❤️").pack(side="bottom", fill="x")
+        
+        
     
 
 
