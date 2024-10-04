@@ -2,7 +2,6 @@ import customtkinter as ctk
 from hPyT import *
 import webbrowser
 ctk.set_appearance_mode("dark")
-ctk.set_widget_scaling(1.0) 
 
 #--------------------------------------  main  ------------------------------
 class WindowMain(ctk.CTk):
@@ -13,6 +12,7 @@ class WindowMain(ctk.CTk):
         self.resizable(1,1)
         maximize_minimize_button.hide(self)
         title_bar_color.set(self,"#222222")
+        self.protocol("WM_DELETE_WINDOW", self.close_window)
         self.show_widgets()
 
     def show_widgets(self):
@@ -22,11 +22,14 @@ class WindowMain(ctk.CTk):
             fg_color="#222222",
             border_width=0,
             corner_radius=0,
+            placeholder_text= "Çevirilecek cümleyi yazın..."
             # activate_scrollbars=False, # this is for CTtextBox
         ).place(x=0,y=0, relwidth=1, relheight=1)
-    
-    def __del__(self):
-        ctk.CTk.destroy(self)
+
+    def close_window(self):
+        print("destroying window main...")
+        self.destroy()
+
 
 #--------------------------------------  settings  ------------------------------
 class WindowSettings(ctk.CTk):
@@ -37,6 +40,7 @@ class WindowSettings(ctk.CTk):
         self.resizable(1,1)
         maximize_minimize_button.hide(self)
         title_bar_color.set(self,"#222222")
+        # self.protocol("WM_DELETE_WINDOW", self.close_window)
         self.show_widgets()
 
     def show_widgets(self):
@@ -84,8 +88,10 @@ class WindowSettings(ctk.CTk):
         print(f"Source: {self.source_combobox_var.get()}")
         print(f"Destination: {self.destination_combobox_var.get()}")
 
-    def __del__(self):
-            ctk.CTk.destroy(self)
+    # def close_window(self):
+    #     print("destroying window settings...")
+    #     self.destroy()
+
 
 #--------------------------------------  about  ------------------------------
 class WindowAbout(ctk.CTk):
@@ -96,6 +102,7 @@ class WindowAbout(ctk.CTk):
         maximize_minimize_button.hide(self)
         self.title("writeLate - About")
         title_bar_color.set(self,"#242424")
+        # self.protocol("WM_DELETE_WINDOW", self.close_window)
         self.show_widgets()
     
     def show_widgets(self):
@@ -110,6 +117,7 @@ class WindowAbout(ctk.CTk):
         ).pack(pady=30,padx=60)
     
         ctk.CTkLabel(master=self, text="Created by Yusuf Emre Albayrak with love ❤️").pack(side="bottom", fill="x")
-        
-    def __del__(self):
-        ctk.CTk.destroy(self)
+
+    # def close_window(self):
+    #     print("destroying window about...")
+    #     self.destroy()
