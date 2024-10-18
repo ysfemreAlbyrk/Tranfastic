@@ -15,6 +15,7 @@ def on_window_close():
 def open_window(window_class):
     global current_window
     
+    print(f"Opening '{window_class.__name__}'")
     if current_window is not None:
         current_window.destroy()
         current_window = None
@@ -24,17 +25,27 @@ def open_window(window_class):
     current_window.mainloop()
 
 
-def open_settings():
-    settings_window = gui_new.WindowSettings()
-    settings_window.mainloop()
+# def open_settings():
+#     print("settings opened")
+#     settings_window = gui_new.WindowSettings()
+#     settings_window.mainloop()
 
-def open_about():
-    about_window = gui_new.WindowAbout()
-    about_window.mainloop()
+# def open_about():
+#     print("about opened")
+#     about_window = gui_new.WindowAbout()
+#     about_window.mainloop()
+
+# def open_main():
+#     print("main opened")
+#     main_window = gui_new.WindowMain()
+#     main_window.mainloop()
+
 
 def on_clicked(icon, item):
     if str(item) == "Settings":
         open_window(gui_new.WindowSettings)
+    elif str(item) == "main":
+        open_window(gui_new.WindowMain)
     elif str(item) == "About":
         open_window(gui_new.WindowAbout)
     elif str(item) == "Exit":
@@ -47,8 +58,9 @@ def on_clicked(icon, item):
         print(f'"{item}" item not implemented yet.')
 
 icon  = pystray.Icon("writeLate", image,menu=pystray.Menu(
-    pystray.MenuItem("Settings", on_clicked),
+    pystray.MenuItem("main", on_clicked),
     pystray.MenuItem("Test", on_clicked),
+    pystray.MenuItem("Settings", on_clicked),
     pystray.MenuItem("About", on_clicked),
     pystray.MenuItem("Exit", on_clicked)
 ))
