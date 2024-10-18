@@ -9,7 +9,7 @@ current_window = None
 def on_window_close():
     global current_window
     print("Window is being closed...")  
-    current_window.destroy()  
+    current_window.destroy()
     current_window = None 
 
 def open_window(window_class):
