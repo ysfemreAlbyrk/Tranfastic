@@ -9,6 +9,8 @@ venv.bak/
 
 case.py
 
+*.log
+
 test/
 assets/
 

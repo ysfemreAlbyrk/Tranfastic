@@ -1,8 +1,11 @@
 import customtkinter as ctk
 from hPyT import *
 import webbrowser
+import logging as log
+log = log.getLogger("GUI")
 ctk.set_appearance_mode("dark")
 
+import app
 #--------------------------------------  main  ------------------------------
 class WindowMain(ctk.CTk):
     def __init__(self):
@@ -14,9 +17,12 @@ class WindowMain(ctk.CTk):
         title_bar_color.set(self,"#222222")
         self.protocol("WM_DELETE_WINDOW", self.close_window)
         self.show_widgets()
+        self.attributes('-topmost', 1)
+        # self.app = app.TranslatorApp(self)
+
 
     def show_widgets(self):
-        ctk.CTkEntry(
+        self.input = ctk.CTkEntry(
             master=self,
             height=40,
             fg_color="#222222",
@@ -24,10 +30,16 @@ class WindowMain(ctk.CTk):
             corner_radius=0,
             placeholder_text= "Çevirilecek cümleyi yazın..."
             # activate_scrollbars=False, # this is for CTtextBox
-        ).place(x=0,y=0, relwidth=1, relheight=1)
+        )
+        self.input.focus()
+        self.input.place(x=0,y=0, relwidth=1, relheight=1)
+
+
+    def get_input(self):
+        return self.input.get()
 
     def close_window(self):
-        print("destroying window main...")
+        log.debug("...destroying window main...")
         self.destroy()
 
 
@@ -85,8 +97,8 @@ class WindowSettings(ctk.CTk):
 
     def save_selection(self):
         # Print the selected values of both comboboxes
-        print(f"Source: {self.source_combobox_var.get()}")
-        print(f"Destination: {self.destination_combobox_var.get()}")
+        log.info(f"Source: {self.source_combobox_var.get()}")
+        log.info(f"Destination: {self.destination_combobox_var.get()}")
 
     # def close_window(self):
     #     print("destroying window settings...")

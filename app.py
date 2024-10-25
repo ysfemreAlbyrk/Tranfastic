@@ -1,6 +1,7 @@
 import tkinter as tk
 from googletrans import Translator
 import time
+import gui_new
 
 class TranslatorApp:
     def __init__(self, root):
