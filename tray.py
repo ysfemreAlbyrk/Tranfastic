@@ -90,7 +90,7 @@ def on_clicked(icon, item):
     except Exception as e:
         log.error(f"Menu item clicking error: {e}")
 
-icon = pystray.Icon("writeLate", image, menu=pystray.Menu(
+icon = pystray.Icon("TransWrite", image, menu=pystray.Menu(
     pystray.MenuItem("Shortcut Status", on_clicked), 
     pystray.MenuItem("Test", on_clicked),
     pystray.MenuItem('Show message', lambda icon, item: icon.notify('Hello World!')),
