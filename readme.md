@@ -11,7 +11,6 @@ TransWrite is a lightweight Python application designed for instant, real-time t
 - **⚡ Hotkey Activation:** Opens translation window instantly with a customizable keyboard shortcut.
 - **🖥️ System Tray Integration:** Operates silently in the background to minimize clutter.
 - **⚙️ Customizable Settings:** Lets you configure source and destination languages.
-- **🔔 Notifications:** Option to notify you when translations are ready.
 - **🔒 Privacy Focused:** Does not store any translation history or sensitive information.
 
 ## 🚀 Getting Started
