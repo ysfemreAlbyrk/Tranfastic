@@ -1,61 +1,79 @@
 # TransWrite
-Instant translator app with GUI
+Instant Translator App with GUI
 
-## About
+## 📖 About
 
-TransWrite is a Python application designed to provide instant translations while you work. It sits discreetly in your system tray and, upon triggering a hotkey, pops up a window to input text for translation. The translated text is then ready for immediate use.
+TransWrite is a lightweight Python application designed for instant, real-time translation while you work. It sits discreetly in your system tray, and a quick hotkey opens a window for text input, making translated text readily available for copying or inserting.
 
-## Features
+## ✨ Features
 
-- **Real-time Translation:** Get translations on-the-fly as you type.
-- **Hotkey Activation:**  Trigger the translation window with a customizable keyboard shortcut.
-- **System Tray Integration:**  Runs silently in the background, minimizing clutter.
-- **Customizable Settings:**  Adjust source and destination languages to your preference.
+- **🌐 Real-time Translation:** Provides on-the-fly translations as you type.
+- **⚡ Hotkey Activation:** Opens translation window instantly with a customizable keyboard shortcut.
+- **🖥️ System Tray Integration:** Operates silently in the background to minimize clutter.
+- **⚙️ Customizable Settings:** Lets you configure source and destination languages.
+- **🔔 Notifications:** Option to notify you when translations are ready.
+- **🔒 Privacy Focused:** Does not store any translation history or sensitive information.
 
-## Getting Started
+## 🚀 Getting Started
+
 ### Installation
+
 1. **Clone the repository:**
-	```bash
-	git clone https://github.com/your-username/TransWrite.git
-	cd TransWrite
-	```
- 2. **Install dependencies:**
-	```bash
-	pip install -r requirements.txt
-	```
-## Usage
-
-1.  **Run the application:**
-    
     ```bash
-    python main.py 
+    git clone https://github.com/your-username/TransWrite.git
+    cd TransWrite
     ```
-    
-	TransWrite will appear in your system tray.
-2. **Select the field you want to translate:**
-	Use the default hotkey (Shift+Alt+D) or customize it in the settings.
-3.  **A small window will pop up. Type or paste the text you want to translate.**
-4.  **Press enter, the translation is automatically added to the field you selected.**
+2. **Install dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-## Configuration
+### Run the Application
 
--   **Language Settings:**  You can change the source and destination languages within the application's settings menu.
-# TODO's
-- [x] Shortcut implementation
-- [x] Logging implementation
+1. **Start TransWrite:**
+    ```bash
+    python main.py
+    ```
+    The TransWrite icon will appear in your system tray.
 
-- [ ] Prevent focusing when first opened
+2. **Using the Hotkey:**
+   - Press `Shift+Alt+D` (default) or set your preferred hotkey in the settings.
+   
+3. **Input & Translate:**
+   - Type or paste text into the pop-up window and press Enter to receive your translation.
 
-- [ ] Capture written text
-- [ ] Translation implementation
-- [ ] Complete translation with (Enter)
-- [ ] Close with (Esc)
+4. **Close with Ease:**
+   - Press `Esc` to quickly close the pop-up window.
 
-- [ ] Send notifications
+## ⚙️ Configuration
 
-- [ ] Redesign settings screen
-    - [ ] Set wait time
-    - [ ] Configure shortcut
+- **Language Settings:** Set your preferred source and destination languages in the settings menu.
+- **Shortcut Customization:** Modify the hotkey to suit your workflow.
+- **Launch on Startup (Windows):** Optionally enable TransWrite to start when your computer boots.
 
-- [ ] Launch at Windows startup
-    - [ ] Add option to settings
+## 🤝 Contributing
+
+We welcome contributions! To contribute:
+1. **Fork the repository** and create a new branch for your feature or bug fix.
+2. **Test your changes** to ensure stability.
+3. **Submit a pull request**, explaining the changes and any added features.
+
+For bug reports, please open an issue with:
+- A clear description of the issue.
+- Steps to reproduce the problem.
+- The `app.log` file content (located in the application's directory) if available.
+
+## 🛠️ Development Roadmap
+
+**Current features and future updates:**
+- [x] Hotkey and logging implementation
+- [ ] Prevent focus-stealing on initial open
+- [ ] Capture text directly from selected fields
+- [ ] Finalize translation function
+- [ ] Add user notifications for translations
+- [ ] Redesign settings screen for improved usability
+- [ ] Enable launch on Windows startup with customizable delay
+
+## 📝 License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
