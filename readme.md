@@ -1,3 +1,8 @@
+# TransWrite
+Instant translator app with GUI
+
+---
+# TODO's
 - [x] shortcut implemantation
 - [x] logging implementation
 
