@@ -10,7 +10,7 @@ import app
 class WindowMain(ctk.CTk):
     def __init__(self):
         super().__init__()
-        self.title("writeLate - " + "connected")
+        self.title("TransWrite - " + "connected")
         self.geometry("400x40+1000+500")
         self.resizable(1,1)
         maximize_minimize_button.hide(self)
@@ -47,7 +47,7 @@ class WindowMain(ctk.CTk):
 class WindowSettings(ctk.CTk):
     def __init__(self):
         super().__init__()
-        self.title("writeLate - Settings")
+        self.title("TransWrite - Settings")
         self.geometry("300x150+1400+650")
         self.resizable(1,1)
         maximize_minimize_button.hide(self)
@@ -112,7 +112,7 @@ class WindowAbout(ctk.CTk):
         self.geometry("300x150+2000+650")
         self.resizable(False,False)
         maximize_minimize_button.hide(self)
-        self.title("writeLate - About")
+        self.title("TransWrite - About")
         title_bar_color.set(self,"#242424")
         # self.protocol("WM_DELETE_WINDOW", self.close_window)
         self.show_widgets()
