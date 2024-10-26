@@ -3,21 +3,21 @@ Instant translator app with GUI
 
 ---
 # TODO's
-- [x] shortcut implemantation
-- [x] logging implementation
+- [x] Shortcut implementation
+- [x] Logging implementation
 
-- [ ] ilk açıldığında focus atmaması 
+- [ ] Prevent focusing when first opened
 
-- [ ] yazılan yazıyı alma
-- [ ] çevirmenin inplementasyonu
-- [ ] (enter) ile çeviriyi tamamlama
-- [ ] (esc) ile kapama
+- [ ] Capture written text
+- [ ] Translation implementation
+- [ ] Complete translation with (Enter)
+- [ ] Close with (Esc)
 
-- [ ] bildirim gönderimi
+- [ ] Send notifications
 
-- [ ] ayarlar ekranı yeniden yapılacak
-	- [ ] bekleme süresi
-	- [ ] kısayol ayarlama
+- [ ] Redesign settings screen
+    - [ ] Set wait time
+    - [ ] Configure shortcut
 
-- [ ] windows başlangıcında açılacak
-    - [ ] ayarlara ekleme
+- [ ] Launch at Windows startup
+    - [ ] Add option to settings
