@@ -1,6 +1,8 @@
 # TransWrite
 Instant Translator App with GUI
 
+## ⚠️ Currently only available on **Windows**. It will be released for Linux and Mac.
+
 ## 📖 About
 
 TransWrite is a lightweight Python application designed for instant, real-time translation while you work. It sits discreetly in your system tray, and a quick hotkey opens a window for text input, making translated text readily available for copying or inserting.
