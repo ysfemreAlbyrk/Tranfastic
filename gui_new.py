@@ -4,14 +4,16 @@ import webbrowser
 import logging as log
 log = log.getLogger("GUI")
 ctk.set_appearance_mode("dark")
-
 import app
+
+import ctypes
+
 #--------------------------------------  main  ------------------------------
 class WindowMain(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.title("TransWrite - " + "connected")
-        self.geometry("400x40+1000+500")
+        self.calculate_window_size()
         self.resizable(1,1)
         maximize_minimize_button.hide(self)
         title_bar_color.set(self,"#222222")
@@ -31,9 +33,21 @@ class WindowMain(ctk.CTk):
             placeholder_text= "Çevirilecek cümleyi yazın..."
             # activate_scrollbars=False, # this is for CTtextBox
         )
-        self.input.focus()
         self.input.place(x=0,y=0, relwidth=1, relheight=1)
+        self.input.focus()
 
+    def calculate_window_size(x):
+        dpi_screen_width = ctypes.windll.user32.GetSystemMetrics(0)
+        dpi_screen_height = ctypes.windll.user32.GetSystemMetrics(1)
+        dpi_factor = ctypes.windll.shcore.GetScaleFactorForDevice(0) / 100
+        # screen_width  = int(dpi_screen_width  * dpi_factor)
+        # screen_height = int(dpi_screen_height * dpi_factor)
+        if x == "width":
+            log.info(f"Window width:{dpi_screen_width}")
+            return (dpi_screen_width)
+        elif x == "height":
+            log.info(f"Window height: {dpi_screen_height}")
+            return (dpi_screen_height)
 
     def get_input(self):
         return self.input.get()
