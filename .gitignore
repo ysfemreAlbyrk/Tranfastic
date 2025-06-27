@@ -12,10 +12,10 @@ gui.py
 
 old-codes/
 
+logs/
 *.log
 
 test/
-assets/
 
 __pycache__/
 

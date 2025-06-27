@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/your-username/Tranfastic">
+  <a href="https://github.com/ysfemreAlbyrk/Tranfastic">
     <img src="../assets/icon.png" alt="Tranfastic Icon" width="150">
   </a>
 </p>
@@ -12,17 +12,17 @@
 
 <p align="center">
   <br>
-  <a href="#-özellikler">Özellikler</a>
+  <a href="#-özellikler" style="color: #0366d6">Özellikler</a>
   .
-  <a href="#-başlangıç">Başlangıç</a>
+  <a href="#-başlangıç" style="color: #0366d6">Başlangıç</a>
   .
-  <a href="#%EF%B8%8F-yapılandırma">Yapılandırma</a>
+  <a href="#%EF%B8%8F-yapılandırma" style="color: #0366d6">Yapılandırma</a>
   .
-  <a href="#-katkıda-bulunma">Katkıda Bulunma</a>
+  <a href="#-katkıda-bulunma" style="color: #0366d6">Katkıda Bulunma</a>
   .
-  <a href="#%EF%B8%8F-geliştirme-yol-haritası">Geliştirme</a>
+  <a href="#%EF%B8%8F-geliştirme-yol-haritası" style="color: #0366d6">Geliştirme</a>
   .
-  <a href="#-lisans">Lisans</a>
+  <a href="#-lisans" style="color: #0366d6">Lisans</a>
   <br>
   <br>
 </p>
@@ -41,7 +41,7 @@
 
 <div align="center">
 
-![Uygulama Önizlemesi](../docs/app_withoutbg.png)
+![Uygulama Önizlemesi](../assets/app.png)
 
 </div>
 

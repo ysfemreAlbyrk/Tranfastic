@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/your-username/Tranfastic">
+  <a href="https://github.com/ysfemreAlbyrk/Tranfastic">
     <img src="./assets/icon.png" alt="Tranfastic Icon" width="150">
   </a>
 </p>
@@ -12,18 +12,21 @@
 
 <p align="center">
   <br>
-  <a href="#-features">Features</a>
+  <a href="#-features" style="color: #0366d6">Features</a>
   .
-  <a href="#-getting-started">Getting Started</a>
+  <a href="#-getting-started" style="color: #0366d6">Getting Started</a>
   .
-  <a href="#%EF%B8%8F-configuration">Configuration</a>
+  <a href="#%EF%B8%8F-configuration" style="color: #0366d6">Configuration</a>
   .
-  <a href="#-contributing">Contributing</a>
+  <a href="#-contributing" style="color: #0366d6">Contributing</a>
   .
-  <a href="#%EF%B8%8F-development-roadmap">Development</a>
+  <a href="#%EF%B8%8F-development-roadmap" style="color: #0366d6">Development</a>
   .
-  <a href="#-license">License</a>
+  <a href="#-license" style="color: #0366d6">License</a>
   <br>
+</p>
+<p align="center">
+  <a href="https://github.com/ysfemreAlbyrk/Tranfastic/docs/readme_tr.md" style="color: #E34C26">Türkçe</a>
   <br>
 </p>
 
@@ -41,7 +44,7 @@
 
 <div align="center">
 
-![App Preview](./docs/app_withoutbg.png)
+![App Preview](./assets/app.png)
 
 </div>
 
