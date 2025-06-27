@@ -58,7 +58,6 @@ Tranfastic is a lightweight Python application designed for instant, real-time t
 - **🖥️ System Tray Integration:** Operates silently in the background to minimize clutter.
 - **⚙️ Customizable Settings:** Lets you configure source and destination languages.
 - **🔒 Privacy Focused:** Does not store any translation history or sensitive information.
-- **📋 One-Click Copy:** Copy translated text with a single click.
 - **🎨 Clean Interface:** Minimalist design that doesn't distract from your work.
 - **🔧 Easy Configuration:** Simple settings menu for language preferences.
 
@@ -113,7 +112,7 @@ For bug reports, please open an issue with:
 
 - A clear description of the issue.
 - Steps to reproduce the problem.
-- The `app.log` file content (located in the application's directory) if available.
+- The `logs/[date].log` file content (located in the application's directory) if available.
 
 ## 🛠️ Development Roadmap
 

@@ -58,7 +58,6 @@ Tranfastic, çalışırken anlık, gerçek zamanlı çeviri için tasarlanmış 
 - **🖥️ Sistem Tepsisi Entegrasyonu:** Karmaşıklığı en aza indirmek için arka planda sessizce çalışır.
 - **⚙️ Özelleştirilebilir Ayarlar:** Kaynak ve hedef dilleri yapılandırmanıza olanak tanır.
 - **🔒 Gizlilik Odaklı:** Hiçbir çeviri geçmişi veya hassas bilgi saklamaz.
-- **📋 Tek Tıkla Kopyalama:** Çevrilen metni tek tıkla kopyalayın.
 - **🎨 Temiz Arayüz:** Çalışmanızı rahatsız etmeyen minimalist tasarım.
 - **🔧 Kolay Yapılandırma:** Dil tercihleri için basit ayarlar menüsü.
 
@@ -113,7 +112,7 @@ Hata raporları için lütfen şunlarla birlikte bir issue açın:
 
 - Sorunun net bir açıklaması.
 - Sorunu yeniden üretme adımları.
-- Mümkünse `app.log` dosyasının içeriği (uygulamanın dizininde bulunur).
+- Mümkünse `logs/[date].log` dosyasının içeriği (uygulamanın dizininde bulunur).
 
 ## 🛠️ Geliştirme Yol Haritası
 

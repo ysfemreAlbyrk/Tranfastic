@@ -10,6 +10,8 @@ venv.bak/
 case.py
 gui.py
 
+old-codes/
+
 *.log
 
 test/
@@ -17,3 +19,4 @@ assets/
 
 __pycache__/
 
+PRD.md
