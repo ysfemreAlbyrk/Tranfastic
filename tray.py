@@ -8,7 +8,7 @@ import logging as log
 log = log.getLogger("Tray")
 
 try:
-    image = PIL.Image.open("./assets/icon_end.png")
+    image = PIL.Image.open("./assets/icon.png")
 except Exception as e:
     log.warning(f"Icon can't open: {e}")
 
@@ -90,7 +90,7 @@ def on_clicked(icon, item):
     except Exception as e:
         log.error(f"Menu item clicking error: {e}")
 
-icon = pystray.Icon("TransWrite", image, menu=pystray.Menu(
+icon = pystray.Icon("Tranfastic", image, menu=pystray.Menu(
     pystray.MenuItem("Shortcut Status", on_clicked), 
     pystray.MenuItem("Test", on_clicked),
     pystray.MenuItem('Show message', lambda icon, item: icon.notify('Hello World!')),

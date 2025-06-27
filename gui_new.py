@@ -12,7 +12,7 @@ import ctypes
 class WindowMain(ctk.CTk):
     def __init__(self):
         super().__init__()
-        self.title("TransWrite - " + "connected")
+        self.title("Tranfastic - " + "connected")
         self.calculate_window_size()
         self.resizable(1,1)
         maximize_minimize_button.hide(self)
@@ -61,7 +61,7 @@ class WindowMain(ctk.CTk):
 class WindowSettings(ctk.CTk):
     def __init__(self):
         super().__init__()
-        self.title("TransWrite - Settings")
+        self.title("Tranfastic - Settings")
         self.geometry("300x150+1400+650")
         self.resizable(1,1)
         maximize_minimize_button.hide(self)
@@ -126,7 +126,7 @@ class WindowAbout(ctk.CTk):
         self.geometry("300x150+2000+650")
         self.resizable(False,False)
         maximize_minimize_button.hide(self)
-        self.title("TransWrite - About")
+        self.title("Tranfastic - About")
         title_bar_color.set(self,"#242424")
         # self.protocol("WM_DELETE_WINDOW", self.close_window)
         self.show_widgets()
