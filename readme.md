@@ -26,7 +26,7 @@
   <br>
 </p>
 <p align="center">
-  <a href="https://github.com/ysfemreAlbyrk/Tranfastic/docs/readme_tr.md" style="color: #E34C26">Türkçe</a>
+  <a href="https://github.com/ysfemreAlbyrk/Tranfastic/blob/newVersion/docs/readme_tr.md" style="color: #E34C26">Türkçe</a>
   <br>
 </p>
 
