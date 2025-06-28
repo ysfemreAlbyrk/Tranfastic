@@ -20,7 +20,7 @@ class TrayManager:
         self.logger = logging.getLogger(__name__)
         self.on_settings = on_settings
         self.on_exit = on_exit
-        self.icon: Optional[pystray.Icon] = None
+        self.icon = None
         self._create_icon()
     
     def _create_icon(self):
