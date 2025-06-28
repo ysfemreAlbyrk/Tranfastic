@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/your-username/Tranfastic">
+  <a href="https://github.com/ysfemreAlbyrk/Tranfastic">
     <img src="./assets/icon.png" alt="Tranfastic Icon" width="150">
   </a>
 </p>
@@ -12,18 +12,21 @@
 
 <p align="center">
   <br>
-  <a href="#-features">Features</a>
+  <a href="#-features" style="color: #0366d6">Features</a>
   .
-  <a href="#-getting-started">Getting Started</a>
+  <a href="#-getting-started" style="color: #0366d6">Getting Started</a>
   .
-  <a href="#%EF%B8%8F-configuration">Configuration</a>
+  <a href="#%EF%B8%8F-configuration" style="color: #0366d6">Configuration</a>
   .
-  <a href="#-contributing">Contributing</a>
+  <a href="#-contributing" style="color: #0366d6">Contributing</a>
   .
-  <a href="#%EF%B8%8F-development-roadmap">Development</a>
+  <a href="#%EF%B8%8F-development-roadmap" style="color: #0366d6">Development</a>
   .
-  <a href="#-license">License</a>
+  <a href="#-license" style="color: #0366d6">License</a>
   <br>
+</p>
+<p align="center">
+  <a href="https://github.com/ysfemreAlbyrk/Tranfastic/blob/newVersion/docs/readme_tr.md" style="color: #E34C26">Türkçe</a>
   <br>
 </p>
 
@@ -41,7 +44,7 @@
 
 <div align="center">
 
-![App Preview](./docs/app_withoutbg.png)
+![App Preview](./assets/app.png)
 
 </div>
 
@@ -58,7 +61,6 @@ Tranfastic is a lightweight Python application designed for instant, real-time t
 - **🖥️ System Tray Integration:** Operates silently in the background to minimize clutter.
 - **⚙️ Customizable Settings:** Lets you configure source and destination languages.
 - **🔒 Privacy Focused:** Does not store any translation history or sensitive information.
-- **📋 One-Click Copy:** Copy translated text with a single click.
 - **🎨 Clean Interface:** Minimalist design that doesn't distract from your work.
 - **🔧 Easy Configuration:** Simple settings menu for language preferences.
 
@@ -113,17 +115,68 @@ For bug reports, please open an issue with:
 
 - A clear description of the issue.
 - Steps to reproduce the problem.
-- The `app.log` file content (located in the application's directory) if available.
+- The `logs/[date].log` file content (located in the application's directory) if available.
 
 ## 🛠️ Development Roadmap
 
-**Current features and future updates:**
+**Current features and future updates organized by phases:**
 
-- [x] Hotkey and logging implementation
-- [ ] Prevent focus-stealing on initial open
+### ✅ Phase 1: Core Foundation (Completed)
+
+- [x] Global hotkey and logging implementation
+- [x] System tray integration with custom icon and menu
+- [x] Minimalist, modern, frameless translation window
+- [x] Customizable language and hotkey settings
+- [x] Local translation history (optional, per day)
+- [x] Dark theme and custom font integration
+- [x] Paste translation to previously focused input
+- [x] About section in settings
+- [x] Windows startup option
+
+### 🔄 Phase 2: User Experience Improvements (In Progress)
+
+- [ ] Prevent focus stealing on initial open
 - [ ] Capture text directly from selected fields
 - [ ] Add user notifications for translations
-- [ ] Enable launch on Windows startup
+- [ ] Quick language switcher in tray menu
+- [ ] Customizable window size and transparency
+- [ ] Keyboard navigation for all UI
+- [ ] Auto-detect and translate clipboard content
+
+### 🚀 Phase 3: Advanced Features
+
+- [ ] Automatic update system (from GitHub releases)
+- [ ] OCR: Translate text from images
+- [ ] Voice input and translation
+- [ ] Multi-API support (Google, DeepL, Yandex, etc.)
+- [ ] Export/import translation history
+- [ ] Theming (light/dark/custom themes)
+- [ ] In-app feedback and bug reporting
+
+### 🤖 Phase 4: AI & Machine Learning
+
+- [ ] Offline translation (local ML model)
+- [ ] Machine learning-based translation improvements
+- [ ] Ollama integration for local AI-powered translation
+- [ ] Context-aware translations
+
+### 🌍 Phase 5: Platform Expansion
+
+- [ ] Cross-platform support (Linux, macOS)
+
+**Have an idea? Open an issue or pull request!**
+
+## 🙏 Open Source Dependencies
+
+Tranfastic wouldn't be possible without these amazing open source projects:
+
+- **[googletrans](https://github.com/ssut/py-googletrans)** - Google Translate API wrapper that powers our translation engine
+- **[PyQt5](https://www.riverbankcomputing.com/software/pyqt/)** - Cross-platform GUI framework for our modern, responsive interface
+- **[pystray](https://github.com/moses-palmer/pystray)** - System tray integration that keeps Tranfastic running silently in the background
+- **[keyboard](https://github.com/boppreh/keyboard)** - Global hotkey detection for instant translation window activation
+- **[Inter Font](https://github.com/rsms/inter)** - Beautiful, modern font family for our clean interface
+- **[Material Symbols](https://fonts.google.com/icons)** - Google's Material Design icons for UI elements
+- **[pywin32](https://github.com/mhammond/pywin32)** - Windows-specific APIs for seamless Windows integration
 
 ## 📝 License
 

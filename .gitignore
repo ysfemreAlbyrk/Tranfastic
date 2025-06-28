@@ -10,10 +10,14 @@ venv.bak/
 case.py
 gui.py
 
+old-codes/
+
+logs/
 *.log
 
 test/
-assets/
 
+KULLANIM_KILAVUZU.md
 __pycache__/
 
+PRD.md
