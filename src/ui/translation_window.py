@@ -80,7 +80,7 @@ class TranslationWindow(QWidget):
                 background-color: {COLORS['background']};
                 border-top-left-radius: 10px;
                 border-top-right-radius: 10px;
-                border-bottom: 1px solid #333;
+                border-bottom: 1px solid #444;
             }}
         """)
         title_layout = QHBoxLayout(title_bar)
@@ -101,15 +101,16 @@ class TranslationWindow(QWidget):
         title_layout.addStretch()
 
         # Kapatma butonu
-        close_btn = QPushButton("\ue5cd")  # Material Symbols 'close' icon
-        close_btn.setFont(QFont("Material Symbols Rounded", 20))
+        # close_btn = QPushButton("\ue5cd")  # Material Symbols 'close' icon
+        close_btn = QPushButton("Close")  # Material Symbols 'close' icon
+        close_btn.setFont(QFont("Material Symbols Rounded"))
         close_btn.setFixedSize(30, 30)
         close_btn.setStyleSheet("""
             QPushButton {
                 background: transparent;
                 color: #fff;
                 border: none;
-                font-size: 20px;
+                font-size: 25px;
                 border-top-right-radius: 10px;
             }
             QPushButton:hover {

@@ -75,7 +75,7 @@ GITHUB_URL = "https://github.com/ysfemreAlbyrk/Tranfastic"
 
 # UI Colors (Dark theme)
 COLORS = {
-    "background": "#222222",
+    "background": "#353535",
     "text": "#FFFFFF",
     "accent": "#4A90E2",
     "secondary": "#2C2C2C",
