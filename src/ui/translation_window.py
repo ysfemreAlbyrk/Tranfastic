@@ -80,6 +80,7 @@ class TranslationWindow(QWidget):
                 background-color: {COLORS['background']};
                 border-top-left-radius: 10px;
                 border-top-right-radius: 10px;
+                border-bottom: 1px solid #333;
             }}
         """)
         title_layout = QHBoxLayout(title_bar)
@@ -94,14 +95,14 @@ class TranslationWindow(QWidget):
 
         # Dinamik başlık
         self.title_label = QLabel()
-        self.title_label.setFont(QFont("Segoe UI", 10))
-        self.title_label.setStyleSheet("color: #fff; font-weight: 600;")
+        self.title_label.setStyleSheet("color: #fff; font-weight: 600; font-size: 12px;")
         title_layout.addWidget(self.title_label)
 
         title_layout.addStretch()
 
         # Kapatma butonu
-        close_btn = QPushButton("🞨")
+        close_btn = QPushButton("\ue5cd")  # Material Symbols 'close' icon
+        close_btn.setFont(QFont("Material Symbols Rounded", 20))
         close_btn.setFixedSize(30, 30)
         close_btn.setStyleSheet("""
             QPushButton {

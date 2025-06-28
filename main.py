@@ -14,6 +14,7 @@ sys.path.insert(0, str(src_path))
 
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QTimer, QThread, pyqtSignal
+from PyQt5.QtGui import QFontDatabase, QFont
 
 from src.config import Config
 from src.logger import setup_logging, cleanup_old_logs
@@ -23,6 +24,13 @@ from src.tray_manager import TrayManager
 from src.clipboard_manager import clipboard_manager
 from src.ui.translation_window import TranslationWindow
 from src.ui.settings_window import SettingsWindow
+
+def load_custom_fonts(app):
+    inter_font_path = str((Path(__file__).parent / "assets/Inter/Inter-VariableFont_opsz,wght.ttf").resolve())
+    QFontDatabase.addApplicationFont(inter_font_path)
+    material_font_path = str((Path(__file__).parent / "assets/Material_Symbols_Rounded/MaterialSymbolsRounded-VariableFont_FILL,GRAD,opsz,wght.ttf").resolve())
+    QFontDatabase.addApplicationFont(material_font_path)
+    app.setFont(QFont("Inter"))
 
 class TrayThread(QThread):
     """Thread for running system tray"""
@@ -53,6 +61,7 @@ class TranfasticApp:
     
     def __init__(self):
         self.app = QApplication(sys.argv)
+        load_custom_fonts(self.app)
         self.app.setQuitOnLastWindowClosed(False)  # Keep running when windows are closed
         
         # Setup logging
