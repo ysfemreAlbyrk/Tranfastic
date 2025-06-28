@@ -17,7 +17,7 @@ import time
 from pathlib import Path
 
 from ..config import COLORS, APP_NAME, SUPPORTED_LANGUAGES
-from ..translator import translator_engine
+from ..translator import translator_engine, save_translation_history
 
 user32 = ctypes.windll.user32
 
@@ -211,6 +211,13 @@ class TranslationWindow(QWidget):
         if success:
             self.status_label.setText("Translation completed!")
             self.status_label.setStyleSheet("color: #4CAF50;")
+            
+            # Geçmiş kaydı
+            if self.config.get("save_history", False):
+                source_lang = self.config.get("source_language", "auto")
+                target_lang = self.config.get("target_language", "en")
+                source_text = self.input_field.text().strip()
+                save_translation_history(source_text, translated_text, source_lang, target_lang)
             
             # Call callback with translated text
             if self.on_translation_complete:

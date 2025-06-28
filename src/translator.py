@@ -7,6 +7,8 @@ import asyncio
 from typing import Optional, Tuple
 from googletrans import Translator, LANGUAGES
 import logging
+from pathlib import Path
+from datetime import datetime
 
 class TranslationEngine:
     """Google Translate API wrapper for Tranfastic"""
@@ -85,6 +87,16 @@ class TranslationEngine:
     def get_supported_languages(self) -> dict:
         """Get all supported languages"""
         return LANGUAGES.copy()
+
+def save_translation_history(source_text, translated_text, source_lang, target_lang):
+    history_dir = Path.home() / ".tranfastic" / "history"
+    history_dir.mkdir(parents=True, exist_ok=True)
+    today = datetime.now().strftime("%Y-%m-%d")
+    history_file = history_dir / f"{today}.txt"
+    timestamp = datetime.now().strftime("%H:%M:%S")
+    line = f"[{timestamp}] {source_lang} -> {target_lang} | {source_text} => {translated_text}\n"
+    with open(history_file, "a", encoding="utf-8") as f:
+        f.write(line)
 
 # Global translator instance
 translator_engine = TranslationEngine() 
