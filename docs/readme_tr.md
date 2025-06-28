@@ -116,13 +116,64 @@ Hata raporları için lütfen şunlarla birlikte bir issue açın:
 
 ## 🛠️ Geliştirme Yol Haritası
 
-**Mevcut özellikler ve gelecek güncellemeler:**
+**Mevcut özellikler ve gelecek güncellemeler fazara göre düzenlenmiştir:**
+
+### ✅ Faz 1: Temel Altyapı (Tamamlandı)
 
 - [x] Kısayol tuşu ve günlük kaydı uygulaması
+- [x] Sistem tepsisi entegrasyonu (özel ikon ve menü)
+- [x] Minimalist, modern, başlıksız çeviri penceresi
+- [x] Dil ve kısayol ayarlarının özelleştirilebilmesi
+- [x] Lokal çeviri geçmişi (günlük dosya, opsiyonel)
+- [x] Koyu tema ve özel font entegrasyonu
+- [x] Çevirinin odaklanılan inputa otomatik yapıştırılması
+- [x] Ayarlar içinde Hakkında bölümü
+- [x] Windows başlangıcında çalıştırma seçeneği
+
+### 🔄 Faz 2: Kullanıcı Deneyimi İyileştirmeleri (Devam Ediyor)
+
 - [ ] İlk açılışta odak çalınmasını önleme
 - [ ] Seçili alanlardan doğrudan metin yakalama
 - [ ] Çeviriler için kullanıcı bildirimleri ekleme
-- [ ] Windows başlangıcında çalıştırmayı etkinleştirme
+- [ ] Tepsi menüsünde hızlı dil değiştirici
+- [ ] Pencere boyutu ve şeffaflığının özelleştirilebilmesi
+- [ ] Tüm arayüz için klavye ile gezinme
+- [ ] Panodaki içeriği otomatik algılayıp çevirme
+
+### 🚀 Faz 3: Gelişmiş Özellikler
+
+- [ ] Otomatik güncelleme sistemi (GitHub releases üzerinden)
+- [ ] OCR ile görselden metin çevirisi
+- [ ] Sesli giriş ve çeviri
+- [ ] Çoklu API desteği (Google, DeepL, Yandex, vs.)
+- [ ] Çeviri geçmişini dışa/içe aktarabilme
+- [ ] Tema desteği (açık/koyu/özel)
+- [ ] Uygulama içi geri bildirim ve hata bildirimi
+
+### 🤖 Faz 4: Yapay Zeka ve Makine Öğrenmesi
+
+- [ ] Offline çeviri (yerel ML modeli)
+- [ ] Makine öğrenmesi ile çeviri iyileştirmeleri
+- [ ] Ollama entegrasyonu ile yerel AI destekli çeviri
+- [ ] Bağlam farkında çeviriler
+
+### 🌍 Faz 5: Platform Genişletme
+
+- [ ] Çoklu platform desteği (Linux, macOS)
+
+**Senin de bir fikrin mi var? Issue veya pull request açabilirsin!**
+
+## 🙏 Açık Kaynak Bağımlılıkları
+
+Tranfastic, bu harika açık kaynak projeler olmadan mümkün olmazdı:
+
+- **[googletrans](https://github.com/ssut/py-googletrans)** - Çeviri motorumuzu güçlendiren Google Translate API wrapper'ı
+- **[PyQt5](https://www.riverbankcomputing.com/software/pyqt/)** - Modern, duyarlı arayüzümüz için çok platformlu GUI framework'ü
+- **[pystray](https://github.com/moses-palmer/pystray)** - Tranfastic'ı arka planda sessizce çalıştıran sistem tepsisi entegrasyonu
+- **[keyboard](https://github.com/boppreh/keyboard)** - Anlık çeviri penceresi aktivasyonu için global kısayol tuşu algılama
+- **[Inter Font](https://github.com/rsms/inter)** - Temiz arayüzümüz için güzel, modern font ailesi
+- **[Material Symbols](https://fonts.google.com/icons)** - UI öğeleri için Google'ın Material Design ikonları
+- **[pywin32](https://github.com/mhammond/pywin32)** - Sorunsuz Windows entegrasyonu için Windows'a özel API'ler
 
 ## 📝 Lisans
 

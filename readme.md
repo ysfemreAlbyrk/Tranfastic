@@ -119,13 +119,64 @@ For bug reports, please open an issue with:
 
 ## 🛠️ Development Roadmap
 
-**Current features and future updates:**
+**Current features and future updates organized by phases:**
 
-- [x] Hotkey and logging implementation
-- [ ] Prevent focus-stealing on initial open
+### ✅ Phase 1: Core Foundation (Completed)
+
+- [x] Global hotkey and logging implementation
+- [x] System tray integration with custom icon and menu
+- [x] Minimalist, modern, frameless translation window
+- [x] Customizable language and hotkey settings
+- [x] Local translation history (optional, per day)
+- [x] Dark theme and custom font integration
+- [x] Paste translation to previously focused input
+- [x] About section in settings
+- [x] Windows startup option
+
+### 🔄 Phase 2: User Experience Improvements (In Progress)
+
+- [ ] Prevent focus stealing on initial open
 - [ ] Capture text directly from selected fields
 - [ ] Add user notifications for translations
-- [ ] Enable launch on Windows startup
+- [ ] Quick language switcher in tray menu
+- [ ] Customizable window size and transparency
+- [ ] Keyboard navigation for all UI
+- [ ] Auto-detect and translate clipboard content
+
+### 🚀 Phase 3: Advanced Features
+
+- [ ] Automatic update system (from GitHub releases)
+- [ ] OCR: Translate text from images
+- [ ] Voice input and translation
+- [ ] Multi-API support (Google, DeepL, Yandex, etc.)
+- [ ] Export/import translation history
+- [ ] Theming (light/dark/custom themes)
+- [ ] In-app feedback and bug reporting
+
+### 🤖 Phase 4: AI & Machine Learning
+
+- [ ] Offline translation (local ML model)
+- [ ] Machine learning-based translation improvements
+- [ ] Ollama integration for local AI-powered translation
+- [ ] Context-aware translations
+
+### 🌍 Phase 5: Platform Expansion
+
+- [ ] Cross-platform support (Linux, macOS)
+
+**Have an idea? Open an issue or pull request!**
+
+## 🙏 Open Source Dependencies
+
+Tranfastic wouldn't be possible without these amazing open source projects:
+
+- **[googletrans](https://github.com/ssut/py-googletrans)** - Google Translate API wrapper that powers our translation engine
+- **[PyQt5](https://www.riverbankcomputing.com/software/pyqt/)** - Cross-platform GUI framework for our modern, responsive interface
+- **[pystray](https://github.com/moses-palmer/pystray)** - System tray integration that keeps Tranfastic running silently in the background
+- **[keyboard](https://github.com/boppreh/keyboard)** - Global hotkey detection for instant translation window activation
+- **[Inter Font](https://github.com/rsms/inter)** - Beautiful, modern font family for our clean interface
+- **[Material Symbols](https://fonts.google.com/icons)** - Google's Material Design icons for UI elements
+- **[pywin32](https://github.com/mhammond/pywin32)** - Windows-specific APIs for seamless Windows integration
 
 ## 📝 License
 
