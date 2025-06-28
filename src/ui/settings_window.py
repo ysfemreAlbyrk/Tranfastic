@@ -9,10 +9,10 @@ from typing import Optional
 from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QComboBox,
     QPushButton, QLineEdit, QCheckBox, QGroupBox, QTabWidget,
-    QTextEdit, QScrollArea, QFrame
+    QTextEdit, QScrollArea, QFrame, QGridLayout
 )
 from PyQt5.QtCore import Qt, pyqtSignal
-from PyQt5.QtGui import QFont, QIcon
+from PyQt5.QtGui import QFont, QIcon, QPixmap
 from pathlib import Path
 
 from ..config import COLORS, APP_NAME, APP_VERSION, APP_AUTHOR, GITHUB_URL, SUPPORTED_LANGUAGES
@@ -46,16 +46,13 @@ class SettingsWindow(QWidget):
                 color: {COLORS['text']};
             }}
             QTabWidget::pane {{
-                border: 1px solid {COLORS['border']};
-                border-radius: 4px;
+                border-top: 1px solid {COLORS['border']};
+                border-bottom: 1px solid {COLORS['border']};
             }}
             QTabBar::tab {{
-                background-color: {COLORS['secondary']};
                 color: {COLORS['text']};
                 padding: 8px 16px;
-                border: 1px solid {COLORS['border']};
-                border-bottom: none;
-                border-radius: 4px 4px 0 0;
+                border:none;
             }}
             QTabBar::tab:selected {{
                 background-color: {COLORS['accent']};
@@ -135,62 +132,51 @@ class SettingsWindow(QWidget):
         """Create general settings tab"""
         tab = QWidget()
         layout = QVBoxLayout()
-        layout.setContentsMargins(16, 16, 16, 16)
-        layout.setSpacing(16)
-        
+        layout.setContentsMargins(10, 10, 10, 10)
+        layout.setSpacing(12)
+
         # Language settings group
         lang_group = QGroupBox("Language Settings")
-        lang_layout = QVBoxLayout()
-        
-        # Source language
-        source_layout = QHBoxLayout()
-        source_layout.addWidget(QLabel("Source Language:"))
+        lang_layout = QGridLayout()
+        lang_layout.setVerticalSpacing(8)
+        lang_layout.setHorizontalSpacing(12)
+        lang_layout.addWidget(QLabel("Source Language:"), 0, 0)
         self.source_combo = QComboBox()
         for code, name in SUPPORTED_LANGUAGES.items():
             self.source_combo.addItem(name, code)
-        source_layout.addWidget(self.source_combo)
-        lang_layout.addLayout(source_layout)
-        
-        # Target language
-        target_layout = QHBoxLayout()
-        target_layout.addWidget(QLabel("Target Language:"))
+        lang_layout.addWidget(self.source_combo, 0, 1)
+        lang_layout.addWidget(QLabel("Target Language:"), 1, 0)
         self.target_combo = QComboBox()
         for code, name in SUPPORTED_LANGUAGES.items():
-            if code != "auto":  # Don't allow auto as target
+            if code != "auto":
                 self.target_combo.addItem(name, code)
-        target_layout.addWidget(self.target_combo)
-        lang_layout.addLayout(target_layout)
-        
+        lang_layout.addWidget(self.target_combo, 1, 1)
         lang_group.setLayout(lang_layout)
         layout.addWidget(lang_group)
-        
+
         # Hotkey settings group
         hotkey_group = QGroupBox("Hotkey Settings")
         hotkey_layout = QVBoxLayout()
-        
+        hotkey_layout.setSpacing(6)
         hotkey_layout.addWidget(QLabel("Global Hotkey:"))
         self.hotkey_input = QLineEdit()
         self.hotkey_input.setPlaceholderText("e.g., shift+alt+d")
         hotkey_layout.addWidget(self.hotkey_input)
-        
         hotkey_layout.addWidget(QLabel("Press the key combination and it will appear here"))
-        
         hotkey_group.setLayout(hotkey_layout)
         layout.addWidget(hotkey_group)
-        
+
         # Application settings group
         app_group = QGroupBox("Application Settings")
         app_layout = QVBoxLayout()
-        
+        app_layout.setSpacing(6)
         self.start_on_boot_cb = QCheckBox("Start on Windows boot")
         app_layout.addWidget(self.start_on_boot_cb)
-        
         self.save_history_cb = QCheckBox("Save translation history (local)")
         app_layout.addWidget(self.save_history_cb)
-        
         app_group.setLayout(app_layout)
         layout.addWidget(app_group)
-        
+
         layout.addStretch()
         tab.setLayout(layout)
         return tab
@@ -198,72 +184,80 @@ class SettingsWindow(QWidget):
     def create_about_tab(self) -> QWidget:
         """Create about tab"""
         tab = QWidget()
-        layout = QVBoxLayout()
-        layout.setContentsMargins(16, 16, 16, 16)
-        layout.setSpacing(16)
-        
-        # App info
-        info_group = QGroupBox("Application Information")
-        info_layout = QVBoxLayout()
-        
-        info_layout.addWidget(QLabel(f"Name: {APP_NAME}"))
-        info_layout.addWidget(QLabel(f"Version: {APP_VERSION}"))
-        info_layout.addWidget(QLabel(f"Author: {APP_AUTHOR}"))
-        
-        # GitHub link
-        github_layout = QHBoxLayout()
-        github_layout.addWidget(QLabel("GitHub:"))
-        github_btn = QPushButton("Open Repository")
+        main_layout = QVBoxLayout(tab)
+        main_layout.setContentsMargins(10, 10, 10, 10)
+        main_layout.setSpacing(10)
+
+        # Üst alan: Sol (başlık + version/author) ve Sağ (ikon)
+        top_layout = QHBoxLayout()
+        top_layout.setSpacing(0)
+
+        # Sol blok (başlık ve version/author)
+        left_box = QVBoxLayout()
+        left_box.setSpacing(20)
+        title_label = QLabel("<p style='font-size:48px; font-weight:bold; font-family:Inter; color: #FF6B6B;'>Tranfastic</p>")
+        left_box.addWidget(title_label)
+        info_label = QLabel(
+            f"<span style='font-size:12px; font-weight:600;'>Version:</span> "
+            f"<span style='font-size:12px; font-style:italic;'>v{APP_VERSION}</span> "
+            f"<span style='font-size:12px; font-weight:600;'>&nbsp;&nbsp;&nbsp;&nbsp;Author:</span> "
+            f"<span style='font-size:12px;'>{APP_AUTHOR}</span>"
+        )
+        info_label.setStyleSheet("QLabel { margin-left: 5px; }")
+        left_box.addWidget(info_label)
+        left_box.addStretch()
+        top_layout.addLayout(left_box, stretch=1)
+
+        # Sağ blok (ikon)
+        icon_label = QLabel()
+        icon_path = str((Path(__file__).parent.parent / "../assets/icon.png").resolve())
+        pixmap = QPixmap(icon_path)
+        pixmap = pixmap.scaled(96, 96, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        icon_label.setPixmap(pixmap)
+        icon_label.setAlignment(Qt.AlignCenter)
+        icon_label.setStyleSheet("margin: 0px;")
+        top_layout.addWidget(icon_label, stretch=0)
+
+        main_layout.addLayout(top_layout)
+
+        # Alt çizgi
+        hr = QFrame()
+        hr.setFrameShape(QFrame.HLine)
+        hr.setStyleSheet("background-color: #454545; color: #454545; height: 1px;")
+        main_layout.addWidget(hr)
+
+        # Diğer içerikler (github butonu, açıklama, lisans vs.)
+        github_btn = QPushButton("GitHub Repository")
+        github_btn.setCursor(Qt.PointingHandCursor)
+        github_btn.setStyleSheet("font-weight: bold; padding: 8px 18px; font-size: 13px;")
         github_btn.clicked.connect(lambda: webbrowser.open(GITHUB_URL))
-        github_layout.addWidget(github_btn)
-        info_layout.addLayout(github_layout)
-        
-        info_group.setLayout(info_layout)
-        layout.addWidget(info_group)
-        
-        # Description
-        desc_group = QGroupBox("Description")
-        desc_layout = QVBoxLayout()
-        
-        desc_text = QTextEdit()
-        desc_text.setReadOnly(True)
-        desc_text.setMaximumHeight(150)
-        desc_text.setPlainText(
-            "Tranfastic is a lightweight Python application designed for instant, "
-            "real-time translation while you work. It sits discreetly in your system tray, "
-            "and a quick hotkey opens a window for text input, making translated text "
-            "readily available for copying or inserting.\n\n"
-            "Features:\n"
-            "• Real-time translation\n"
-            "• Global hotkey activation\n"
-            "• System tray integration\n"
-            "• Privacy focused\n"
-            "• Clean, minimalist interface"
+        main_layout.addWidget(github_btn, alignment=Qt.AlignLeft)
+
+        desc_label = QLabel(
+            "<b>About Tranfastic</b><br>"
+            "Tranfastic is a lightweight Python application for instant, real-time translation while you work."
+            "<br><br><b>Features:</b><ul>"
+            "<li>Real-time translation</li>"
+            "<li>Global hotkey activation</li>"
+            "<li>System tray integration</li>"
+            "<li>Privacy focused</li>"
+            "<li>Clean, minimalist interface</li>"
+            "</ul>"
         )
-        desc_layout.addWidget(desc_text)
-        
-        desc_group.setLayout(desc_layout)
-        layout.addWidget(desc_group)
-        
-        # License
-        license_group = QGroupBox("License")
-        license_layout = QVBoxLayout()
-        
-        license_text = QTextEdit()
-        license_text.setReadOnly(True)
-        license_text.setMaximumHeight(100)
-        license_text.setPlainText(
-            "This project is licensed under the MIT License.\n\n"
-            "MIT License - A short and simple permissive license with conditions "
-            "only requiring preservation of copyright and license notices."
+        desc_label.setWordWrap(True)
+        desc_label.setStyleSheet("font-size: 13px; margin-bottom: 8px;")
+        main_layout.addWidget(desc_label)
+
+        license_label = QLabel(
+            "<b>License:</b> MIT License<br>"
+            "<span style='font-size:11px;color:#aaa;'>A short and simple permissive license with conditions only requiring preservation of copyright and license notices.</span>"
         )
-        license_layout.addWidget(license_text)
-        
-        license_group.setLayout(license_layout)
-        layout.addWidget(license_group)
-        
-        layout.addStretch()
-        tab.setLayout(layout)
+        license_label.setStyleSheet("background:#222;padding:10px 14px;border-radius:6px;font-size:12px;")
+        license_label.setWordWrap(True)
+        main_layout.addWidget(license_label)
+
+        main_layout.addStretch()
+        tab.setLayout(main_layout)
         return tab
     
     def load_settings(self):

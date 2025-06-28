@@ -37,6 +37,7 @@ class TranslationEngine:
         """Check if translation service is connected"""
         return self._connection_status
     
+    # TODO: auto mode doesnt work. must be fixed.
     def translate(self, text: str, source_lang: str = "auto", target_lang: str = "en") -> Tuple[str, Optional[str], bool]:
         """
         Translate text from source language to target language
