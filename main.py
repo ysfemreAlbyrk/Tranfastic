@@ -14,7 +14,7 @@ sys.path.insert(0, str(src_path))
 
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QTimer, QThread, pyqtSignal
-from PyQt5.QtGui import QFontDatabase, QFont
+from PyQt5.QtGui import QFontDatabase, QFont, QIcon
 
 from src.config import Config
 from src.logger import setup_logging, cleanup_old_logs
@@ -63,6 +63,10 @@ class TranfasticApp:
         self.app = QApplication(sys.argv)
         load_custom_fonts(self.app)
         self.app.setQuitOnLastWindowClosed(False)  # Keep running when windows are closed
+        
+        # Set application icon
+        icon_path = str((Path(__file__).parent / "assets/icon.png").resolve())
+        self.app.setWindowIcon(QIcon(icon_path))
         
         # Setup logging
         self.logger = setup_logging()

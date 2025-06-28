@@ -13,6 +13,7 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QFont, QIcon
+from pathlib import Path
 
 from ..config import COLORS, APP_NAME, APP_VERSION, APP_AUTHOR, GITHUB_URL, SUPPORTED_LANGUAGES
 from ..hotkey_manager import hotkey_manager
@@ -26,6 +27,10 @@ class SettingsWindow(QWidget):
         super().__init__()
         self.config = config
         self.logger = logging.getLogger(__name__)
+        
+        # Set window icon
+        icon_path = str((Path(__file__).parent.parent / "../assets/icon.png").resolve())
+        self.setWindowIcon(QIcon(icon_path))
         
         self.setup_ui()
         self.load_settings()

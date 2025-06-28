@@ -8,7 +8,7 @@ import logging
 from typing import Optional, Callable
 from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, 
-    QLabel, QPushButton, QApplication, QFrame, QShortcut
+    QLabel, QPushButton, QApplication, QFrame, QShortcut, QGraphicsDropShadowEffect
 )
 from PyQt5.QtCore import Qt, QTimer, pyqtSignal, QThread, pyqtSlot, QPoint
 from PyQt5.QtGui import QFont, QIcon, QKeySequence, QPixmap, QColor
@@ -51,7 +51,12 @@ class TranslationWindow(QWidget):
         self._drag_pos = None
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
-        self.setFixedSize(480, 60)
+        self.setFixedSize(500, 80)  # Increased size to accommodate shadow
+        
+        # Set window icon
+        icon_path = str((Path(__file__).parent.parent / "../assets/icon.png").resolve())
+        self.setWindowIcon(QIcon(icon_path))
+        
         self.setup_ui()
         self.setup_shortcuts()
         self.update_title()
@@ -65,6 +70,7 @@ class TranslationWindow(QWidget):
             QWidget#main_widget {{
                 background-color: {COLORS['background']};
                 border-radius: 10px;
+                border: 1px solid #454545;
             }}
         """)
         main_layout = QVBoxLayout(main_widget)
@@ -80,6 +86,7 @@ class TranslationWindow(QWidget):
                 background-color: {COLORS['background']};
                 border-top-left-radius: 10px;
                 border-top-right-radius: 10px;
+                border: 1px solid #454545;
                 border-bottom: 1px solid #444;
             }}
         """)
@@ -147,9 +154,17 @@ class TranslationWindow(QWidget):
         self.status_label.hide()
 
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setContentsMargins(10, 10, 10, 10)  # Add margins for shadow
         layout.addWidget(main_widget)
         self.setLayout(layout)
+        
+        # Add shadow effect
+        shadow = QGraphicsDropShadowEffect()
+        shadow.setBlurRadius(20)
+        shadow.setColor(QColor(0, 0, 0, 70))
+        shadow.setOffset(0, 4)
+        main_widget.setGraphicsEffect(shadow)
+        
         self.center_window()
     
     def setup_shortcuts(self):
