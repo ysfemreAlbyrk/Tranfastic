@@ -1,0 +1,7 @@
+googletrans==4.0.0rc1
+PyQt5==5.15.10
+pystray==0.19.5
+Pillow==10.1.0
+keyboard==0.13.5
+pynput==1.7.6
+pywin32==306; sys_platform == "win32" 
