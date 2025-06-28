@@ -131,7 +131,7 @@ For bug reports, please open an issue with:
 - [x] Dark theme and custom font integration
 - [x] Paste translation to previously focused input
 - [x] About section in settings
-- [x] Windows startup option
+- [ ] Windows startup option
 
 ### 🔄 Phase 2: User Experience Improvements (In Progress)
 
@@ -142,6 +142,14 @@ For bug reports, please open an issue with:
 - [ ] Customizable window size and transparency
 - [ ] Keyboard navigation for all UI
 - [ ] Auto-detect and translate clipboard content
+- [ ] **Translation History Management:**
+  - [ ] Modern GUI interface to view, search, and manage translation history
+  - [ ] Database structure with metadata (timestamp, language pairs, frequency)
+  - [ ] Star/favorite translations for quick access
+  - [ ] Search & filter by text, date, or language pairs
+  - [ ] Categories & tags for organization
+  - [ ] Bulk operations (delete, export, categorize)
+  - [ ] Backup & sync capabilities
 
 ### 🚀 Phase 3: Advanced Features
 

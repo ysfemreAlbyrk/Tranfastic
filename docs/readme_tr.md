@@ -128,7 +128,7 @@ Hata raporları için lütfen şunlarla birlikte bir issue açın:
 - [x] Koyu tema ve özel font entegrasyonu
 - [x] Çevirinin odaklanılan inputa otomatik yapıştırılması
 - [x] Ayarlar içinde Hakkında bölümü
-- [x] Windows başlangıcında çalıştırma seçeneği
+- [ ] Windows başlangıcında çalıştırma seçeneği
 
 ### 🔄 Faz 2: Kullanıcı Deneyimi İyileştirmeleri (Devam Ediyor)
 
@@ -139,6 +139,14 @@ Hata raporları için lütfen şunlarla birlikte bir issue açın:
 - [ ] Pencere boyutu ve şeffaflığının özelleştirilebilmesi
 - [ ] Tüm arayüz için klavye ile gezinme
 - [ ] Panodaki içeriği otomatik algılayıp çevirme
+- [ ] **Çeviri Geçmişi Yönetimi:**
+  - [ ] Çeviri geçmişini görüntüleme, arama ve yönetme için modern arayüz
+  - [ ] Meta verilerle (zaman damgası, dil çiftleri, sıklık) veritabanı yapısı
+  - [ ] Önemli çevirileri hızlı erişim için yıldızlama/favoriler
+  - [ ] Metin, tarih veya dil çiftlerine göre arama ve filtreleme
+  - [ ] Organizasyon için kategoriler ve etiketler
+  - [ ] Toplu işlemler (silme, dışa aktarma, kategorilendirme)
+  - [ ] Yedekleme ve senkronizasyon yetenekleri
 
 ### 🚀 Faz 3: Gelişmiş Özellikler
 
