@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 from typing import Dict, Any
 
+#TODO: Add a way to change the start on boot.
 class Config:
     """Application configuration manager"""
     

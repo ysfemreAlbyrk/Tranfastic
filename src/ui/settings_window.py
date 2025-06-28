@@ -50,26 +50,40 @@ class SettingsWindow(QWidget):
                 border-bottom: 1px solid {COLORS['border']};
             }}
             QTabBar::tab {{
+                background-color: {COLORS['background']};
                 color: {COLORS['text']};
                 padding: 8px 16px;
                 border:none;
             }}
             QTabBar::tab:selected {{
-                background-color: {COLORS['accent']};
+                background-color: {COLORS['background']};
+                border-bottom: 2px solid {COLORS['accent']};
             }}
             QGroupBox {{
                 font-weight: bold;
-                border: 1px solid {COLORS['border']};
-                border-radius: 4px;
-                margin-top: 8px;
-                padding-top: 8px;
+                border:none;
+                padding-top: 20px;
             }}
             QGroupBox::title {{
                 subcontrol-origin: margin;
-                left: 8px;
-                padding: 0 4px 0 4px;
             }}
-            QComboBox, QLineEdit {{
+            QComboBox {{
+                background-color: #2a2a2a;
+                border: 1px solid #555;
+                border-radius: 4px;
+                padding:6px;
+                font-size: 12px;
+                color: #fff;
+                min-height: 16px;
+            }}
+            QComboBox:hover {{
+                border: 1px solid #777;
+            }}
+            QComboBox::drop-down {{
+                border: none;
+                width: 20px;
+            }}
+            QLineEdit {{
                 background-color: {COLORS['secondary']};
                 border: 1px solid {COLORS['border']};
                 border-radius: 4px;
@@ -96,8 +110,8 @@ class SettingsWindow(QWidget):
         
         # Main layout
         layout = QVBoxLayout()
-        layout.setContentsMargins(16, 16, 16, 16)
-        layout.setSpacing(16)
+        layout.setContentsMargins(12,0,12,0)
+        layout.setSpacing(12)
         
         # Tab widget
         tab_widget = QTabWidget()
@@ -114,6 +128,7 @@ class SettingsWindow(QWidget):
         
         # Buttons
         button_layout = QHBoxLayout()
+        button_layout.setContentsMargins(0,0,12,12)
         button_layout.addStretch()
         
         save_btn = QPushButton("Save")
@@ -122,6 +137,7 @@ class SettingsWindow(QWidget):
         
         cancel_btn = QPushButton("Cancel")
         cancel_btn.clicked.connect(self.close)
+        cancel_btn.setStyleSheet("background-color: #444;")
         button_layout.addWidget(cancel_btn)
         
         layout.addLayout(button_layout)
@@ -137,20 +153,54 @@ class SettingsWindow(QWidget):
 
         # Language settings group
         lang_group = QGroupBox("Language Settings")
-        lang_layout = QGridLayout()
-        lang_layout.setVerticalSpacing(8)        
-        lang_layout.setHorizontalSpacing(12)
-        lang_layout.addWidget(QLabel("Source Language:"), 0, 0)
+        lang_layout = QVBoxLayout()
+        lang_layout.setSpacing(12)
+        
+        # Top row: Language titles
+        titles_layout = QHBoxLayout()
+        titles_layout.setSpacing(20)  # Remove spacing since we want labels to fill width
+        
+        source_label = QLabel("Source Language")
+        source_label.setAlignment(Qt.AlignCenter)
+        titles_layout.addWidget(source_label, stretch=1)
+        
+        # Fixed width spacer for arrow area
+        spacer = QLabel()
+        spacer.setFixedWidth(40)  # Match arrow label width
+        titles_layout.addWidget(spacer)
+        
+        target_label = QLabel("Target Language")
+        target_label.setAlignment(Qt.AlignCenter)
+        titles_layout.addWidget(target_label, stretch=1)
+        
+        lang_layout.addLayout(titles_layout)
+        
+        # Bottom row: Dropdowns and arrow
+        controls_layout = QHBoxLayout()
+        controls_layout.setSpacing(20)
+        
+        # Source dropdown
         self.source_combo = QComboBox()
         for code, name in SUPPORTED_LANGUAGES.items():
             self.source_combo.addItem(name, code)
-        lang_layout.addWidget(self.source_combo, 0, 1)
-        lang_layout.addWidget(QLabel("Target Language:"), 1, 0)
+        controls_layout.addWidget(self.source_combo, stretch=1)
+        
+        # Arrow
+        arrow_label = QLabel('\uf108\ue5df ')
+        arrow_label.setStyleSheet("font-size: 24px; color: #888; font-weight: bold;letter-spacing: -15px;") #letter-spacing: -15px for making arrow with line and head.
+        arrow_label.setFont(QFont("Material Symbols Rounded"))
+        arrow_label.setAlignment(Qt.AlignCenter)
+        arrow_label.setFixedWidth(40)
+        controls_layout.addWidget(arrow_label, stretch=0)
+        
+        # Target dropdown
         self.target_combo = QComboBox()
         for code, name in SUPPORTED_LANGUAGES.items():
             if code != "auto":
                 self.target_combo.addItem(name, code)
-        lang_layout.addWidget(self.target_combo, 1, 1)
+        controls_layout.addWidget(self.target_combo, stretch=1)
+        
+        lang_layout.addLayout(controls_layout)
         lang_group.setLayout(lang_layout)
         layout.addWidget(lang_group)
 
@@ -258,7 +308,7 @@ class SettingsWindow(QWidget):
             "<span style='color:rgba(255, 119, 0, 1);'><b>This tool uses Google Translate™ services.</b><br></span>"
             "<span style='font-size:11px;color:rgba(255, 119, 0, 1);'>If translation does not work, it may be due to issues with Google Translate services or connectivity.</span>"
         )
-        service_note.setStyleSheet("background:rgba(255, 119, 0, 0.1);padding:5px 10px;border-radius:6px;border: 1px dotted #ff7700;font-size:12px;")
+        service_note.setStyleSheet("background:rgba(255, 119, 0, 0.1);padding:5px 10px;border-radius:6px;border: 2px dashed #ff7700;font-size:12px;")
         service_note.setWordWrap(True)
         service_note.setAlignment(Qt.AlignBottom)
         main_layout.addWidget(service_note)
