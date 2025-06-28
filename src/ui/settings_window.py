@@ -132,13 +132,13 @@ class SettingsWindow(QWidget):
         """Create general settings tab"""
         tab = QWidget()
         layout = QVBoxLayout()
-        layout.setContentsMargins(10, 10, 10, 10)
+        layout.setContentsMargins(0,10,0,0)
         layout.setSpacing(12)
 
         # Language settings group
         lang_group = QGroupBox("Language Settings")
         lang_layout = QGridLayout()
-        lang_layout.setVerticalSpacing(8)
+        lang_layout.setVerticalSpacing(8)        
         lang_layout.setHorizontalSpacing(12)
         lang_layout.addWidget(QLabel("Source Language:"), 0, 0)
         self.source_combo = QComboBox()
@@ -162,7 +162,6 @@ class SettingsWindow(QWidget):
         self.hotkey_input = QLineEdit()
         self.hotkey_input.setPlaceholderText("e.g., shift+alt+d")
         hotkey_layout.addWidget(self.hotkey_input)
-        hotkey_layout.addWidget(QLabel("Press the key combination and it will appear here"))
         hotkey_group.setLayout(hotkey_layout)
         layout.addWidget(hotkey_group)
 
@@ -186,7 +185,7 @@ class SettingsWindow(QWidget):
         tab = QWidget()
         main_layout = QVBoxLayout(tab)
         main_layout.setContentsMargins(10, 10, 10, 10)
-        main_layout.setSpacing(10)
+        main_layout.setSpacing(12)
 
         # Üst alan: Sol (başlık + version/author) ve Sağ (ikon)
         top_layout = QHBoxLayout()
@@ -227,26 +226,24 @@ class SettingsWindow(QWidget):
         main_layout.addWidget(hr)
 
         # Diğer içerikler (github butonu, açıklama, lisans vs.)
+        main_layout.addSpacing(10)
+        desc_label = QLabel(
+            "<b>About Tranfastic</b><br>"
+            "Tranfastic is a lightweight Python application for instant, real-time translation while you work."
+            
+        )
+        desc_label.setWordWrap(True)
+        desc_label.setStyleSheet("font-size: 13px; margin-bottom: 8px;")
+        main_layout.addWidget(desc_label)
+
         github_btn = QPushButton("GitHub Repository")
         github_btn.setCursor(Qt.PointingHandCursor)
         github_btn.setStyleSheet("font-weight: bold; padding: 8px 18px; font-size: 13px;")
         github_btn.clicked.connect(lambda: webbrowser.open(GITHUB_URL))
         main_layout.addWidget(github_btn, alignment=Qt.AlignLeft)
 
-        desc_label = QLabel(
-            "<b>About Tranfastic</b><br>"
-            "Tranfastic is a lightweight Python application for instant, real-time translation while you work."
-            "<br><br><b>Features:</b><ul>"
-            "<li>Real-time translation</li>"
-            "<li>Global hotkey activation</li>"
-            "<li>System tray integration</li>"
-            "<li>Privacy focused</li>"
-            "<li>Clean, minimalist interface</li>"
-            "</ul>"
-        )
-        desc_label.setWordWrap(True)
-        desc_label.setStyleSheet("font-size: 13px; margin-bottom: 8px;")
-        main_layout.addWidget(desc_label)
+        # Add vertical spacing
+        main_layout.addSpacing(50)
 
         license_label = QLabel(
             "<b>License:</b> MIT License<br>"
@@ -255,6 +252,16 @@ class SettingsWindow(QWidget):
         license_label.setStyleSheet("background:#222;padding:10px 14px;border-radius:6px;font-size:12px;")
         license_label.setWordWrap(True)
         main_layout.addWidget(license_label)
+
+        # Google Translate service note
+        service_note = QLabel(
+            "<span style='color:rgba(255, 119, 0, 1);'><b>This tool uses Google Translate™ services.</b><br></span>"
+            "<span style='font-size:11px;color:rgba(255, 119, 0, 1);'>If translation does not work, it may be due to issues with Google Translate services or connectivity.</span>"
+        )
+        service_note.setStyleSheet("background:rgba(255, 119, 0, 0.1);padding:5px 10px;border-radius:6px;border: 1px dotted #ff7700;font-size:12px;")
+        service_note.setWordWrap(True)
+        service_note.setAlignment(Qt.AlignBottom)
+        main_layout.addWidget(service_note)
 
         main_layout.addStretch()
         tab.setLayout(main_layout)
