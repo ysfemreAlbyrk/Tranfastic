@@ -51,7 +51,7 @@ class TranslationWindow(QWidget):
         self._drag_pos = None
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
-        self.setFixedSize(400, 100)
+        self.setFixedSize(480, 60)
         self.setup_ui()
         self.setup_shortcuts()
         self.update_title()
@@ -64,7 +64,7 @@ class TranslationWindow(QWidget):
         main_widget.setStyleSheet(f"""
             QWidget#main_widget {{
                 background-color: {COLORS['background']};
-                border-radius: 14px;
+                border-radius: 10px;
             }}
         """)
         main_layout = QVBoxLayout(main_widget)
@@ -74,16 +74,16 @@ class TranslationWindow(QWidget):
         # Custom başlık bar
         title_bar = QWidget()
         title_bar.setObjectName("title_bar")
-        title_bar.setFixedHeight(36)
+        title_bar.setFixedHeight(30)
         title_bar.setStyleSheet(f"""
             QWidget#title_bar {{
                 background-color: {COLORS['background']};
-                border-top-left-radius: 14px;
-                border-top-right-radius: 14px;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
             }}
         """)
         title_layout = QHBoxLayout(title_bar)
-        title_layout.setContentsMargins(12, 0, 8, 0)
+        title_layout.setContentsMargins(5, 0, 0, 0)
         title_layout.setSpacing(8)
 
         # Sol ikon
@@ -94,25 +94,25 @@ class TranslationWindow(QWidget):
 
         # Dinamik başlık
         self.title_label = QLabel()
-        self.title_label.setFont(QFont("Arial", 10, QFont.Bold))
-        self.title_label.setStyleSheet("color: #fff;")
+        self.title_label.setFont(QFont("Segoe UI", 10))
+        self.title_label.setStyleSheet("color: #fff; font-weight: 600;")
         title_layout.addWidget(self.title_label)
 
         title_layout.addStretch()
 
         # Kapatma butonu
-        close_btn = QPushButton("✕")
-        close_btn.setFixedSize(24, 24)
+        close_btn = QPushButton("🞨")
+        close_btn.setFixedSize(30, 30)
         close_btn.setStyleSheet("""
             QPushButton {
                 background: transparent;
                 color: #fff;
                 border: none;
-                font-size: 16px;
-                border-radius: 12px;
+                font-size: 20px;
+                border-top-right-radius: 10px;
             }
             QPushButton:hover {
-                background: #F44336;
+                background: #e81123;
                 color: #fff;
             }
         """)
@@ -129,8 +129,8 @@ class TranslationWindow(QWidget):
                 background: transparent;
                 border: none;
                 color: {COLORS['text']};
-                font-size: 16px;
-                padding: 18px 16px 18px 16px;
+                font-size: 14px;
+                padding: 5px;
             }}
         """)
         self.input_field.returnPressed.connect(self.translate_text)
@@ -175,9 +175,10 @@ class TranslationWindow(QWidget):
             status = "Not Connected"
         source_lang = self.config.get("source_language", "auto")
         target_lang = self.config.get("target_language", "en")
-        source_name = SUPPORTED_LANGUAGES.get(source_lang, source_lang.upper())
-        target_name = SUPPORTED_LANGUAGES.get(target_lang, target_lang.upper())
-        title = f"Tranfastic - <span style='color:#4CAF50;'>{status}</span> | {source_name} → {target_name}"
+        # If I need to write the long version(like English, Turkish, etc.) of the languages ​​in the future, I can use these 2 lines.
+        # source_name = SUPPORTED_LANGUAGES.get(source_lang, source_lang.upper())
+        # target_name = SUPPORTED_LANGUAGES.get(target_lang, target_lang.upper())
+        title = f"Tranfastic - <span style='color:#00ff00;'>{status}</span> <span style='color:#a7a7a7;'>| {source_lang} → {target_lang}</span>"
         self.title_label.setText(title)
     
     def on_text_changed(self, text: str):
