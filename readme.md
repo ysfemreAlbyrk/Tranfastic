@@ -221,7 +221,7 @@ For bug reports, please open an issue with:
 - [x] Paste translation to previously focused input
 - [x] About section in settings
 - [x] Portable executable build system
-- [ ] Windows startup option
+- [x] Windows startup option
 
 ### 🔄 Phase 2: User Experience Improvements (In Progress)
 
