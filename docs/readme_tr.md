@@ -6,93 +6,87 @@
 
 <h1 align="center">Tranfastic</h1>
 
----
-
-<h4 align="center">Anlık Çeviri Uygulaması (GUI ile)</h3>
+<h4 align="center">Hafif Taşınabilir Anlık Çevirmen</h4>
 
 <p align="center">
   <br>
   <a href="#-özellikler" style="color: #0366d6">Özellikler</a>
-  .
-  <a href="#-başlangıç" style="color: #0366d6">Başlangıç</a>
-  .
-  <a href="#%EF%B8%8F-yapılandırma" style="color: #0366d6">Yapılandırma</a>
-  .
+  ·
+  <a href="#-hızlı-başlangıç" style="color: #0366d6">Hızlı Başlangıç</a>
+  ·
+  <a href="#-nasıl-kullanılır" style="color: #0366d6">Nasıl Kullanılır</a>
+  ·
+  <a href="#%EF%B8%8F-geliştirme" style="color: #0366d6">Geliştirme</a>
+  ·
   <a href="#-katkıda-bulunma" style="color: #0366d6">Katkıda Bulunma</a>
-  .
-  <a href="#%EF%B8%8F-geliştirme-yol-haritası" style="color: #0366d6">Geliştirme</a>
-  .
-  <a href="#-lisans" style="color: #0366d6">Lisans</a>
   <br>
+</p>
+
+<p align="center">
+  <a href="../README.md" style="color: #0366d6">🇺🇸 English</a>
   <br>
 </p>
 
 <p align="center">
    <a href="https://www.python.org/downloads/">
-      <image src="https://img.shields.io/badge/Python-3.8+-blue.svg" alt="Python 3.8+" />
+      <img src="https://img.shields.io/badge/Python-3.7+-blue.svg" alt="Python 3.7+" />
    </a>
    <a href="https://www.microsoft.com/windows">
-      <image src="https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-blue.svg" alt="Windows | Linux" />
+      <img src="https://img.shields.io/badge/Platform-Windows-blue.svg" alt="Windows" />
    </a>
    <a href="https://opensource.org/licenses/MIT">
-      <image src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" />
+      <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" />
+   </a>
+   <a href="../../releases/latest">
+      <img src="https://img.shields.io/badge/İndir-Taşınabilir%20EXE-green.svg" alt="Taşınabilir İndir" />
    </a>
 </p>
 
 <div align="center">
 
-![Uygulama Önizlemesi](../assets/app.png)
+![Tranfastic](../assets/app.png)
 
 </div>
 
-## ⚠️ Şu anda sadece **Windows** için mevcuttur. Linux ve Mac için yakında yayınlanacaktır.
-
-## 📖 Hakkında
-
-Tranfastic, çalışırken anlık, gerçek zamanlı çeviri için tasarlanmış hafif bir Python uygulamasıdır. Sistem tepsisinde sessizce çalışır ve hızlı bir kısayol tuşu metin girişi için bir pencere açar, çevrilen metni kopyalama veya ekleme için hazır hale getirir.
+Windows için sistem çapında kısayollarla anlık çeviri sağlayan hafif, taşınabilir çeviri uygulaması.
 
 ## ✨ Özellikler
 
-- **🌐 Gerçek Zamanlı Çeviri:** Yazarken anında çeviri sağlar.
-- **⚡ Kısayol Tuşu Aktivasyonu:** Özelleştirilebilir klavye kısayolu ile çeviri penceresini anında açar.
-- **🖥️ Sistem Tepsisi Entegrasyonu:** Karmaşıklığı en aza indirmek için arka planda sessizce çalışır.
-- **⚙️ Özelleştirilebilir Ayarlar:** Kaynak ve hedef dilleri yapılandırmanıza olanak tanır.
-- **🔒 Gizlilik Odaklı:** Hiçbir çeviri geçmişi veya hassas bilgi saklamaz.
-- **🎨 Temiz Arayüz:** Çalışmanızı rahatsız etmeyen minimalist tasarım.
-- **🔧 Kolay Yapılandırma:** Dil tercihleri için basit ayarlar menüsü.
+- **🔥 Anlık Çeviri**: Global kısayol (`Shift+Alt+D`) ile hızlı çeviri
+- **🌐 Çoklu Dil**: İngilizce, Türkçe, Almanca, İspanyolca, Japonca ve daha fazlası
+- **📱 Sistem Tepsisi**: Arka planda sessizce çalışır
+- **⚡ Hafif**: Tek taşınabilir dosya (~50-80MB)
+- **🎨 Modern Arayüz**: Temiz, koyu temalı tasarım
+- **📋 Pano Entegrasyonu**: Çeviriyi otomatik yapıştırır
+- **🔧 Yapılandırılabilir**: Özelleştirilebilir kısayollar ve diller
+- **📝 Günlük**: İsteğe bağlı çeviri geçmişi
 
-## 🚀 Başlangıç
+## 🚀 Hızlı Başlangıç
 
-### Kurulum
+### 📥 İndir & Çalıştır
 
-1. **Depoyu klonlayın:**
-   ```bash
-   git clone https://github.com/your-username/Tranfastic.git
-   cd Tranfastic
-   ```
-2. **Bağımlılıkları yükleyin:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+1. [Releases](../../releases/latest) sayfasından `Tranfastic.exe` dosyasını indirin
+2. İstediğiniz klasöre kopyalayın (Masaüstü, USB sürücü vb.)
+3. Çift tıklayarak çalıştırın
+4. Herhangi bir yerde metin seçin ve `Shift+Alt+D` tuşlarına basın
 
-### Uygulamayı Çalıştırma
+Kurulum gerektirmez! Herhangi bir Windows 10/11 bilgisayarında çalışır.
 
-1. **Tranfastic'ı başlatın:**
+## 🎯 Nasıl Kullanılır
 
-   ```bash
-   python main.py
-   ```
+1. **Uygulamayı Başlatın**: `Tranfastic.exe` dosyasını çalıştırın
+2. **Metin Seçin**: Herhangi bir uygulamada metni vurgulayın
+3. **Çevirin**: `Shift+Alt+D` tuşlarına basın (veya özel kısayolunuz)
+4. **Sonuç Alın**: Çeviri penceresi anında açılır
+5. **Otomatik Yapıştır**: Çevrilen metin otomatik olarak yapıştırılır
 
-   Tranfastic simgesi sistem tepsinizde görünecektir.
+### Sistem Tepsisi Menüsü
 
-2. **Kısayol Tuşunu Kullanma:**
-   - `Shift+Alt+D` (varsayılan) tuşlarına basın veya ayarlarda tercih ettiğiniz kısayolu belirleyin.
-3. **Giriş ve Çeviri:**
+Tepsi simgesine sağ tıklayarak:
 
-   - Açılan pencereye metin yazın veya yapıştırın ve çevirinizi almak için Enter'a basın.
-
-4. **Kolay Kapatma:**
-   - Açılan pencereyi hızlıca kapatmak için `Esc` tuşuna basın.
+- Ayarları açın
+- Çeviri geçmişini kontrol edin
+- Uygulamadan çıkın
 
 ## ⚙️ Yapılandırma
 

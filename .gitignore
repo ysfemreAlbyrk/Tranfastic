@@ -21,3 +21,51 @@ KULLANIM_KILAVUZU.md
 __pycache__/
 
 PRD.md
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# PyInstaller
+build/
+dist/
+*.spec.bak
+*.manifest
+*.exe (sadece geliştirme sırasında)
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Config (opsiyonel - kullanıcı ayarları için)
+config.json
+
+# Test files
+test_*.py
+tests/
+
+# Temporary files
+*.tmp
+*.bak
+*.old
+temp/

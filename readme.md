@@ -6,109 +6,191 @@
 
 <h1 align="center">Tranfastic</h1>
 
-<h4 align="center">Instant Translator App with GUI</h3>
+<h4 align="center">Lightweight Portable Instant Translator App with GUI</h4>
 
 <p align="center">
   <br>
   <a href="#-features" style="color: #0366d6">Features</a>
   .
-  <a href="#-getting-started" style="color: #0366d6">Getting Started</a>
+  <a href="#-quick-start" style="color: #0366d6">Quick Start</a>
   .
-  <a href="#%EF%B8%8F-configuration" style="color: #0366d6">Configuration</a>
+  <a href="#-development" style="color: #0366d6">Development</a>
+  .
+  <a href="#-configuration" style="color: #0366d6">Configuration</a>
+  .
+  <a href="#-troubleshooting" style="color: #0366d6">Troubleshooting</a>
   .
   <a href="#-contributing" style="color: #0366d6">Contributing</a>
   .
-  <a href="#%EF%B8%8F-development-roadmap" style="color: #0366d6">Development</a>
+  <a href="#%EF%B8%8F-development-roadmap" style="color: #0366d6">Roadmap</a>
   .
   <a href="#-license" style="color: #0366d6">License</a>
   <br>
 </p>
+
 <p align="center">
-  <a href="https://github.com/ysfemreAlbyrk/Tranfastic/blob/newVersion/docs/readme_tr.md" style="color: #E34C26">Türkçe</a>
+  <a href="docs/readme_tr.md" style="color: #E34C26">🇹🇷 Türkçe</a>
   <br>
 </p>
 
 <p align="center">
    <a href="https://www.python.org/downloads/">
-      <image src="https://img.shields.io/badge/Python-3.8+-blue.svg" alt="Python 3.8+" />
+      <img src="https://img.shields.io/badge/Python-3.7+-blue.svg" alt="Python 3.7+" />
    </a>
    <a href="https://www.microsoft.com/windows">
-      <image src="https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-blue.svg" alt="Windows | Linux" />
+      <img src="https://img.shields.io/badge/Platform-Windows-blue.svg" alt="Windows" />
    </a>
    <a href="https://opensource.org/licenses/MIT">
-      <image src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" />
+      <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" />
+   </a>
+   <a href="../../releases/latest">
+      <img src="https://img.shields.io/badge/Download-Portable%20EXE-green.svg" alt="Download Portable" />
    </a>
 </p>
 
 <div align="center">
 
-![App Preview](./assets/app.png)
+![Tranfastic](assets/app.png)
 
 </div>
 
-## ⚠️ Currently only available on **Windows**. It will be released for Linux and Mac.
-
-## 📖 About
-
-Tranfastic is a lightweight Python application designed for instant, real-time translation while you work. It sits discreetly in your system tray, and a quick hotkey opens a window for text input, making translated text readily available for copying or inserting.
+Tranfastic is a lightweight Python application designed for instant,
+real-time translation while you work. It sits discreetly in your
+system tray, and a quick hotkey opens a window for text input, making
+translated text readily available for copying or inserting.
 
 ## ✨ Features
 
-- **🌐 Real-time Translation:** Provides on-the-fly translations as you type.
-- **⚡ Hotkey Activation:** Opens translation window instantly with a customizable keyboard shortcut.
-- **🖥️ System Tray Integration:** Operates silently in the background to minimize clutter.
-- **⚙️ Customizable Settings:** Lets you configure source and destination languages.
+- **🔥 Instant Translation**: Quick translate with global hotkey (`Shift+Alt+D`)
+- **⚡ Hotkey Activation:** Opens translation pop up instantly with a customizable keyboard shortcut.
+- **🌐 Multiple Languages**: Support for _English_, _Turkish_, _German_, _Spanish_, _Japanese_ and more.
+- **📱 System Tray**: Runs quietly in the background.
+- **📋 Clipboard Integration**: Automatic paste translated text
+- **🔧 Configurable**: Customizable hotkeys and languages
 - **🔒 Privacy Focused:** Does not store any translation history or sensitive information.
 - **🎨 Clean Interface:** Minimalist design that doesn't distract from your work.
-- **🔧 Easy Configuration:** Simple settings menu for language preferences.
 
-## 🚀 Getting Started
+## 🚀 Quick Start
 
-### Installation
+### 📥 Download
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/your-username/Tranfastic.git
-   cd Tranfastic
-   ```
-2. **Setup virtual envoirement**
+> No installation required! Works on any Windows 10/11 machine.
 
-   ```bash
-   python -m venv venv
+1. Download `Tranfastic.exe` from [Releases](../../releases/latest)
+2. Copy to any folder (Desktop, USB drive, etc.)
+3. Double-click to run
 
-   # Activate virtual envoirement
-   ./venv/Script/activate
-   ```
+### 🎯 How to Use
 
-3. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-### Run the Application
-
-1. **Start Tranfastic:**
-
-   ```bash
-   python main.py
-   ```
-
-   The Tranfastic icon will appear in your system tray.
-
-2. **Using the Hotkey:**
+1. **Using the Hotkey:**
    - Press `Shift+Alt+D` (default) or set your preferred hotkey in the settings.
-3. **Input & Translate:**
+2. **Input & Translate:**
 
    - Type or paste text into the pop-up window and press Enter to receive your translation.
 
-4. **Close with Ease:**
+3. **Close with Ease:**
    - Press `Esc` to quickly close the pop-up window.
+
+## 🛠️ Development
+
+### 📦 Installation
+
+1. **First, clone the repository:**
+
+```bash
+git clone https://github.com/your-username/Tranfastic.git
+cd Tranfastic
+```
+
+2. **Setup virtual envoirement**
+
+```bash
+
+python -m venv venv
+
+# Activate virtual envoirement
+./venv/Script/activate
+```
+
+3. **Install dependencies:**
+
+```bash
+pip install -r requirements.txt
+```
+
+### 🏃 Run the Application
+
+1. **Start Tranfastic:**
+
+```bash
+python main.py
+```
+
+The Tranfastic icon will appear in your system tray.
+
+### 🔨 Build Portable Executable
+
+```bash
+# Clone repository
+git clone https://github.com/ysfemreAlbyrk/Tranfastic.git
+cd Tranfastic
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Build portable executable
+./build_portable.bat
+```
+
+The executable will be created in `dist/Tranfastic.exe`
 
 ## ⚙️ Configuration
 
 - **Language Settings:** Set your preferred source and destination languages in the settings menu.
 - **Shortcut Customization:** Modify the hotkey to suit your workflow.
 - **Launch on Startup (Windows):** Optionally enable Tranfastic to start when your computer boots.
+
+### 📁 User Data
+
+Application creates user data in:
+
+```
+%USERPROFILE%\.tranfastic\
+├── config.json          # User settings
+└── logs\                # Translation logs (if enabled)
+    ├── 2024-01-01.log
+    └── ...
+```
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**Application doesn't start**
+
+- Check Windows Defender/Antivirus settings
+- Run as administrator if needed
+- Ensure Windows 10/11 compatibility
+
+**Hotkey not working**
+
+- Check if hotkey conflicts with other applications
+- Try different hotkey combination in settings
+- Restart application after changing hotkey
+
+**Translation fails**
+
+- Check internet connection
+- Google Translate service might be temporarily unavailable
+- Try different source/target language combination
+
+### Antivirus False Positives
+
+Some antivirus software may flag PyInstaller executables. This is a known false positive. The application:
+
+- Does not modify system files
+- Only accesses clipboard and creates user data folder
+- Is open source - you can verify the code
 
 ## 🤝 Contributing
 
@@ -138,6 +220,7 @@ For bug reports, please open an issue with:
 - [x] Dark theme and custom font integration
 - [x] Paste translation to previously focused input
 - [x] About section in settings
+- [x] Portable executable build system
 - [ ] Windows startup option
 
 ### 🔄 Phase 2: User Experience Improvements (In Progress)
@@ -160,7 +243,7 @@ For bug reports, please open an issue with:
 
 ### 🚀 Phase 3: Advanced Features
 
-- [ ] Automatic update system (from GitHub releases)
+- [ ] Update checker (from GitHub releases)
 - [ ] OCR: Translate text from images
 - [ ] Voice input and translation
 - [ ] Multi-API support (Google, DeepL, Yandex, etc.)
