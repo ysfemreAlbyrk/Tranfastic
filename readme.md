@@ -210,7 +210,7 @@ For bug reports, please open an issue with:
 
 **Current features and future updates organized by phases:**
 
-### ✅ Phase 1: Core Foundation (Completed)
+### ~~✅ Phase 1: Core Foundation (Completed)~~
 
 - [x] Global hotkey and logging implementation
 - [x] System tray integration with custom icon and menu
