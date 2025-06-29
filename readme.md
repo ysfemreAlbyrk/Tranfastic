@@ -6,8 +6,6 @@
 
 <h1 align="center">Tranfastic</h1>
 
----
-
 <h4 align="center">Instant Translator App with GUI</h3>
 
 <p align="center">
