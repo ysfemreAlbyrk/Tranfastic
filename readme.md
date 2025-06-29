@@ -73,7 +73,14 @@ Tranfastic is a lightweight Python application designed for instant, real-time t
    git clone https://github.com/your-username/Tranfastic.git
    cd Tranfastic
    ```
-2. **Install dependencies:**
+2. **Setup virtual envoirement**
+   ```bash
+   python -m venv venv
+
+   # Activate virtual envoirement
+   ./venv/Script/activate
+   ```
+3. **Install dependencies:**
    ```bash
    pip install -r requirements.txt
    ```
