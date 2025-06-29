@@ -180,6 +180,8 @@ class TranfasticApp:
             if new_hotkey != hotkey_manager.current_hotkey:
                 hotkey_manager.set_hotkey(new_hotkey)
             
+            # Startup setting is automatically handled by Config class
+            
             self.logger.info("Settings updated")
             
         except Exception as e:

@@ -7,8 +7,6 @@ import json
 import os
 from pathlib import Path
 from typing import Dict, Any
-
-#TODO: Add a way to change the start on boot.
 class Config:
     """Application configuration manager"""
     
@@ -24,6 +22,7 @@ class Config:
             "theme": "dark"
         }
         self.config = self.load_config()
+        self._sync_startup_setting()
     
     def load_config(self) -> Dict[str, Any]:
         """Load configuration from file or create default"""
@@ -56,7 +55,47 @@ class Config:
     def set(self, key: str, value: Any):
         """Set configuration value"""
         self.config[key] = value
+        
+        # Handle startup setting special case
+        if key == "start_on_boot":
+            self._handle_startup_setting(value)
+        
         self.save_config()
+    
+    def _sync_startup_setting(self):
+        """Sync startup setting with Windows registry on app start"""
+        try:
+            from .startup_manager import startup_manager
+            
+            # Check current Windows registry status
+            registry_enabled = startup_manager.is_startup_enabled()
+            config_enabled = self.config.get("start_on_boot", False)
+            
+            # If they don't match, use the config setting as source of truth
+            if registry_enabled != config_enabled:
+                startup_manager.set_startup(config_enabled)
+                
+        except Exception as e:
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.error(f"Failed to sync startup setting: {e}")
+    
+    def _handle_startup_setting(self, enabled: bool):
+        """Handle changes to startup setting"""
+        try:
+            from .startup_manager import startup_manager
+            
+            success = startup_manager.set_startup(enabled)
+            if not success:
+                # If registry update failed, revert the config value
+                self.config["start_on_boot"] = not enabled
+                raise Exception("Failed to update Windows startup registry")
+                
+        except Exception as e:
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.error(f"Failed to handle startup setting: {e}")
+            raise
 
 # Supported languages
 SUPPORTED_LANGUAGES = {

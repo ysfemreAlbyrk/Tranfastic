@@ -357,8 +357,26 @@ class SettingsWindow(QWidget):
                 else:
                     self.logger.error("Failed to set hotkey")
             
-            # Application settings
-            self.config.set("start_on_boot", self.start_on_boot_cb.isChecked())
+            # Application settings - handle startup setting with error handling
+            try:
+                current_startup = self.config.get("start_on_boot", False)
+                new_startup = self.start_on_boot_cb.isChecked()
+                
+                if current_startup != new_startup:
+                    self.config.set("start_on_boot", new_startup)
+                    
+            except Exception as startup_error:
+                self.logger.error(f"Failed to update startup setting: {startup_error}")
+                # Show error message to user
+                from PyQt5.QtWidgets import QMessageBox
+                QMessageBox.warning(
+                    self, 
+                    "Startup Setting Error",
+                    f"Failed to update Windows startup setting:\n{str(startup_error)}\n\nOther settings have been saved successfully."
+                )
+                # Revert checkbox to current config value
+                self.start_on_boot_cb.setChecked(self.config.get("start_on_boot", False))
+            
             self.config.set("save_history", self.save_history_cb.isChecked())
             
             self.settings_changed.emit()
@@ -366,6 +384,13 @@ class SettingsWindow(QWidget):
             
         except Exception as e:
             self.logger.error(f"Failed to save settings: {e}")
+            # Show general error message
+            from PyQt5.QtWidgets import QMessageBox
+            QMessageBox.critical(
+                self, 
+                "Settings Error",
+                f"Failed to save settings:\n{str(e)}"
+            )
     
     def closeEvent(self, event):
         """Handle close event"""
