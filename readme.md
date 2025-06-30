@@ -50,7 +50,7 @@
 
 <div align="center">
 
-<img src="assets/howto.gif" alt="Tranfastic" style="border-radius: 16px;" />
+![Tranfastic](assets/howto.gif)
 
 </div>
 
