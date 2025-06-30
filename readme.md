@@ -50,7 +50,7 @@
 
 <div align="center">
 
-![Tranfastic](assets/app.png)
+<img src="assets/howto.gif" alt="Tranfastic" style="border-radius: 16px;" />
 
 </div>
 
