@@ -35,11 +35,13 @@ def load_custom_fonts(app):
 class TrayThread(QThread):
     """Thread for running system tray"""
     settings_requested = pyqtSignal()
+    restart_requested = pyqtSignal()
     exit_requested = pyqtSignal()
     
-    def __init__(self, on_settings, on_exit):
+    def __init__(self, on_settings, on_restart, on_exit):
         super().__init__()
         self.on_settings = on_settings
+        self.on_restart = on_restart
         self.on_exit = on_exit
         self.tray_manager = None
     
@@ -47,6 +49,7 @@ class TrayThread(QThread):
         """Run tray manager in separate thread"""
         self.tray_manager = TrayManager(
             on_settings=lambda: self.settings_requested.emit(),
+            on_restart=lambda: self.restart_requested.emit(),
             on_exit=lambda: self.exit_requested.emit()
         )
         self.tray_manager.show()
@@ -93,9 +96,11 @@ class TranfasticApp:
             # Setup tray manager in separate thread
             self.tray_thread = TrayThread(
                 on_settings=self.show_settings_window,
+                on_restart=self.restart_application,
                 on_exit=self.quit_application
             )
             self.tray_thread.settings_requested.connect(self.show_settings_window)
+            self.tray_thread.restart_requested.connect(self.restart_application)
             self.tray_thread.exit_requested.connect(self.quit_application)
             self.tray_thread.start()
             
@@ -222,6 +227,40 @@ class TranfasticApp:
         except Exception as e:
             self.logger.error(f"Error during shutdown: {e}")
             sys.exit(1)
+
+    def restart_application(self):
+        """Restart the application"""
+        try:
+            self.logger.info("Restarting Tranfastic application")
+            
+            # Import subprocess for restart
+            import subprocess
+            
+            # Get current executable and arguments
+            executable = sys.executable
+            script_path = sys.argv[0]
+            
+            # Show notification before restart
+            if self.tray_thread and self.tray_thread.tray_manager:
+                self.tray_thread.tray_manager.show_notification(
+                    "Restarting Application",
+                    "Tranfastic is restarting..."
+                )
+            
+            # Start new process
+            subprocess.Popen([executable, script_path])
+            
+            # Quit current application
+            self.quit_application()
+            
+        except Exception as e:
+            self.logger.error(f"Failed to restart application: {e}")
+            # If restart fails, show notification and continue running
+            if self.tray_thread and self.tray_thread.tray_manager:
+                self.tray_thread.tray_manager.show_notification(
+                    "Restart Failed",
+                    "Could not restart application. Please restart manually."
+                )
 
 def main():
     """Main entry point"""
