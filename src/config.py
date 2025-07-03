@@ -105,7 +105,18 @@ SUPPORTED_LANGUAGES = {
     "tr": "Turkish", 
     "de": "German",
     "es": "Spanish",
-    "ja": "Japanese"
+    "ja": "Japanese",
+    "fr": "French",
+    "it": "Italian",
+    "ru": "Russian",
+    "ar": "Arabic",
+    "hi": "Hindi",
+    "pt": "Portuguese",
+    "nl": "Dutch",
+    "pl": "Polish",
+    "ro": "Romanian",
+    "sv": "Swedish",
+    "uk": "Ukrainian"
 }
 
 # Application constants
@@ -116,9 +127,9 @@ GITHUB_URL = "https://github.com/ysfemreAlbyrk/Tranfastic"
 
 # UI Colors (Dark theme)
 COLORS = {
-    "background": "#353535",
+    "background": "#222222",
     "text": "#FFFFFF",
     "accent": "#4A90E2",
-    "secondary": "#2C2C2C",
-    "border": "#555555"
+    "secondary": "#333333",
+    "border": "#444444"
 } 
