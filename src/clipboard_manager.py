@@ -37,7 +37,7 @@ class ClipboardManager:
             self.logger.info(f"Pasted translation: {translated_text[:50]}...")
             
             # Simulate Ctrl+V to paste
-            self._simulate_paste()
+            # self._simulate_paste()
             
             # Restore original clipboard after delay if restore is enabled in config
             should_restore = config.get("restore_clipboard", False) if config else False
