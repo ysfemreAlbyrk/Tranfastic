@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 - Connection status check on translation window open
 - Clipboard restore functionality as optional setting (disabled by default)
 - Extended language support: French, Italian, Russian, Arabic, Hindi, Portuguese, Dutch, Polish, Romanian, Swedish, Ukrainian
+- Restart application functionality in tray menu
 
 ### Changed 🔄
 
