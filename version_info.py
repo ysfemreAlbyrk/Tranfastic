@@ -6,8 +6,8 @@ VSVersionInfo(
   ffi=FixedFileInfo(
     # filevers and prodvers should be always a tuple with four items: (1, 2, 3, 4)
     # Set not needed items to zero 0.
-    filevers=(1,0,0,0),
-    prodvers=(1,0,0,0),
+    filevers=(1,1,0,0),
+    prodvers=(1,1,0,0),
     # Contains a bitmask that specifies the valid bits 'flags'r
     mask=0x3f,
     # Contains a bitmask that specifies the Boolean attributes of the file.
@@ -31,12 +31,13 @@ VSVersionInfo(
         u'040904B0',
         [StringStruct(u'CompanyName', u'Yusuf Emre Albayrak'),
         StringStruct(u'FileDescription', u'Tranfastic - Instant Translator'),
-        StringStruct(u'FileVersion', u'1.0.0.0'),
+        StringStruct(u'FileVersion', u'1.1'),
         StringStruct(u'InternalName', u'Tranfastic'),
         StringStruct(u'LegalCopyright', u'MIT License - Open Source Project'),
         StringStruct(u'OriginalFilename', u'Tranfastic.exe'),
         StringStruct(u'ProductName', u'Tranfastic'),
-        StringStruct(u'ProductVersion', u'1.0.0.0')])
+        StringStruct(u'ProductVersion', u'1.1'),
+        StringStruct(u'Comments', u'System tray translation app with global hotkeys')])
       ]), 
     VarFileInfo([VarStruct(u'Translation', [1033, 1200])])
   ]
