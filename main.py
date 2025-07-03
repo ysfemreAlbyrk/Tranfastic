@@ -157,8 +157,8 @@ class TranfasticApp:
     def handle_translation_complete(self, translated_text: str):
         """Handle translation completion"""
         try:
-            # Paste translated text
-            clipboard_manager.paste_translation(translated_text)
+            # Paste translated text with config
+            clipboard_manager.paste_translation(translated_text, config=self.config)
             
             # Log translation
             source_lang = self.config.get("source_language", "auto")

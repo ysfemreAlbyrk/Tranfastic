@@ -19,6 +19,7 @@ class Config:
             "hotkey": "shift+alt+d",
             "start_on_boot": False,
             "save_history": False,
+            "restore_clipboard": False,
             "theme": "dark"
         }
         self.config = self.load_config()
