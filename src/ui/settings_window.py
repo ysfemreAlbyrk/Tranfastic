@@ -68,16 +68,16 @@ class SettingsWindow(QWidget):
                 subcontrol-origin: margin;
             }}
             QComboBox {{
-                background-color: #2a2a2a;
-                border: 1px solid #555;
+                background-color: {COLORS['secondary']};
+                border: 1px solid {COLORS['border']};
                 border-radius: 4px;
                 padding:6px;
                 font-size: 12px;
-                color: #fff;
+                color: {COLORS['text']};
                 min-height: 16px;
             }}
             QComboBox:hover {{
-                border: 1px solid #777;
+                border: 1px solid {COLORS['border']};
             }}
             QComboBox::drop-down {{
                 border: none;
@@ -174,6 +174,14 @@ class SettingsWindow(QWidget):
         titles_layout.addWidget(target_label, stretch=1)
         
         lang_layout.addLayout(titles_layout)
+
+        # bottom line
+        hr = QFrame()
+        hr.setFrameShape(QFrame.HLine)
+        hr.setFrameShadow(QFrame.Sunken)
+        hr.setFixedHeight(1)
+        hr.setStyleSheet(f"background-color: {COLORS['border']}; color: {COLORS['border']}; height: 1px;")
+        lang_layout.addWidget(hr)
         
         # Bottom row: Dropdowns and arrow
         controls_layout = QHBoxLayout()
@@ -201,6 +209,20 @@ class SettingsWindow(QWidget):
         controls_layout.addWidget(self.target_combo, stretch=1)
         
         lang_layout.addLayout(controls_layout)
+
+        # Info area
+        info_layout = QHBoxLayout()
+        info_layout.setSpacing(6)
+        info_layout.setContentsMargins(0, 0, 0, 0)
+        info_icon = QLabel("info")
+        info_icon.setStyleSheet("color: #888; font-size: 16px;")
+        info_icon.setFont(QFont("Material Symbols Rounded"))
+        info_layout.addWidget(info_icon)
+        info_text = QLabel("Please avoid using 'Auto Detect' for faster and more accurate translation.")
+        info_text.setStyleSheet("color: #888; font-style: italic;")
+        info_text.setWordWrap(True)
+        info_layout.addWidget(info_text, stretch=1)
+        lang_layout.addLayout(info_layout)
         lang_group.setLayout(lang_layout)
         layout.addWidget(lang_group)
 
@@ -223,6 +245,8 @@ class SettingsWindow(QWidget):
         app_layout.addWidget(self.start_on_boot_cb)
         self.save_history_cb = QCheckBox("Save translation history (local)")
         app_layout.addWidget(self.save_history_cb)
+        self.restore_clipboard_cb = QCheckBox("Restore original clipboard after translation")
+        app_layout.addWidget(self.restore_clipboard_cb)
         app_group.setLayout(app_layout)
         layout.addWidget(app_group)
 
@@ -237,14 +261,14 @@ class SettingsWindow(QWidget):
         main_layout.setContentsMargins(10, 10, 10, 10)
         main_layout.setSpacing(12)
 
-        # Üst alan: Sol (başlık + version/author) ve Sağ (ikon)
+        # top area: left (title + version/author) and right (icon)
         top_layout = QHBoxLayout()
         top_layout.setSpacing(0)
 
-        # Sol blok (başlık ve version/author)
+        # left block (title and version/author)
         left_box = QVBoxLayout()
         left_box.setSpacing(20)
-        title_label = QLabel("<p style='font-size:48px; font-weight:bold; font-family:Inter; color: #FF6B6B;'>Tranfastic</p>")
+        title_label = QLabel("<p style='font-size:48px; font-weight:bold; font-family:Inter; color: #fff;'>Tranfastic</p>")
         left_box.addWidget(title_label)
         info_label = QLabel(
             f"<span style='font-size:12px; font-weight:600;'>Version:</span> "
@@ -257,7 +281,7 @@ class SettingsWindow(QWidget):
         left_box.addStretch()
         top_layout.addLayout(left_box, stretch=1)
 
-        # Sağ blok (ikon)
+        # right block (icon)
         icon_label = QLabel()
         icon_path = str((Path(__file__).parent.parent / "../assets/icon.png").resolve())
         pixmap = QPixmap(icon_path)
@@ -269,13 +293,15 @@ class SettingsWindow(QWidget):
 
         main_layout.addLayout(top_layout)
 
-        # Alt çizgi
+        # bottom line
         hr = QFrame()
         hr.setFrameShape(QFrame.HLine)
-        hr.setStyleSheet("background-color: #454545; color: #454545; height: 1px;")
+        hr.setFrameShadow(QFrame.Sunken)
+        hr.setFixedHeight(1)
+        hr.setStyleSheet(f"background-color: {COLORS['border']}; color: {COLORS['border']}; height: 1px;")
         main_layout.addWidget(hr)
 
-        # Diğer içerikler (github butonu, açıklama, lisans vs.)
+        # other content (github button, description, license etc.)
         main_layout.addSpacing(10)
         desc_label = QLabel(
             "<b>About Tranfastic</b><br>"
@@ -299,13 +325,13 @@ class SettingsWindow(QWidget):
             "<b>License:</b> MIT License<br>"
             "<span style='font-size:11px;color:#aaa;'>A short and simple permissive license with conditions only requiring preservation of copyright and license notices.</span>"
         )
-        license_label.setStyleSheet("background:#222;padding:10px 14px;border-radius:6px;font-size:12px;")
+        license_label.setStyleSheet(f"background:{COLORS['secondary']};padding:10px 14px;border-radius:6px;font-size:12px;")
         license_label.setWordWrap(True)
         main_layout.addWidget(license_label)
 
         # Google Translate service note
         service_note = QLabel(
-            "<span style='color:rgba(255, 119, 0, 1);'><b>This tool uses Google Translate™ services.</b><br></span>"
+            "<span style='color:rgba(255, 119, 0, 1);'><b>This tool uses Google Translate™ services with py-googletrans.</b><br></span>"
             "<span style='font-size:11px;color:rgba(255, 119, 0, 1);'>If translation does not work, it may be due to issues with Google Translate services or connectivity.</span>"
         )
         service_note.setStyleSheet("background:rgba(255, 119, 0, 0.1);padding:5px 10px;border-radius:6px;border: 2px dashed #ff7700;font-size:12px;")
@@ -338,6 +364,7 @@ class SettingsWindow(QWidget):
         # Application settings
         self.start_on_boot_cb.setChecked(self.config.get("start_on_boot", False))
         self.save_history_cb.setChecked(self.config.get("save_history", False))
+        self.restore_clipboard_cb.setChecked(self.config.get("restore_clipboard", False))
     
     def save_settings(self):
         """Save settings from UI to config"""
@@ -378,6 +405,7 @@ class SettingsWindow(QWidget):
                 self.start_on_boot_cb.setChecked(self.config.get("start_on_boot", False))
             
             self.config.set("save_history", self.save_history_cb.isChecked())
+            self.config.set("restore_clipboard", self.restore_clipboard_cb.isChecked())
             
             self.settings_changed.emit()
             self.close()

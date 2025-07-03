@@ -63,7 +63,7 @@ class TranslationWindow(QWidget):
     
     def setup_ui(self):
         """Setup user interface"""
-        # Ana arka plan widget'ı
+        # Main background widget
         main_widget = QWidget(self)
         main_widget.setObjectName("main_widget")
         main_widget.setStyleSheet(f"""
@@ -77,7 +77,7 @@ class TranslationWindow(QWidget):
         main_layout.setContentsMargins(0, 0, 0, 0)
         main_layout.setSpacing(0)
 
-        # Custom başlık bar
+        # Custom title bar
         title_bar = QWidget()
         title_bar.setObjectName("title_bar")
         title_bar.setFixedHeight(30)
@@ -94,20 +94,20 @@ class TranslationWindow(QWidget):
         title_layout.setContentsMargins(5, 0, 0, 0)
         title_layout.setSpacing(8)
 
-        # Sol ikon
+        # Left icon
         icon_label = QLabel()
         icon_path = str((Path(__file__).parent.parent / "../assets/icon.png").resolve())
         icon_label.setPixmap(QPixmap(icon_path).scaled(20, 20, Qt.KeepAspectRatio, Qt.SmoothTransformation))
         title_layout.addWidget(icon_label)
 
-        # Dinamik başlık
+        # Dynamic title
         self.title_label = QLabel()
         self.title_label.setStyleSheet("color: #fff; font-weight: 600; font-size: 12px;")
         title_layout.addWidget(self.title_label)
 
         title_layout.addStretch()
 
-        # Kapatma butonu
+        # Close button
         # close_btn = QPushButton("\ue5cd")  # Material Symbols 'close' icon
         close_btn = QPushButton("Close")  # Material Symbols 'close' icon
         close_btn.setFont(QFont("Material Symbols Rounded"))
@@ -146,7 +146,7 @@ class TranslationWindow(QWidget):
         self.input_field.textChanged.connect(self.on_text_changed)
         main_layout.addWidget(self.input_field)
 
-        # Status label (gizli, sadece hata için)
+        # Status label (hide, only for error)
         self.status_label = QLabel("")
         self.status_label.setAlignment(Qt.AlignCenter)
         self.status_label.setStyleSheet("color: #F44336; font-size: 12px;")
@@ -195,7 +195,8 @@ class TranslationWindow(QWidget):
         # If I need to write the long version(like English, Turkish, etc.) of the languages ​​in the future, I can use these 2 lines.
         # source_name = SUPPORTED_LANGUAGES.get(source_lang, source_lang.upper())
         # target_name = SUPPORTED_LANGUAGES.get(target_lang, target_lang.upper())
-        title = f"Tranfastic - <span style='color:#00ff00;'>{status}</span> <span style='color:#a7a7a7;'>| {source_lang} → {target_lang}</span>"
+        status_color = "#00ff00" if status == "Connected" else "#ff0000"
+        title = f"Tranfastic - <span style='color:{status_color};'>{status}</span> <span style='color:#a7a7a7;'>| {source_lang} → {target_lang}</span>"
         self.title_label.setText(title)
     
     def on_text_changed(self, text: str):
@@ -230,7 +231,7 @@ class TranslationWindow(QWidget):
             self.status_label.setText("Translation completed!")
             self.status_label.setStyleSheet("color: #4CAF50;")
             
-            # Geçmiş kaydı
+            # History
             if self.config.get("save_history", False):
                 source_lang = self.config.get("source_language", "auto")
                 target_lang = self.config.get("target_language", "en")
@@ -265,6 +266,9 @@ class TranslationWindow(QWidget):
         self._last_hwnd = user32.GetForegroundWindow()
         super().showEvent(event)
         self.input_field.setFocus()
+        
+        # Check connection status when window opens
+        translator_engine._test_connection()
         self.update_title()
     
     def closeEvent(self, event):
@@ -274,7 +278,7 @@ class TranslationWindow(QWidget):
             self.translation_worker.wait()
         super().closeEvent(event)
 
-    # Sürüklenebilirlik
+    # Dragable
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton and event.pos().y() <= 36:
             self._drag_pos = event.globalPos() - self.frameGeometry().topLeft()

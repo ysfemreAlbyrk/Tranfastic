@@ -16,9 +16,10 @@ from .config import APP_NAME, APP_VERSION
 class TrayManager:
     """System tray manager for Tranfastic"""
     
-    def __init__(self, on_settings: Callable, on_exit: Callable):
+    def __init__(self, on_settings: Callable, on_restart: Callable, on_exit: Callable):
         self.logger = logging.getLogger(__name__)
         self.on_settings = on_settings
+        self.on_restart = on_restart
         self.on_exit = on_exit
         self.icon = None
         self._create_icon()
@@ -39,6 +40,7 @@ class TrayManager:
                 pystray.MenuItem("Settings", self._on_settings_click),
                 pystray.MenuItem("Translation History", self._on_history_click),
                 pystray.Menu.SEPARATOR,
+                pystray.MenuItem("Restart", self._on_restart_click),
                 pystray.MenuItem("Exit", self._on_exit_click)
             )
             
@@ -76,6 +78,13 @@ class TrayManager:
                 
         except Exception as e:
             self.logger.error(f"History click error: {e}")
+    
+    def _on_restart_click(self, icon, item):
+        """Handle restart menu click"""
+        try:
+            self.on_restart()
+        except Exception as e:
+            self.logger.error(f"Restart click error: {e}")
     
     def _on_exit_click(self, icon, item):
         """Handle exit menu click"""

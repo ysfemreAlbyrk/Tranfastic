@@ -16,13 +16,13 @@
   .
   <a href="#-development" style="color: #0366d6">Development</a>
   .
-  <a href="#-configuration" style="color: #0366d6">Configuration</a>
-  .
-  <a href="#-troubleshooting" style="color: #0366d6">Troubleshooting</a>
-  .
   <a href="#-contributing" style="color: #0366d6">Contributing</a>
   .
-  <a href="#%EF%B8%8F-development-roadmap" style="color: #0366d6">Roadmap</a>
+  <a href="docs/LEGAL.md" style="color: #0366d6">Legal</a>
+  .
+  <a href="docs/TROUBLESHOOTING.md" style="color: #0366d6">Troubleshooting</a>
+  .
+  <a href="docs/ROADMAP.md" style="color: #0366d6">Roadmap</a>
   .
   <a href="#-license" style="color: #0366d6">License</a>
   <br>
@@ -50,7 +50,7 @@
 
 <div align="center">
 
-![Tranfastic](assets/howto.gif)
+![Tranfastic](docs/assets/howto.gif)
 
 </div>
 
@@ -76,7 +76,7 @@ translated text readily available for copying or inserting.
 
 > No installation required! Works on any Windows 10/11 machine.
 
-1. Download `Tranfastic.exe` from [Releases](../../releases/latest)
+1. Download `Tranfastic.exe` from [**Releases**](../../releases/latest)
 2. Copy to any folder (Desktop, USB drive, etc.)
 3. Double-click to run
 
@@ -144,53 +144,9 @@ pip install -r requirements.txt
 
 The executable will be created in `dist/Tranfastic.exe`
 
-## ⚙️ Configuration
+## 🐛 Need Help?
 
-- **Language Settings:** Set your preferred source and destination languages in the settings menu.
-- **Shortcut Customization:** Modify the hotkey to suit your workflow.
-- **Launch on Startup (Windows):** Optionally enable Tranfastic to start when your computer boots.
-
-### 📁 User Data
-
-Application creates user data in:
-
-```
-%USERPROFILE%\.tranfastic\
-├── config.json          # User settings
-└── logs\                # Translation logs (if enabled)
-    ├── 2024-01-01.log
-    └── ...
-```
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-**Application doesn't start**
-
-- Check Windows Defender/Antivirus settings
-- Run as administrator if needed
-- Ensure Windows 10/11 compatibility
-
-**Hotkey not working**
-
-- Check if hotkey conflicts with other applications
-- Try different hotkey combination in settings
-- Restart application after changing hotkey
-
-**Translation fails**
-
-- Check internet connection
-- Google Translate service might be temporarily unavailable
-- Try different source/target language combination
-
-### Antivirus False Positives
-
-Some antivirus software may flag PyInstaller executables. This is a known false positive. The application:
-
-- Does not modify system files
-- Only accesses clipboard and creates user data folder
-- Is open source - you can verify the code
+Having issues? Check our comprehensive [Troubleshooting Guide](docs/TROUBLESHOOTING.md) for solutions to common problems.
 
 ## 🤝 Contributing
 
@@ -208,61 +164,14 @@ For bug reports, please open an issue with:
 
 ## 🛠️ Development Roadmap
 
-**Current features and future updates organized by phases:**
+See our detailed [Development Roadmap](docs/ROADMAP.md) for planned features, timelines, and how to contribute to Tranfastic's future.
 
-### ~~✅ Phase 1: Core Foundation (Completed)~~
+**Quick highlights:**
 
-- [x] Global hotkey and logging implementation
-- [x] System tray integration with custom icon and menu
-- [x] Minimalist, modern, frameless translation window
-- [x] Customizable language and hotkey settings
-- [x] Local translation history (optional, per day)
-- [x] Dark theme and custom font integration
-- [x] Paste translation to previously focused input
-- [x] About section in settings
-- [x] Portable executable build system
-- [x] Windows startup option
-
-### 🔄 Phase 2: User Experience Improvements (In Progress)
-
-- [ ] Prevent focus stealing on initial open
-- [ ] Capture text directly from selected fields
-- [ ] Add user notifications for translations
-- [ ] Quick language switcher in tray menu
-- [ ] Customizable window size and transparency
-- [ ] Keyboard navigation for all UI
-- [ ] Auto-detect and translate clipboard content
-- [ ] **Translation History Management:**
-  - [ ] Modern GUI interface to view, search, and manage translation history
-  - [ ] Database structure with metadata (timestamp, language pairs, frequency)
-  - [ ] Star/favorite translations for quick access
-  - [ ] Search & filter by text, date, or language pairs
-  - [ ] Categories & tags for organization
-  - [ ] Bulk operations (delete, export, categorize)
-  - [ ] Backup & sync capabilities
-
-### 🚀 Phase 3: Advanced Features
-
-- [ ] Update checker (from GitHub releases)
-- [ ] OCR: Translate text from images
-- [ ] Voice input and translation
-- [ ] Multi-API support (Google, DeepL, Yandex, etc.)
-- [ ] Export/import translation history
-- [ ] Theming (light/dark/custom themes)
-- [ ] In-app feedback and bug reporting
-
-### 🤖 Phase 4: AI & Machine Learning
-
-- [ ] Offline translation (local ML model)
-- [ ] Machine learning-based translation improvements
-- [ ] Ollama integration for local AI-powered translation
-- [ ] Context-aware translations
-
-### 🌍 Phase 5: Platform Expansion
-
-- [ ] Cross-platform support (Linux, macOS)
-
-**Have an idea? Open an issue or pull request!**
+- 🔄 **Phase 2 (In Progress)**: User experience improvements and translation history management
+- 🚀 **Phase 3**: Advanced features including OCR, voice input, and multi-API support
+- 🤖 **Phase 4**: AI & machine learning integration (via ollama)
+- 🌍 **Phase 5**: Cross-platform expansion
 
 ## 🙏 Open Source Dependencies
 

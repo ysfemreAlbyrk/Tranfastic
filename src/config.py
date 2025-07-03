@@ -19,6 +19,7 @@ class Config:
             "hotkey": "shift+alt+d",
             "start_on_boot": False,
             "save_history": False,
+            "restore_clipboard": False,
             "theme": "dark"
         }
         self.config = self.load_config()
@@ -104,20 +105,31 @@ SUPPORTED_LANGUAGES = {
     "tr": "Turkish", 
     "de": "German",
     "es": "Spanish",
-    "ja": "Japanese"
+    "ja": "Japanese",
+    "fr": "French",
+    "it": "Italian",
+    "ru": "Russian",
+    "ar": "Arabic",
+    "hi": "Hindi",
+    "pt": "Portuguese",
+    "nl": "Dutch",
+    "pl": "Polish",
+    "ro": "Romanian",
+    "sv": "Swedish",
+    "uk": "Ukrainian"
 }
 
 # Application constants
 APP_NAME = "Tranfastic"
-APP_VERSION = "1.0"
+APP_VERSION = "1.1"
 APP_AUTHOR = "Yusuf Emre Albayrak"
 GITHUB_URL = "https://github.com/ysfemreAlbyrk/Tranfastic"
 
 # UI Colors (Dark theme)
 COLORS = {
-    "background": "#353535",
+    "background": "#222222",
     "text": "#FFFFFF",
     "accent": "#4A90E2",
-    "secondary": "#2C2C2C",
-    "border": "#555555"
+    "secondary": "#333333",
+    "border": "#444444"
 } 

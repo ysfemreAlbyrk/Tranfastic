@@ -6,19 +6,25 @@
 
 <h1 align="center">Tranfastic</h1>
 
-<h4 align="center">Hafif Taşınabilir Anlık Çevirmen</h4>
+<h4 align="center">Hafif Anlık Çevirmen</h4>
 
 <p align="center">
   <br>
   <a href="#-özellikler" style="color: #0366d6">Özellikler</a>
-  ·
+  .
   <a href="#-hızlı-başlangıç" style="color: #0366d6">Hızlı Başlangıç</a>
-  ·
-  <a href="#-nasıl-kullanılır" style="color: #0366d6">Nasıl Kullanılır</a>
-  ·
+  .
   <a href="#%EF%B8%8F-geliştirme" style="color: #0366d6">Geliştirme</a>
-  ·
+  .
   <a href="#-katkıda-bulunma" style="color: #0366d6">Katkıda Bulunma</a>
+  .
+  <a href="LEGAL.md" style="color: #0366d6">Hukuki</a>
+  .
+  <a href="TROUBLESHOOTING.md" style="color: #0366d6">Sorun Giderme</a>
+  .
+  <a href="ROADMAP.md" style="color: #0366d6">Yol Haritası</a>
+  .
+  <a href="#-lisans" style="color: #0366d6">Lisans</a>
   <br>
 </p>
 
@@ -44,55 +50,100 @@
 
 <div align="center">
 
-![Tranfastic](../assets/app.png)
+![Tranfastic](../assets/howto.gif)
 
 </div>
 
-Windows için sistem çapında kısayollarla anlık çeviri sağlayan hafif, taşınabilir çeviri uygulaması.
+Tranfastic, çalışırken anlık, gerçek zamanlı çeviri için tasarlanmış hafif bir Python uygulamasıdır. Sistem tepsisinde gizlice durur ve hızlı bir kısayol tuşu metin girişi için bir pencere açar, çevrilmiş metni kopyalama veya yerleştirme için hazır hale getirir.
 
 ## ✨ Özellikler
 
 - **🔥 Anlık Çeviri**: Global kısayol (`Shift+Alt+D`) ile hızlı çeviri
-- **🌐 Çoklu Dil**: İngilizce, Türkçe, Almanca, İspanyolca, Japonca ve daha fazlası
-- **📱 Sistem Tepsisi**: Arka planda sessizce çalışır
-- **⚡ Hafif**: Tek taşınabilir dosya (~50-80MB)
-- **🎨 Modern Arayüz**: Temiz, koyu temalı tasarım
-- **📋 Pano Entegrasyonu**: Çeviriyi otomatik yapıştırır
+- **⚡ Kısayol Aktivasyonu:** Özelleştirilebilir klavye kısayolu ile çeviri pop-up'ını anında açar.
+- **🌐 Çoklu Dil**: _İngilizce_, _Türkçe_, _Almanca_, _İspanyolca_, _Japonca_ ve daha fazlası desteği.
+- **📱 Sistem Tepsisi**: Arka planda sessizce çalışır.
+- **📋 Pano Entegrasyonu**: Çevrilmiş metni otomatik yapıştırır
 - **🔧 Yapılandırılabilir**: Özelleştirilebilir kısayollar ve diller
-- **📝 Günlük**: İsteğe bağlı çeviri geçmişi
+- **🔒 Gizlilik Odaklı:** Herhangi bir çeviri geçmişi veya hassas bilgi saklamaz.
+- **🎨 Temiz Arayüz:** Çalışmanızı bölmeyen minimalist tasarım.
 
 ## 🚀 Hızlı Başlangıç
 
 ### 📥 İndir & Çalıştır
 
-1. [Releases](../../releases/latest) sayfasından `Tranfastic.exe` dosyasını indirin
+1. [**Releases**](../../releases/latest) sayfasından `Tranfastic.exe` dosyasını indirin
 2. İstediğiniz klasöre kopyalayın (Masaüstü, USB sürücü vb.)
 3. Çift tıklayarak çalıştırın
-4. Herhangi bir yerde metin seçin ve `Shift+Alt+D` tuşlarına basın
 
 Kurulum gerektirmez! Herhangi bir Windows 10/11 bilgisayarında çalışır.
 
-## 🎯 Nasıl Kullanılır
+### 🎯 Nasıl Kullanılır
 
-1. **Uygulamayı Başlatın**: `Tranfastic.exe` dosyasını çalıştırın
-2. **Metin Seçin**: Herhangi bir uygulamada metni vurgulayın
-3. **Çevirin**: `Shift+Alt+D` tuşlarına basın (veya özel kısayolunuz)
-4. **Sonuç Alın**: Çeviri penceresi anında açılır
-5. **Otomatik Yapıştır**: Çevrilen metin otomatik olarak yapıştırılır
+1. **Kısayolu Kullanarak:**
+   - `Shift+Alt+D` tuşlarına basın (varsayılan) veya ayarlarda tercih ettiğiniz kısayolu belirleyin.
+2. **Giriş ve Çeviri:**
 
-### Sistem Tepsisi Menüsü
+   - Pop-up penceresine metin yazın veya yapıştırın ve çevirinizi almak için Enter tuşuna basın.
 
-Tepsi simgesine sağ tıklayarak:
+3. **Kolayca Kapatın:**
+   - Pop-up penceresini hızlıca kapatmak için `Esc` tuşuna basın.
 
-- Ayarları açın
-- Çeviri geçmişini kontrol edin
-- Uygulamadan çıkın
+## 🛠️ Geliştirme
 
-## ⚙️ Yapılandırma
+### 📦 Kurulum
 
-- **Dil Ayarları:** Ayarlar menüsünde tercih ettiğiniz kaynak ve hedef dilleri belirleyin.
-- **Kısayol Özelleştirme:** İsteğinize uygun olarak kısayol tuşunu değiştirin.
-- **Başlangıçta Çalıştırma (Windows):** İsteğe bağlı olarak Tranfastic'ın bilgisayarınız açıldığında başlamasını etkinleştirin.
+1. **Önce, depoyu klonlayın:**
+
+```bash
+git clone https://github.com/your-username/Tranfastic.git
+cd Tranfastic
+```
+
+2. **Sanal ortam kurun**
+
+```bash
+
+python -m venv venv
+
+# Sanal ortamı etkinleştirin
+./venv/Script/activate
+```
+
+3. **Bağımlılıkları yükleyin:**
+
+```bash
+pip install -r requirements.txt
+```
+
+### 🏃 Uygulamayı Çalıştırın
+
+1. **Tranfastic'ı başlatın:**
+
+```bash
+python main.py
+```
+
+Tranfastic simgesi sistem tepsisinde görünecektir.
+
+### 🔨 Taşınabilir Çalıştırılabilir Dosya Oluşturun
+
+```bash
+# Depoyu klonlayın
+git clone https://github.com/ysfemreAlbyrk/Tranfastic.git
+cd Tranfastic
+
+# Bağımlılıkları yükleyin
+pip install -r requirements.txt
+
+# Taşınabilir çalıştırılabilir dosya oluşturun
+./build_portable.bat
+```
+
+Çalıştırılabilir dosya `dist/Tranfastic.exe` konumunda oluşturulacaktır.
+
+## 🐛 Yardıma mı İhtiyacınız Var?
+
+Sorun mu yaşıyorsunuz? Yaygın sorunların çözümleri için kapsamlı [Sorun Giderme Rehberimizi](TROUBLESHOOTING.md) kontrol edin.
 
 ## 🤝 Katkıda Bulunma
 
@@ -110,60 +161,14 @@ Hata raporları için lütfen şunlarla birlikte bir issue açın:
 
 ## 🛠️ Geliştirme Yol Haritası
 
-**Mevcut özellikler ve gelecek güncellemeler fazara göre düzenlenmiştir:**
+Planlanan özellikler, zaman çizelgeleri ve Tranfastic'ın geleceğine nasıl katkıda bulunabileceğiniz için detaylı [Geliştirme Yol Haritamızı](ROADMAP.md) inceleyin.
 
-### ✅ Faz 1: Temel Altyapı (Tamamlandı)
+**Hızlı öne çıkanlar:**
 
-- [x] Kısayol tuşu ve günlük kaydı uygulaması
-- [x] Sistem tepsisi entegrasyonu (özel ikon ve menü)
-- [x] Minimalist, modern, başlıksız çeviri penceresi
-- [x] Dil ve kısayol ayarlarının özelleştirilebilmesi
-- [x] Lokal çeviri geçmişi (günlük dosya, opsiyonel)
-- [x] Koyu tema ve özel font entegrasyonu
-- [x] Çevirinin odaklanılan inputa otomatik yapıştırılması
-- [x] Ayarlar içinde Hakkında bölümü
-- [ ] Windows başlangıcında çalıştırma seçeneği
-
-### 🔄 Faz 2: Kullanıcı Deneyimi İyileştirmeleri (Devam Ediyor)
-
-- [ ] İlk açılışta odak çalınmasını önleme
-- [ ] Seçili alanlardan doğrudan metin yakalama
-- [ ] Çeviriler için kullanıcı bildirimleri ekleme
-- [ ] Tepsi menüsünde hızlı dil değiştirici
-- [ ] Pencere boyutu ve şeffaflığının özelleştirilebilmesi
-- [ ] Tüm arayüz için klavye ile gezinme
-- [ ] Panodaki içeriği otomatik algılayıp çevirme
-- [ ] **Çeviri Geçmişi Yönetimi:**
-  - [ ] Çeviri geçmişini görüntüleme, arama ve yönetme için modern arayüz
-  - [ ] Meta verilerle (zaman damgası, dil çiftleri, sıklık) veritabanı yapısı
-  - [ ] Önemli çevirileri hızlı erişim için yıldızlama/favoriler
-  - [ ] Metin, tarih veya dil çiftlerine göre arama ve filtreleme
-  - [ ] Organizasyon için kategoriler ve etiketler
-  - [ ] Toplu işlemler (silme, dışa aktarma, kategorilendirme)
-  - [ ] Yedekleme ve senkronizasyon yetenekleri
-
-### 🚀 Faz 3: Gelişmiş Özellikler
-
-- [ ] Otomatik güncelleme sistemi (GitHub releases üzerinden)
-- [ ] OCR ile görselden metin çevirisi
-- [ ] Sesli giriş ve çeviri
-- [ ] Çoklu API desteği (Google, DeepL, Yandex, vs.)
-- [ ] Çeviri geçmişini dışa/içe aktarabilme
-- [ ] Tema desteği (açık/koyu/özel)
-- [ ] Uygulama içi geri bildirim ve hata bildirimi
-
-### 🤖 Faz 4: Yapay Zeka ve Makine Öğrenmesi
-
-- [ ] Offline çeviri (yerel ML modeli)
-- [ ] Makine öğrenmesi ile çeviri iyileştirmeleri
-- [ ] Ollama entegrasyonu ile yerel AI destekli çeviri
-- [ ] Bağlam farkında çeviriler
-
-### 🌍 Faz 5: Platform Genişletme
-
-- [ ] Çoklu platform desteği (Linux, macOS)
-
-**Senin de bir fikrin mi var? Issue veya pull request açabilirsin!**
+- 🔄 **Faz 2 (Devam Ediyor)**: Kullanıcı deneyimi iyileştirmeleri ve çeviri geçmişi yönetimi
+- 🚀 **Faz 3**: OCR, sesli giriş ve çoklu API desteği dahil gelişmiş özellikler
+- 🤖 **Faz 4**: AI ve makine öğrenmesi entegrasyonu (ollama aracılığıyla)
+- 🌍 **Faz 5**: Çapraz platform genişletme
 
 ## 🙏 Açık Kaynak Bağımlılıkları
 

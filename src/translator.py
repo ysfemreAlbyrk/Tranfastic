@@ -37,7 +37,6 @@ class TranslationEngine:
         """Check if translation service is connected"""
         return self._connection_status
     
-    # TODO: auto mode doesnt work. must be fixed.
     def translate(self, text: str, source_lang: str = "auto", target_lang: str = "en") -> Tuple[str, Optional[str], bool]:
         """
         Translate text from source language to target language
@@ -54,19 +53,31 @@ class TranslationEngine:
             return "", None, False
         
         try:
-            # Perform translation
-            result = self.translator.translate(
-                text, 
-                src=source_lang if source_lang != "auto" else None,
-                dest=target_lang
-            )
+            # Handle auto-detect properly
+            if source_lang == "auto":
+                # For auto-detect, don't pass src parameter at all
+                result = self.translator.translate(text, dest=target_lang)
+                detected_lang = result.src
+                self.logger.info(f"Auto-detected language: {detected_lang}")
+            else:
+                # For specific source language, pass it explicitly
+                result = self.translator.translate(text, src=source_lang, dest=target_lang)
+                detected_lang = source_lang
             
             translated_text = result.text
-            detected_lang = result.src if source_lang == "auto" else source_lang
+            
+            # Verify we got a valid translation
+            if not translated_text or translated_text.strip() == "":
+                self.logger.error("Empty translation result received")
+                return "", detected_lang, False
             
             self.logger.info(f"Translation successful: {text[:50]}... -> {translated_text[:50]}...")
             return translated_text, detected_lang, True
             
+        except AttributeError as e:
+            self.logger.error(f"Translation failed - Attribute error (likely googletrans internal issue): {e}")
+            self._connection_status = False
+            return "", None, False
         except Exception as e:
             self.logger.error(f"Translation failed: {e}")
             self._connection_status = False

@@ -18,12 +18,13 @@ class ClipboardManager:
         self._original_clipboard = ""
         self._restore_timer: Optional[QTimer] = None
     
-    def paste_translation(self, translated_text: str, restore_after: int = 3000):
+    def paste_translation(self, translated_text: str, config=None, restore_after: int = 3000):
         """
         Paste translated text to clipboard and optionally restore original
         
         Args:
             translated_text: Text to paste
+            config: Configuration object to check restore setting
             restore_after: Milliseconds to wait before restoring original clipboard
         """
         try:
@@ -36,11 +37,15 @@ class ClipboardManager:
             self.logger.info(f"Pasted translation: {translated_text[:50]}...")
             
             # Simulate Ctrl+V to paste
-            self._simulate_paste()
+            # self._simulate_paste()
             
-            # Restore original clipboard after delay if specified
-            if restore_after > 0:
+            # Restore original clipboard after delay if restore is enabled in config
+            should_restore = config.get("restore_clipboard", False) if config else False
+            if should_restore and restore_after > 0:
                 self._schedule_restore(restore_after)
+                self.logger.info("Clipboard restore scheduled")
+            else:
+                self.logger.info("Clipboard restore disabled")
                 
         except Exception as e:
             self.logger.error(f"Failed to paste translation: {e}")
