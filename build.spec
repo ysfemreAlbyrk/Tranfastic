@@ -1,8 +1,19 @@
 # -*- mode: python ; coding: utf-8 -*-
+import sys
+import os
+from pathlib import Path
+
+# Add src to path to import version
+src_path = Path(__file__).parent / "src"
+sys.path.insert(0, str(src_path))
+
+from version import __version__, VERSION_INFO
+
+print(f"Building Tranfastic v{__version__}")
 
 a = Analysis(
     ['main.py'],
-    pathex=[],
+    pathex=[str(src_path)],
     binaries=[],
     datas=[
         ('assets', 'assets'),  # Include assets folder
@@ -15,7 +26,9 @@ a = Analysis(
         'PIL._tkinter_finder',
         'googletrans',
         'keyboard',
-        'pynput'
+        'pynput',
+        'requests',
+        'pyperclip'
     ],
     hookspath=[],
     hooksconfig={},
@@ -46,5 +59,11 @@ exe = EXE(
     codesign_identity=None,
     entitlements_file=None,
     icon='assets/icon.ico',  # Application icon
-    version='version_info.py'  # Version information
+    version='version_info.py',  # Version information
+    version_file_version=VERSION_INFO,
+    version_product_version=VERSION_INFO,
+    version_product_name='Tranfastic',
+    version_file_description='Instant Translator Application',
+    version_legal_copyright='MIT License - Open Source Project',
+    version_company_name='Yusuf Emre Albayrak'
 ) 

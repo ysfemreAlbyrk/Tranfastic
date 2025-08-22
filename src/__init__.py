@@ -1,7 +1,7 @@
 # Tranfastic - Instant Translator Application
-# Version: 1.0
+# Version: 1.1
 # Author: Yusuf Emre Albayrak
 
-from .startup_manager import startup_manager
+from core.startup_manager import startup_manager
 
 __all__ = ['startup_manager'] 

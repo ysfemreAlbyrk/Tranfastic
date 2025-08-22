@@ -66,7 +66,7 @@ class Config:
     def _sync_startup_setting(self):
         """Sync startup setting with Windows registry on app start"""
         try:
-            from .startup_manager import startup_manager
+            from core.startup_manager import startup_manager
             
             # Check current Windows registry status
             registry_enabled = startup_manager.is_startup_enabled()
@@ -84,7 +84,7 @@ class Config:
     def _handle_startup_setting(self, enabled: bool):
         """Handle changes to startup setting"""
         try:
-            from .startup_manager import startup_manager
+            from core.startup_manager import startup_manager
             
             success = startup_manager.set_startup(enabled)
             if not success:

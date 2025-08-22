@@ -21,14 +21,14 @@ All foundational features have been implemented and are stable:
 
 ## 🖼️ Phase 2: User Experience Improvements
 
-- [ ] Popup window icon rework for status indication
+- [ ] Popup window DPI scaling
 - [ ] Popup window position and size customization
-- [ ] User notifications for translations
 - [ ] Quick language switcher in tray menu
-- [ ] Customizable window size and transparency
 - [ ] Auto-detect and translate clipboard content
 - [ ] Setup installer (MSI installer for Windows)
 - [ ] Auto-update system (from GitHub releases)
+- [ ] Popup window icon rework for status indication
+- [ ] Customizable window size and transparency
 
 ### Translation History Management
 

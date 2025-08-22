@@ -1,8 +1,18 @@
+# Production dependencies
 googletrans==4.0.0rc1
 PyQt5==5.15.10
 pystray==0.19.5
 Pillow==10.1.0
 keyboard==0.13.5
 pynput==1.7.6
-pywin32==306; sys_platform == "win32" 
-pyinstaller
+pywin32==306; sys_platform == "win32"
+pyinstaller>=5.0.0
+requests>=2.25.0
+pyperclip>=1.8.0
+
+# Development dependencies (optional)
+# pytest>=7.0.0
+# pytest-qt>=4.0.0
+# black>=22.0.0
+# flake8>=5.0.0
+# mypy>=1.0.0
