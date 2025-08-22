@@ -21,7 +21,6 @@ All foundational features have been implemented and are stable:
 
 ## 🖼️ Phase 2: User Experience Improvements
 
-- [ ] Popup window DPI scaling
 - [ ] Popup window position and size customization
 - [ ] Quick language switcher in tray menu
 - [ ] Auto-detect and translate clipboard content
@@ -45,6 +44,7 @@ All foundational features have been implemented and are stable:
 - [ ] Multi-API support (Google, DeepL, Yandex, etc.)
 - [ ] Export/import translation history
 - [ ] Theming system (light/dark/custom themes)
+- [ ] Popup window DPI scaling
 
 ## 🤖 Phase 4: AI & Machine Learning
 

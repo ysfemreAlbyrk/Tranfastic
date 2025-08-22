@@ -1,11 +1,11 @@
-# WriteLate - Build Automation Makefile
+# Tranfastic - Build Automation Makefile
 # Cross-platform compatible with PowerShell
 
 .PHONY: help install build clean test lint format run dev-install build-exe build-portable
 
 # Default target
 help:
-	@echo "WriteLate - Build Commands"
+	@echo "Tranfastic - Build Commands"
 	@echo "=========================="
 	@echo "install        - Install package in development mode"
 	@echo "build          - Build package distribution"
