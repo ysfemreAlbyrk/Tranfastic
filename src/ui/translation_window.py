@@ -11,7 +11,7 @@ from PyQt5.QtWidgets import (
     QLabel, QPushButton, QApplication, QFrame, QShortcut, QGraphicsDropShadowEffect
 )
 from PyQt5.QtCore import Qt, QTimer, pyqtSignal, QThread, pyqtSlot, QPoint
-from PyQt5.QtGui import QFont, QIcon, QKeySequence, QPixmap, QColor
+from PyQt5.QtGui import QFont, QIcon, QKeySequence, QPixmap, QColor, QCursor
 import ctypes
 import time
 from pathlib import Path
@@ -178,11 +178,31 @@ class TranslationWindow(QWidget):
         ctrl_enter_shortcut.activated.connect(self.translate_text)
     
     def center_window(self):
-        """Center window on screen"""
-        screen = QApplication.primaryScreen().geometry()
-        x = (screen.width() - self.width()) // 2
-        y = (screen.height() - self.height()) // 2
-        self.move(x, y)
+        """Center window on screen based on monitor behavior setting"""
+        monitor_behavior = self.config.get("monitor_behavior", "cursor")
+        
+        if monitor_behavior == "cursor":
+            # Open on monitor where cursor is located
+            cursor_pos = QCursor.pos()
+            screen = QApplication.screenAt(cursor_pos)
+        elif monitor_behavior == "primary":
+            # Always open on primary monitor
+            screen = QApplication.primaryScreen()
+        else:
+            # Fallback to primary monitor
+            screen = QApplication.primaryScreen()
+        
+        if screen:
+            screen_geometry = screen.geometry()
+            x = screen_geometry.x() + (screen_geometry.width() - self.width()) // 2
+            y = screen_geometry.y() + (screen_geometry.height() - self.height()) // 2
+            self.move(x, y)
+        else:
+            # Fallback to primary screen
+            screen = QApplication.primaryScreen().geometry()
+            x = (screen.width() - self.width()) // 2
+            y = (screen.height() - self.height()) // 2
+            self.move(x, y)
     
     def update_title(self):
         """Update window title with connection and language info"""

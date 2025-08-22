@@ -247,6 +247,17 @@ class SettingsWindow(QWidget):
         app_layout.addWidget(self.save_history_cb)
         self.restore_clipboard_cb = QCheckBox("Restore original clipboard after translation")
         app_layout.addWidget(self.restore_clipboard_cb)
+        
+        # Monitor behavior settings
+        monitor_label = QLabel("Translation window monitor behavior:")
+        monitor_label.setStyleSheet("margin-top: 10px;")
+        app_layout.addWidget(monitor_label)
+        
+        self.monitor_behavior_combo = QComboBox()
+        self.monitor_behavior_combo.addItem("Open on cursor location", "cursor")
+        self.monitor_behavior_combo.addItem("Always open on primary monitor", "primary")
+        app_layout.addWidget(self.monitor_behavior_combo)
+        
         app_group.setLayout(app_layout)
         layout.addWidget(app_group)
 
@@ -365,6 +376,12 @@ class SettingsWindow(QWidget):
         self.start_on_boot_cb.setChecked(self.config.get("start_on_boot", False))
         self.save_history_cb.setChecked(self.config.get("save_history", False))
         self.restore_clipboard_cb.setChecked(self.config.get("restore_clipboard", False))
+        
+        # Monitor behavior setting
+        monitor_behavior = self.config.get("monitor_behavior", "cursor")
+        monitor_index = self.monitor_behavior_combo.findData(monitor_behavior)
+        if monitor_index >= 0:
+            self.monitor_behavior_combo.setCurrentIndex(monitor_index)
     
     def save_settings(self):
         """Save settings from UI to config"""
@@ -406,6 +423,10 @@ class SettingsWindow(QWidget):
             
             self.config.set("save_history", self.save_history_cb.isChecked())
             self.config.set("restore_clipboard", self.restore_clipboard_cb.isChecked())
+            
+            # Monitor behavior setting
+            monitor_behavior = self.monitor_behavior_combo.currentData()
+            self.config.set("monitor_behavior", monitor_behavior)
             
             self.settings_changed.emit()
             self.close()

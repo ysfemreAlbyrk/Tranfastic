@@ -58,7 +58,9 @@ class Config:
             "start_on_boot": False,
             "save_history": False,
             "restore_clipboard": False,
-            "theme": "dark"
+            "theme": "dark",
+            "monitor_behavior": "cursor",  # "cursor", "primary"
+            "preferred_monitor": 0  # 0 = primary, 1 = secondary, etc.
         }
         self.config = self.load_config()
         self._sync_startup_setting()
