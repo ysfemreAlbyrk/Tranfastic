@@ -16,8 +16,8 @@ import ctypes
 import time
 from pathlib import Path
 
-from ..config import COLORS, APP_NAME, SUPPORTED_LANGUAGES
-from ..translator import translator_engine, save_translation_history
+from ..utils.config import COLORS, APP_NAME, SUPPORTED_LANGUAGES
+from ..core.translator import translator_engine, save_translation_history
 
 user32 = ctypes.windll.user32
 

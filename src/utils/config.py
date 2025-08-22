@@ -7,6 +7,44 @@ import json
 import os
 from pathlib import Path
 from typing import Dict, Any
+
+# Application constants
+APP_NAME = "Tranfastic"
+APP_VERSION = "1.1.0"
+APP_AUTHOR = "Yusuf Emre Albayrak"
+GITHUB_URL = "https://github.com/ysfemrealbyrk/tranfastic"
+APP_ICON_PATH = "assets/icon.png"
+
+# Supported languages
+SUPPORTED_LANGUAGES = {
+    "auto": "Auto Detect",
+    "en": "English",
+    "tr": "Turkish", 
+    "de": "German",
+    "es": "Spanish",
+    "ja": "Japanese",
+    "fr": "French",
+    "it": "Italian",
+    "ru": "Russian",
+    "ar": "Arabic",
+    "hi": "Hindi",
+    "pt": "Portuguese",
+    "nl": "Dutch",
+    "pl": "Polish",
+    "ro": "Romanian",
+    "sv": "Swedish",
+    "uk": "Ukrainian"
+}
+
+# UI Colors (Dark theme)
+COLORS = {
+    "background": "#222222",
+    "text": "#FFFFFF",
+    "accent": "#4A90E2",
+    "secondary": "#333333",
+    "border": "#444444"
+} 
+
 class Config:
     """Application configuration manager"""
     
@@ -66,7 +104,7 @@ class Config:
     def _sync_startup_setting(self):
         """Sync startup setting with Windows registry on app start"""
         try:
-            from core.startup_manager import startup_manager
+            from ..core.startup_manager import startup_manager
             
             # Check current Windows registry status
             registry_enabled = startup_manager.is_startup_enabled()
@@ -84,7 +122,7 @@ class Config:
     def _handle_startup_setting(self, enabled: bool):
         """Handle changes to startup setting"""
         try:
-            from core.startup_manager import startup_manager
+            from ..core.startup_manager import startup_manager
             
             success = startup_manager.set_startup(enabled)
             if not success:
@@ -96,40 +134,4 @@ class Config:
             import logging
             logger = logging.getLogger(__name__)
             logger.error(f"Failed to handle startup setting: {e}")
-            raise
-
-# Supported languages
-SUPPORTED_LANGUAGES = {
-    "auto": "Auto Detect",
-    "en": "English",
-    "tr": "Turkish", 
-    "de": "German",
-    "es": "Spanish",
-    "ja": "Japanese",
-    "fr": "French",
-    "it": "Italian",
-    "ru": "Russian",
-    "ar": "Arabic",
-    "hi": "Hindi",
-    "pt": "Portuguese",
-    "nl": "Dutch",
-    "pl": "Polish",
-    "ro": "Romanian",
-    "sv": "Swedish",
-    "uk": "Ukrainian"
-}
-
-# Application constants
-APP_NAME = "Tranfastic"
-APP_VERSION = "1.1"
-APP_AUTHOR = "Yusuf Emre Albayrak"
-GITHUB_URL = "https://github.com/ysfemreAlbyrk/Tranfastic"
-
-# UI Colors (Dark theme)
-COLORS = {
-    "background": "#222222",
-    "text": "#FFFFFF",
-    "accent": "#4A90E2",
-    "secondary": "#333333",
-    "border": "#444444"
-} 
+            raise 

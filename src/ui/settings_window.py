@@ -15,8 +15,8 @@ from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QFont, QIcon, QPixmap
 from pathlib import Path
 
-from ..config import COLORS, APP_NAME, APP_VERSION, APP_AUTHOR, GITHUB_URL, SUPPORTED_LANGUAGES
-from ..hotkey_manager import hotkey_manager
+from ..utils.config import COLORS, APP_NAME, APP_VERSION, APP_AUTHOR, GITHUB_URL, SUPPORTED_LANGUAGES
+from ..core.hotkey_manager import hotkey_manager
 
 class SettingsWindow(QWidget):
     """Settings configuration window"""

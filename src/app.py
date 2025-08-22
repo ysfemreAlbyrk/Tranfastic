@@ -12,14 +12,14 @@ from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QTimer, QThread, pyqtSignal
 from PyQt5.QtGui import QFontDatabase, QFont, QIcon
 
-from .utils.config import Config
-from .utils.logger import setup_logging, cleanup_old_logs
-from .core.translator import translator_engine
-from .core.hotkey_manager import hotkey_manager
-from .core.tray_manager import TrayManager
-from .core.clipboard_manager import clipboard_manager
-from .ui.translation_window import TranslationWindow
-from .ui.settings_window import SettingsWindow
+from src.utils.config import Config
+from src.utils.logger import setup_logging, cleanup_old_logs
+from src.core.translator import translator_engine
+from src.core.hotkey_manager import hotkey_manager
+from src.core.tray_manager import TrayManager
+from src.core.clipboard_manager import clipboard_manager
+from src.ui.translation_window import TranslationWindow
+from src.ui.settings_window import SettingsWindow
 
 def load_custom_fonts(app):
     """Load custom fonts for the application"""
@@ -161,7 +161,7 @@ class TranfasticApp:
             source_lang = self.config.get("source_language", "auto")
             target_lang = self.config.get("target_language", "en")
             
-            from .utils.logger import log_translation
+            from src.utils.logger import log_translation
             log_translation("", translated_text, source_lang, target_lang, True)
             
             # Show notification

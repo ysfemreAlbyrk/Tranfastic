@@ -11,7 +11,7 @@ from typing import Optional, Callable
 import pystray
 from PIL import Image
 
-from .config import APP_NAME, APP_VERSION
+from ..utils.config import APP_NAME, APP_VERSION, APP_ICON_PATH
 
 class TrayManager:
     """System tray manager for Tranfastic"""
@@ -28,7 +28,7 @@ class TrayManager:
         """Create system tray icon from assets/icon.png"""
         try:
             # Load icon from file
-            icon_path = Path(__file__).parent.parent / "assets" / "icon.png"
+            icon_path = Path(__file__).parent.parent.parent / APP_ICON_PATH
             if not icon_path.exists():
                 self.logger.warning(f"Icon file not found: {icon_path}, using default")
                 image = Image.new('RGBA', (64, 64), (0, 0, 0, 0))
