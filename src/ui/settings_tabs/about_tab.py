@@ -13,6 +13,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
 
 from ...utils.config import COLORS, APP_NAME, APP_VERSION, APP_AUTHOR, GITHUB_URL, APP_ICON_PATH
+from ...utils.runtime import get_display_version
 
 
 class AboutTab(QWidget):
@@ -39,7 +40,7 @@ class AboutTab(QWidget):
         left_box.addWidget(title_label)
         info_label = QLabel(
             f"<span style='font-size:12px; font-weight:600;'>Version:</span> "
-            f"<span style='font-size:12px; font-style:italic;'>v{APP_VERSION}</span> "
+            f"<span style='font-size:12px; font-style:italic;'>v{get_display_version()}</span> "
             f"<span style='font-size:12px; font-weight:600;'>&nbsp;&nbsp;&nbsp;&nbsp;Author:</span> "
             f"<span style='font-size:12px;'>{APP_AUTHOR}</span>"
         )

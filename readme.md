@@ -67,6 +67,7 @@ translated text readily available for copying or inserting.
 - **📱 System Tray**: Runs quietly in the background.
 - **📋 Clipboard Integration**: Automatic paste translated text
 - **🔧 Configurable**: Customizable hotkeys and languages
+- **🔄 Auto-Update**: Automatic updates
 - **🔒 Privacy Focused:** Does not store any translation history or sensitive information.
 - **🎨 Clean Interface:** Minimalist design that doesn't distract from your work.
 
@@ -74,7 +75,17 @@ translated text readily available for copying or inserting.
 
 ### 📥 Download
 
-> No installation required! Works on any Windows 10/11 machine.
+Choose your preferred installation method:
+
+#### 🖥️ **Windows Installer (Recommended)**
+
+1. Download `Tranfastic-Setup.exe` from [**Releases**](../../releases/latest)
+2. Run the installer as administrator
+3. Launch from Start Menu or Desktop shortcut
+
+#### 📦 **Portable Version**
+
+> No installation required! Works on any Windows 10/11 machine. Best for trying out the application.
 
 1. Download `Tranfastic.exe` from [**Releases**](../../releases/latest)
 2. Copy to any folder (Desktop, USB drive, etc.)

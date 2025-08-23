@@ -2,7 +2,7 @@
 
 This document outlines the planned features and improvements for Tranfastic.
 
-## Version: _v1.1_
+## Version: _v1.2_
 
 ## ~~✅ Phase 1: Core Foundation~~
 
@@ -23,11 +23,9 @@ All foundational features have been implemented and are stable:
 
 - [x] Popup window position and size customization
 - [ ] Quick language switcher in tray menu
-- [ ] Auto-detect and translate clipboard content
-- [ ] Setup installer (MSI installer for Windows)
-- [ ] Auto-update system (from GitHub releases)
+- [x] Setup installer (MSI installer for Windows)
+- [x] Auto-update system (from GitHub releases)
 - [ ] Popup window icon rework for status indication
-- [ ] Customizable window size and transparency
 
 ### Translation History Management
 

@@ -10,7 +10,7 @@ from typing import Dict, Any
 
 # Application constants
 APP_NAME = "Tranfastic"
-APP_VERSION = "1.1.0"
+APP_VERSION = "1.2.0"
 APP_AUTHOR = "Yusuf Emre Albayrak"
 GITHUB_URL = "https://github.com/ysfemrealbyrk/tranfastic"
 APP_ICON_PATH = "assets/icon.png"
