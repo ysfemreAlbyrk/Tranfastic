@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file.
 
+## v1.2 - 2025-08-23
+
+### Added 🎉
+
+- **Windows Installer**: NSIS-based installer for easy installation
+- **Auto-update system**: Automatic version checking and update functionality
+- **Appearance settings tab**: New tabbed interface in settings window for better organization
+  - **Adding Popup window opening location settings**: You can now choose to where open the popup window. Example: cursor's monitor, cursor's below, always open on primary monitor.
+  - **Adding Popup window size settings**: You can now choose the size of the popup window. Example: small, default, large.
+- **PowerShell build script**: Simplified build commands with `make.ps1`
+
+### Changed 🔄
+
+- **Project structure refactoring**: Centralized asset paths for icons and fonts
+- **Dynamic window sizing**: Translation and settings windows now adjust dynamically
+- **Import system optimization**: Refactored to use absolute import paths
+- **Configuration module enhancement**: Added application constants and supported languages
+
+### Fixed 🐛
+
+- Enhanced error handling and logging throughout the application
+- Improved clipboard management functionality
+- Better startup manager and hotkey handling
+- Code optimization and performance improvements
+
+### Technical Improvements 🔧
+
+- Updated `build.spec` to include additional paths and binaries
+- Enhanced build process with automated installer creation
+- Improved version management system
+
 ## v1.1 - 2025-07-03
 
 ### Added 🎉

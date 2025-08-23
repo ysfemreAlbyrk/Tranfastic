@@ -3,8 +3,8 @@
 Version information for Tranfastic application
 """
 
-__version__ = "1.1.0"
-VERSION_INFO = (1, 1, 0, 0)
+__version__ = "1.2.0"
+VERSION_INFO = (1, 2, 0, 0)
 
 def get_version():
     """Get the version string"""

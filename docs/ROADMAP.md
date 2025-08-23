@@ -2,7 +2,7 @@
 
 This document outlines the planned features and improvements for Tranfastic.
 
-## Version: _v1.1_
+## Version: _v1.2_
 
 ## ~~✅ Phase 1: Core Foundation~~
 
@@ -21,14 +21,11 @@ All foundational features have been implemented and are stable:
 
 ## 🖼️ Phase 2: User Experience Improvements
 
-- [ ] Popup window DPI scaling
-- [ ] Popup window position and size customization
+- [x] Popup window position and size customization
 - [ ] Quick language switcher in tray menu
-- [ ] Auto-detect and translate clipboard content
-- [ ] Setup installer (MSI installer for Windows)
-- [ ] Auto-update system (from GitHub releases)
+- [x] Setup installer (MSI installer for Windows)
+- [x] Auto-update system (from GitHub releases)
 - [ ] Popup window icon rework for status indication
-- [ ] Customizable window size and transparency
 
 ### Translation History Management
 
@@ -45,6 +42,7 @@ All foundational features have been implemented and are stable:
 - [ ] Multi-API support (Google, DeepL, Yandex, etc.)
 - [ ] Export/import translation history
 - [ ] Theming system (light/dark/custom themes)
+- [ ] Popup window DPI scaling
 
 ## 🤖 Phase 4: AI & Machine Learning
 

@@ -11,13 +11,13 @@ from PyQt5.QtWidgets import (
     QLabel, QPushButton, QApplication, QFrame, QShortcut, QGraphicsDropShadowEffect
 )
 from PyQt5.QtCore import Qt, QTimer, pyqtSignal, QThread, pyqtSlot, QPoint
-from PyQt5.QtGui import QFont, QIcon, QKeySequence, QPixmap, QColor
+from PyQt5.QtGui import QFont, QIcon, QKeySequence, QPixmap, QColor, QCursor, QPalette
 import ctypes
 import time
 from pathlib import Path
 
-from ..config import COLORS, APP_NAME, SUPPORTED_LANGUAGES
-from ..translator import translator_engine, save_translation_history
+from ..utils.config import COLORS, APP_NAME, SUPPORTED_LANGUAGES, APP_ICON_PATH
+from ..core.translator import translator_engine, save_translation_history
 
 user32 = ctypes.windll.user32
 
@@ -51,97 +51,266 @@ class TranslationWindow(QWidget):
         self._drag_pos = None
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
-        self.setFixedSize(500, 80)  # Increased size to accommodate shadow
+        # Set window size based on config
+        self.set_window_size()
         
         # Set window icon
-        icon_path = str((Path(__file__).parent.parent / "../assets/icon.png").resolve())
-        self.setWindowIcon(QIcon(icon_path))
+        self.icon_path = str((Path(__file__).parent.parent.parent / APP_ICON_PATH).resolve())
+        self.setWindowIcon(QIcon(self.icon_path))
         
         self.setup_ui()
         self.setup_shortcuts()
         self.update_title()
     
+    def set_window_size(self):
+        """Set window size based on configuration"""
+        size_setting = self.config.get("window_size", "default")
+        
+        if size_setting == "small":
+            self.setFixedSize(400, 60)
+            self._adjust_ui_for_size("small")
+        elif size_setting == "large":
+            self.setFixedSize(600, 100)
+            self._adjust_ui_for_size("large")
+        else:  # default
+            self.setFixedSize(500, 80)
+            self._adjust_ui_for_size("default")
+    
+    def _adjust_ui_for_size(self, size):
+        """Adjust UI elements based on window size"""
+        if not hasattr(self, 'input_field') or not hasattr(self, 'title_label'):
+            return  # UI not yet created
+        
+        # Use direct references instead of searching
+        title_bar = self.title_bar
+        main_widget = self.main_widget
+        
+        if size == "small":
+            # Small size adjustments
+            if title_bar:
+                title_bar.setFixedHeight(20)
+                # Update title bar style for small size
+                title_bar.setStyleSheet(f"""
+                    QWidget#title_bar {{
+                        background-color: {COLORS['background']};
+                        border-top-left-radius: 5px;
+                        border-top-right-radius: 5px;
+                        border: 1px solid #454545;
+                        border-bottom: 1px solid #444;
+                    }}
+                """)
+                # Update title bar layout margins
+                title_layout = title_bar.layout()
+                if title_layout:
+                    title_layout.setContentsMargins(3, 0, 0, 0)
+            
+            if main_widget:
+                # Update main widget border radius for small size
+                main_widget.setStyleSheet(f"""
+                    QWidget#main_widget {{
+                        background-color: {COLORS['background']};
+                        border-radius: 5px;
+                        border: 1px solid #454545;
+                    }}
+                """)
+            
+            # Update icon size for small size
+            self.icon_label.setPixmap(QPixmap(self.icon_path).scaled(15, 15, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+            
+            # Update close button size for small size
+            self.close_btn.setFixedSize(20, 20)
+            self.close_btn.setStyleSheet("""
+                QPushButton {
+                    background: transparent;
+                    color: #fff;
+                    border: none;
+                    font-size: 16px;
+                    border-top-right-radius: 5px;
+                }
+                QPushButton:hover {
+                    background: #e81123;
+                    color: #fff;
+                }
+            """)
+            
+            self.input_field.setStyleSheet(f"""
+                QLineEdit {{
+                    background: transparent;
+                    border: none;
+                    color: {COLORS['text']};
+                    font-size: 12px;
+                    padding: 3px;
+                }}
+            """)
+            self.title_label.setStyleSheet("color: #fff; font-weight: 600; font-size: 10px;")
+            
+        elif size == "large":
+            # Large size adjustments
+            if title_bar:
+                title_bar.setFixedHeight(40)
+                # Update title bar style for large size
+                title_bar.setStyleSheet(f"""
+                    QWidget#title_bar {{
+                        background-color: {COLORS['background']};
+                        border-top-left-radius: 15px;
+                        border-top-right-radius: 15px;
+                        border: 1px solid #454545;
+                        border-bottom: 1px solid #444;
+                    }}
+                """)
+                # Update title bar layout margins
+                title_layout = title_bar.layout()
+                if title_layout:
+                    title_layout.setContentsMargins(8, 0, 0, 0)
+            
+            if main_widget:
+                # Update main widget border radius for large size
+                main_widget.setStyleSheet(f"""
+                    QWidget#main_widget {{
+                        background-color: {COLORS['background']};
+                        border-radius: 15px;
+                        border: 1px solid #454545;
+                    }}
+                """)
+            
+            # Update icon size for large size
+            self.icon_label.setPixmap(QPixmap(self.icon_path).scaled(28, 28, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+            
+            # Update close button size for large size
+            self.close_btn.setFixedSize(40, 40)
+            self.close_btn.setStyleSheet("""
+                QPushButton {
+                    background: transparent;
+                    color: #fff;
+                    border: none;
+                    font-size: 32px;
+                    border-top-right-radius: 15px;
+                }
+                QPushButton:hover {
+                    background: #e81123;
+                    color: #fff;
+                }
+            """)
+            
+            self.input_field.setStyleSheet(f"""
+                QLineEdit {{
+                    background: transparent;
+                    border: none;
+                    color: {COLORS['text']};
+                    font-size: 16px;
+                    padding: 8px;
+                }}
+            """)
+            self.title_label.setStyleSheet("color: #fff; font-weight: 600; font-size: 14px;")
+            
+        else:  # default
+            # Default size adjustments
+            if title_bar:
+                title_bar.setFixedHeight(30)
+                # Update title bar style for default size
+                title_bar.setStyleSheet(f"""
+                    QWidget#title_bar {{
+                        background-color: {COLORS['background']};
+                        border-top-left-radius: 10px;
+                        border-top-right-radius: 10px;
+                        border: 1px solid #454545;
+                        border-bottom: 1px solid #444;
+                    }}
+                """)
+                # Update title bar layout margins
+                title_layout = title_bar.layout()
+                if title_layout:
+                    title_layout.setContentsMargins(5, 0, 0, 0)
+            
+            if main_widget:
+                # Update main widget border radius for default size
+                main_widget.setStyleSheet(f"""
+                    QWidget#main_widget {{
+                        background-color: {COLORS['background']};
+                        border-radius: 10px;
+                        border: 1px solid #454545;
+                    }}
+                """)
+            
+            # Update icon size for default size
+            self.icon_label.setPixmap(QPixmap(self.icon_path).scaled(20, 20, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+            
+            # Update close button size for default size
+            self.close_btn.setFixedSize(30, 30)
+            self.close_btn.setStyleSheet("""
+                QPushButton {
+                    background: transparent;
+                    color: #fff;
+                    border: none;
+                    font-size: 25px;
+                    border-top-right-radius: 10px;
+                }
+                QPushButton:hover {
+                    background: #e81123;
+                    color: #fff;
+                }
+            """)
+            
+            self.input_field.setStyleSheet(f"""
+                QLineEdit {{
+                    background: transparent;
+                    border: none;
+                    color: {COLORS['text']};
+                    font-size: 14px;
+                    padding: 5px;
+                }}
+            """)
+            self.title_label.setStyleSheet("color: #fff; font-weight: 600; font-size: 12px;")
+    
     def setup_ui(self):
         """Setup user interface"""
         # Main background widget
-        main_widget = QWidget(self)
-        main_widget.setObjectName("main_widget")
-        main_widget.setStyleSheet(f"""
-            QWidget#main_widget {{
-                background-color: {COLORS['background']};
-                border-radius: 10px;
-                border: 1px solid #454545;
-            }}
-        """)
-        main_layout = QVBoxLayout(main_widget)
+        self.main_widget = QWidget(self)
+        self.main_widget.setObjectName("main_widget")
+        # Initial style will be set in _adjust_ui_for_size
+        main_layout = QVBoxLayout(self.main_widget)
         main_layout.setContentsMargins(0, 0, 0, 0)
         main_layout.setSpacing(0)
 
         # Custom title bar
-        title_bar = QWidget()
-        title_bar.setObjectName("title_bar")
-        title_bar.setFixedHeight(30)
-        title_bar.setStyleSheet(f"""
-            QWidget#title_bar {{
-                background-color: {COLORS['background']};
-                border-top-left-radius: 10px;
-                border-top-right-radius: 10px;
-                border: 1px solid #454545;
-                border-bottom: 1px solid #444;
-            }}
-        """)
-        title_layout = QHBoxLayout(title_bar)
-        title_layout.setContentsMargins(5, 0, 0, 0)
+        self.title_bar = QWidget()
+        self.title_bar.setObjectName("title_bar")
+        
+        # Initial style will be set in _adjust_ui_for_size
+        title_layout = QHBoxLayout(self.title_bar)
+        # Initial margins will be set in _adjust_ui_for_size
         title_layout.setSpacing(8)
 
         # Left icon
-        icon_label = QLabel()
-        icon_path = str((Path(__file__).parent.parent / "../assets/icon.png").resolve())
-        icon_label.setPixmap(QPixmap(icon_path).scaled(20, 20, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-        title_layout.addWidget(icon_label)
+        self.icon_label = QLabel()
+        # Initial icon size will be set in _adjust_ui_for_size
+        title_layout.addWidget(self.icon_label)
 
         # Dynamic title
         self.title_label = QLabel()
-        self.title_label.setStyleSheet("color: #fff; font-weight: 600; font-size: 12px;")
+        # Initial style will be set in _adjust_ui_for_size
         title_layout.addWidget(self.title_label)
 
         title_layout.addStretch()
 
         # Close button
         # close_btn = QPushButton("\ue5cd")  # Material Symbols 'close' icon
-        close_btn = QPushButton("Close")  # Material Symbols 'close' icon
-        close_btn.setFont(QFont("Material Symbols Rounded"))
-        close_btn.setFixedSize(30, 30)
-        close_btn.setStyleSheet("""
-            QPushButton {
-                background: transparent;
-                color: #fff;
-                border: none;
-                font-size: 25px;
-                border-top-right-radius: 10px;
-            }
-            QPushButton:hover {
-                background: #e81123;
-                color: #fff;
-            }
-        """)
-        close_btn.clicked.connect(self.close)
-        title_layout.addWidget(close_btn)
+        self.close_btn = QPushButton("Close")  # Material Symbols 'close' icon
+        self.close_btn.setFont(QFont("Material Symbols Rounded"))
+        # Initial size and style will be set in _adjust_ui_for_size
+        self.close_btn.clicked.connect(self.close)
+        title_layout.addWidget(self.close_btn)
 
-        main_layout.addWidget(title_bar)
+        main_layout.addWidget(self.title_bar)
 
         # Sadece input
         self.input_field = QLineEdit()
         self.input_field.setPlaceholderText("Write something...")
-        self.input_field.setStyleSheet(f"""
-            QLineEdit {{
-                background: transparent;
-                border: none;
-                color: {COLORS['text']};
-                font-size: 14px;
-                padding: 5px;
-            }}
-        """)
+        # Placeholder rengini değiştir
+        palette = self.input_field.palette()
+        palette.setColor(QPalette.PlaceholderText, QColor(Qt.gray))  # Kırmızı
+        self.input_field.setPalette(palette)
+        # Initial style will be set in _adjust_ui_for_size
         self.input_field.returnPressed.connect(self.translate_text)
         self.input_field.textChanged.connect(self.on_text_changed)
         main_layout.addWidget(self.input_field)
@@ -155,7 +324,7 @@ class TranslationWindow(QWidget):
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(10, 10, 10, 10)  # Add margins for shadow
-        layout.addWidget(main_widget)
+        layout.addWidget(self.main_widget)
         self.setLayout(layout)
         
         # Add shadow effect
@@ -163,9 +332,12 @@ class TranslationWindow(QWidget):
         shadow.setBlurRadius(20)
         shadow.setColor(QColor(0, 0, 0, 70))
         shadow.setOffset(0, 4)
-        main_widget.setGraphicsEffect(shadow)
+        self.main_widget.setGraphicsEffect(shadow)
         
         self.center_window()
+        
+        # Apply size-based UI adjustments AFTER all UI elements are created
+        self._adjust_ui_for_size(self.config.get("window_size", "default"))
     
     def setup_shortcuts(self):
         """Setup keyboard shortcuts"""
@@ -178,11 +350,55 @@ class TranslationWindow(QWidget):
         ctrl_enter_shortcut.activated.connect(self.translate_text)
     
     def center_window(self):
-        """Center window on screen"""
-        screen = QApplication.primaryScreen().geometry()
-        x = (screen.width() - self.width()) // 2
-        y = (screen.height() - self.height()) // 2
-        self.move(x, y)
+        """Position window based on popup opening location setting"""
+        popup_location = self.config.get("popup_opening_location", "cursor")
+        # Handle legacy config key
+        if popup_location == "cursor" and "monitor_behavior" in self.config.config:
+            popup_location = self.config.get("monitor_behavior", "cursor")
+        
+        if popup_location == "cursor":
+            # Open on monitor where cursor is located (centered)
+            cursor_pos = QCursor.pos()
+            screen = QApplication.screenAt(cursor_pos)
+        elif popup_location == "cursor_below":
+            # Open 30px below cursor position
+            cursor_pos = QCursor.pos()
+            screen = QApplication.screenAt(cursor_pos)
+            if screen:
+                # Position window 30px below cursor
+                x = cursor_pos.x() - (self.width() // 2)
+                y = cursor_pos.y() + 30
+                
+                # Ensure window stays within screen bounds
+                screen_geometry = screen.geometry()
+                if x < screen_geometry.x():
+                    x = screen_geometry.x()
+                elif x + self.width() > screen_geometry.x() + screen_geometry.width():
+                    x = screen_geometry.x() + screen_geometry.width() - self.width()
+                
+                if y + self.height() > screen_geometry.y() + screen_geometry.height():
+                    y = cursor_pos.y() - self.height() - 10  # Place above cursor if not enough space below
+                
+                self.move(x, y)
+                return
+        elif popup_location == "primary":
+            # Always open on primary monitor
+            screen = QApplication.primaryScreen()
+        else:
+            # Fallback to primary monitor
+            screen = QApplication.primaryScreen()
+        
+        if screen:
+            screen_geometry = screen.geometry()
+            x = screen_geometry.x() + (screen_geometry.width() - self.width()) // 2
+            y = screen_geometry.y() + (screen_geometry.height() - self.height()) // 2
+            self.move(x, y)
+        else:
+            # Fallback to primary screen
+            screen = QApplication.primaryScreen().geometry()
+            x = (screen.width() - self.width()) // 2
+            y = (screen.height() - self.height()) // 2
+            self.move(x, y)
     
     def update_title(self):
         """Update window title with connection and language info"""
@@ -280,7 +496,16 @@ class TranslationWindow(QWidget):
 
     # Dragable
     def mousePressEvent(self, event):
-        if event.button() == Qt.LeftButton and event.pos().y() <= 36:
+        # Get current title bar height based on window size
+        size_setting = self.config.get("window_size", "default")
+        if size_setting == "small":
+            title_bar_height = 20
+        elif size_setting == "large":
+            title_bar_height = 40
+        else:  # default
+            title_bar_height = 30
+            
+        if event.button() == Qt.LeftButton and event.pos().y() <= title_bar_height:
             self._drag_pos = event.globalPos() - self.frameGeometry().topLeft()
             event.accept()
 
