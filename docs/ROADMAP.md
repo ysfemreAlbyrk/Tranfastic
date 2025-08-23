@@ -21,7 +21,7 @@ All foundational features have been implemented and are stable:
 
 ## 🖼️ Phase 2: User Experience Improvements
 
-- [ ] Popup window position and size customization
+- [x] Popup window position and size customization
 - [ ] Quick language switcher in tray menu
 - [ ] Auto-detect and translate clipboard content
 - [ ] Setup installer (MSI installer for Windows)

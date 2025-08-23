@@ -91,7 +91,7 @@ class Config:
         self.config_dir.mkdir(exist_ok=True)
         with open(self.config_file, 'w', encoding='utf-8') as f:
             json.dump(self.config, f, indent=2, ensure_ascii=False)
-    
+
     def get(self, key: str, default=None):
         """Get configuration value"""
         return self.config.get(key, default)

@@ -189,7 +189,7 @@ class TranfasticApp:
             
             # Startup setting is automatically handled by Config class
             
-            self.logger.info("Settings updated")
+            self.logger.info(f"Settings updated, config: \n{self.config.config}")
             
         except Exception as e:
             self.logger.error(f"Failed to apply settings changes: {e}")
