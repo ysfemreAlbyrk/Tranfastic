@@ -12,7 +12,7 @@ from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QTimer, QThread, pyqtSignal
 from PyQt5.QtGui import QFontDatabase, QFont, QIcon
 
-from src.utils.config import Config
+from src.utils.config import Config, APP_ICON_PATH, APP_TEXT_FONT_PATH, APP_SYMBOL_FONT_PATH
 from src.utils.logger import setup_logging, cleanup_old_logs
 from src.core.translator import translator_engine
 from src.core.hotkey_manager import hotkey_manager
@@ -23,9 +23,9 @@ from src.ui.settings_window import SettingsWindow
 
 def load_custom_fonts(app):
     """Load custom fonts for the application"""
-    inter_font_path = str((Path(__file__).parent.parent / "assets/Inter/Inter-VariableFont_opsz,wght.ttf").resolve())
+    inter_font_path = str((Path(__file__).parent.parent / APP_TEXT_FONT_PATH).resolve())
     QFontDatabase.addApplicationFont(inter_font_path)
-    material_font_path = str((Path(__file__).parent.parent / "assets/Material_Symbols_Rounded/MaterialSymbolsRounded-VariableFont_FILL,GRAD,opsz,wght.ttf").resolve())
+    material_font_path = str((Path(__file__).parent.parent / APP_SYMBOL_FONT_PATH).resolve())
     QFontDatabase.addApplicationFont(material_font_path)
     app.setFont(QFont("Inter"))
 
@@ -65,7 +65,7 @@ class TranfasticApp:
         self.app.setQuitOnLastWindowClosed(False)  # Keep running when windows are closed
         
         # Set application icon
-        icon_path = str((Path(__file__).parent.parent / "assets/icon.png").resolve())
+        icon_path = str((Path(__file__).parent.parent / APP_ICON_PATH).resolve())
         self.app.setWindowIcon(QIcon(icon_path))
         
         # Setup logging
@@ -181,6 +181,11 @@ class TranfasticApp:
             new_hotkey = self.config.get("hotkey")
             if new_hotkey != hotkey_manager.current_hotkey:
                 hotkey_manager.set_hotkey(new_hotkey)
+            
+            # Update translation window size if changed
+            if self.translation_window and self.translation_window.isVisible():
+                self.translation_window.set_window_size()
+                self.translation_window.center_window()
             
             # Startup setting is automatically handled by Config class
             

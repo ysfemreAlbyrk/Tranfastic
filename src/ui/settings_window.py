@@ -9,13 +9,13 @@ from typing import Optional
 from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QComboBox,
     QPushButton, QLineEdit, QCheckBox, QGroupBox, QTabWidget,
-    QTextEdit, QScrollArea, QFrame, QGridLayout
+    QTextEdit, QScrollArea, QFrame, QGridLayout, QRadioButton, QButtonGroup, QGraphicsDropShadowEffect,
 )
 from PyQt5.QtCore import Qt, pyqtSignal
-from PyQt5.QtGui import QFont, QIcon, QPixmap
+from PyQt5.QtGui import QFont, QIcon, QPixmap, QColor
 from pathlib import Path
 
-from ..utils.config import COLORS, APP_NAME, APP_VERSION, APP_AUTHOR, GITHUB_URL, SUPPORTED_LANGUAGES
+from ..utils.config import COLORS, APP_NAME, APP_VERSION, APP_AUTHOR, GITHUB_URL, SUPPORTED_LANGUAGES, APP_ICON_PATH
 from ..core.hotkey_manager import hotkey_manager
 
 class SettingsWindow(QWidget):
@@ -29,7 +29,7 @@ class SettingsWindow(QWidget):
         self.logger = logging.getLogger(__name__)
         
         # Set window icon
-        icon_path = str((Path(__file__).parent.parent / "../assets/icon.png").resolve())
+        icon_path = str((Path(__file__).parent.parent.parent / APP_ICON_PATH).resolve())
         self.setWindowIcon(QIcon(icon_path))
         
         self.setup_ui()
@@ -120,6 +120,10 @@ class SettingsWindow(QWidget):
         general_tab = self.create_general_tab()
         tab_widget.addTab(general_tab, "General")
         
+        # Popup settings tab
+        popup_tab = self.create_popup_tab()
+        tab_widget.addTab(popup_tab, "PopUp Window")
+
         # About tab
         about_tab = self.create_about_tab()
         tab_widget.addTab(about_tab, "About")
@@ -248,16 +252,6 @@ class SettingsWindow(QWidget):
         self.restore_clipboard_cb = QCheckBox("Restore original clipboard after translation")
         app_layout.addWidget(self.restore_clipboard_cb)
         
-        # Monitor behavior settings
-        monitor_label = QLabel("Translation window monitor behavior:")
-        monitor_label.setStyleSheet("margin-top: 10px;")
-        app_layout.addWidget(monitor_label)
-        
-        self.monitor_behavior_combo = QComboBox()
-        self.monitor_behavior_combo.addItem("Open on cursor location", "cursor")
-        self.monitor_behavior_combo.addItem("Always open on primary monitor", "primary")
-        app_layout.addWidget(self.monitor_behavior_combo)
-        
         app_group.setLayout(app_layout)
         layout.addWidget(app_group)
 
@@ -265,6 +259,286 @@ class SettingsWindow(QWidget):
         tab.setLayout(layout)
         return tab
     
+    def create_popup_tab(self) -> QWidget:
+        """Create popup settings tab"""
+        tab = QWidget()
+        layout = QVBoxLayout()
+        layout.setContentsMargins(0,10,0,0)
+        layout.setSpacing(12)
+        
+        # Window size settings group
+        size_group = QGroupBox("Translation PopUp Size")
+        size_layout = QVBoxLayout()
+        size_layout.setSpacing(6)
+
+        # Window size settings with custom radio buttons
+        from PyQt5.QtWidgets import QRadioButton, QButtonGroup
+        
+        self.size_button_group = QButtonGroup()
+        self.size_button_group.buttonClicked.connect(self.on_size_button_clicked)
+        
+        # Horizontal layout for radio buttons
+        size_buttons_layout = QHBoxLayout()
+        size_buttons_layout.setSpacing(10)
+        
+        # Small size option
+        small_container = QWidget()
+        small_layout = QVBoxLayout(small_container)
+        small_layout.setSpacing(5)
+        small_layout.setAlignment(Qt.AlignCenter)
+        
+        # Create a custom radio button container
+        small_radio_container = QWidget()
+        small_radio_container.setFixedSize(100, 120)
+        small_radio_container.setStyleSheet(f"""
+            QWidget {{
+                border: none;
+                border-radius: 8px;
+                background-color: transparent;
+            }}
+            QWidget:hover {{
+                border: 1px solid {COLORS['border']};
+                background-color: {COLORS['secondary']};
+            }}
+        """)
+        small_radio_container.setCursor(Qt.PointingHandCursor)
+        
+        # Add drop shadow effect
+        shadow = QGraphicsDropShadowEffect()
+        shadow.setBlurRadius(20)
+        shadow.setXOffset(0)
+        shadow.setYOffset(4)
+        shadow.setColor(QColor(0, 0, 0, 70))
+        small_radio_container.setGraphicsEffect(shadow)
+        
+        # Add star label inside the container
+        small_star_label = QLabel("crop_16_9", small_radio_container)
+        small_star_label.setFont(QFont("Material Symbols Rounded",12))
+        small_star_label.setStyleSheet(f"color: {COLORS['text']}; font-weight: normal; font-size: 12px;")
+        small_star_label.setAlignment(Qt.AlignCenter)
+        small_star_label.setGeometry(0, 0, 100, 80)
+        
+        # Add text label inside the container (alt kısım)
+        small_text_label = QLabel("Small", small_radio_container)
+        small_text_label.setStyleSheet(f"color: {COLORS['text']}; font-weight: bold; font-size: 12px;")
+        small_text_label.setAlignment(Qt.AlignCenter)
+        small_text_label.setGeometry(0, 80, 100, 40)
+        
+        self.small_radio = QRadioButton()
+        self.small_radio.setProperty("size", "small")
+        self.small_radio.setFixedSize(100, 120)
+        self.small_radio.setStyleSheet("""
+            QRadioButton {
+                border: none;
+                background: transparent;
+            }
+            QRadioButton::indicator {
+                width: 0px;
+                height: 0px;
+                border: none;
+                background: transparent;
+            }
+        """)
+        self.size_button_group.addButton(self.small_radio)
+        
+        # Overlay the radio button on the container
+        small_layout.addWidget(small_radio_container, alignment=Qt.AlignCenter)
+        self.small_radio.setParent(small_radio_container)
+        self.small_radio.setGeometry(0, 0, 100, 120)
+        
+        size_buttons_layout.addWidget(small_container)
+        
+        # Default size option
+        default_container = QWidget()
+        default_layout = QVBoxLayout(default_container)
+        default_layout.setSpacing(5)
+        default_layout.setAlignment(Qt.AlignCenter)
+        
+        # Create a custom radio button container
+        default_radio_container = QWidget()
+        default_radio_container.setFixedSize(100, 120)
+        default_radio_container.setStyleSheet(f"""
+            QWidget {{
+                border: none;
+                border-radius: 8px;
+                background-color: transparent;
+            }}
+            QWidget:hover {{
+                border: 1px solid {COLORS['border']};
+                background-color: {COLORS['secondary']};
+            }}
+        """)
+        default_radio_container.setCursor(Qt.PointingHandCursor)
+        
+        # Add drop shadow effect
+        shadow = QGraphicsDropShadowEffect()
+        shadow.setBlurRadius(20)
+        shadow.setXOffset(0)
+        shadow.setYOffset(4)
+        shadow.setColor(QColor(0, 0, 0, 70))
+        default_radio_container.setGraphicsEffect(shadow)
+        
+        # Add star label inside the container
+        default_star_label = QLabel("crop_16_9", default_radio_container)
+        default_star_label.setFont(QFont("Material Symbols Rounded",32))
+        default_star_label.setStyleSheet(f"color: {COLORS['text']}; font-weight: normal; font-size: 32px;")
+        default_star_label.setAlignment(Qt.AlignCenter)
+        default_star_label.setGeometry(0, 0, 100, 80)
+        
+        # Add text label inside the container
+        default_text_label = QLabel("Default", default_radio_container)
+        default_text_label.setStyleSheet(f"color: {COLORS['text']}; font-weight: bold; font-size: 12px;")
+        default_text_label.setAlignment(Qt.AlignCenter)
+        default_text_label.setGeometry(0, 80, 100, 40)
+        
+        self.default_radio = QRadioButton()
+        self.default_radio.setProperty("size", "default")
+        self.default_radio.setFixedSize(100, 120)
+        self.default_radio.setStyleSheet("""
+            QRadioButton {
+                border: none;
+                background: transparent;
+            }
+            QRadioButton::indicator {
+                width: 0px;
+                height: 0px;
+                border: none;
+                background: transparent;
+            }
+        """)
+        self.size_button_group.addButton(self.default_radio)
+        
+        # Overlay the radio button on the container
+        default_layout.addWidget(default_radio_container, alignment=Qt.AlignCenter)
+        self.default_radio.setParent(default_radio_container)
+        self.default_radio.setGeometry(0, 0, 100, 120)
+        
+        size_buttons_layout.addWidget(default_container)
+        
+        # Large size option
+        large_container = QWidget()
+        large_layout = QVBoxLayout(large_container)
+        large_layout.setSpacing(5)
+        large_layout.setAlignment(Qt.AlignCenter)
+        
+        # Create a custom radio button container
+        large_radio_container = QWidget()
+        large_radio_container.setFixedSize(100, 120)
+        large_radio_container.setStyleSheet(f"""
+            QWidget {{
+                border: none;
+                border-radius: 8px;
+                background-color: transparent;
+            }}
+            QWidget:hover {{
+                border: 1px solid {COLORS['border']};
+                background-color: {COLORS['secondary']};
+            }}
+        """)
+        large_radio_container.setCursor(Qt.PointingHandCursor)
+        
+        # Add drop shadow effect
+        shadow = QGraphicsDropShadowEffect()
+        shadow.setBlurRadius(20)
+        shadow.setXOffset(0)
+        shadow.setYOffset(4)
+        shadow.setColor(QColor(0, 0, 0, 70))
+        large_radio_container.setGraphicsEffect(shadow)
+        
+        # Add star label inside the container
+        large_star_label = QLabel("crop_16_9", large_radio_container)
+        large_star_label.setFont(QFont("Material Symbols Rounded",52))
+        large_star_label.setStyleSheet(f"color: {COLORS['text']}; font-weight: normal; font-size: 52px;")
+        large_star_label.setAlignment(Qt.AlignCenter)
+        large_star_label.setGeometry(0, 0, 100, 80)
+        
+        # Add text label inside the container
+        large_text_label = QLabel("Large", large_radio_container)
+        large_text_label.setStyleSheet(f"color: {COLORS['text']}; font-weight: bold; font-size: 12px;")
+        large_text_label.setAlignment(Qt.AlignCenter)
+        large_text_label.setGeometry(0, 80, 100, 40)
+        
+        self.large_radio = QRadioButton()
+        self.large_radio.setProperty("size", "large")
+        self.large_radio.setFixedSize(100, 120)
+        self.large_radio.setStyleSheet("""
+            QRadioButton {
+                border: none;
+                background: transparent;
+            }
+            QRadioButton::indicator {
+                width: 0px;
+                height: 0px;
+                border: none;
+                background: transparent;
+            }
+        """)
+        self.size_button_group.addButton(self.large_radio)
+        
+        # Overlay the radio button on the container
+        large_layout.addWidget(large_radio_container, alignment=Qt.AlignCenter)
+        self.large_radio.setParent(large_radio_container)
+        self.large_radio.setGeometry(0, 0, 100, 120)
+        
+        size_buttons_layout.addWidget(large_container)
+        
+        size_layout.addLayout(size_buttons_layout)
+        
+        size_group.setLayout(size_layout)
+        layout.addWidget(size_group)
+        
+        # Popup opening location settings group
+        popup_location_group = QGroupBox("PopUp Opening Position")
+        popup_location_layout = QVBoxLayout()
+        popup_location_layout.setSpacing(6)
+        
+        popup_location_label = QLabel("Where to open translation window:")
+        popup_location_layout.addWidget(popup_location_label)
+        
+        self.popup_opening_location_combo = QComboBox()
+        self.popup_opening_location_combo.addItem("Open on cursor's monitor (centered)", "cursor")
+        self.popup_opening_location_combo.addItem("Open below cursor", "cursor_below")
+        self.popup_opening_location_combo.addItem("Always open on primary monitor", "primary")
+        popup_location_layout.addWidget(self.popup_opening_location_combo)
+        
+        popup_location_group.setLayout(popup_location_layout)
+        layout.addWidget(popup_location_group)
+        
+        layout.addStretch()
+        tab.setLayout(layout)
+        return tab
+    
+    def on_size_button_clicked(self, button):
+        """Handle size button clicks to update styling"""
+        # Get the container widgets (parent of radio buttons)
+        small_container = self.small_radio.parent()
+        default_container = self.default_radio.parent()
+        large_container = self.large_radio.parent()
+        
+        # Reset all containers to default style
+        for container in [small_container, default_container, large_container]:
+            container.setStyleSheet(f"""
+                QWidget {{
+                    border: none;
+                    border-radius: 8px;
+                    background-color: transparent;
+                }}
+                QWidget:hover {{
+                    border: 1px solid {COLORS['border']};
+                    background-color: {COLORS['secondary']};
+                }}
+            """)
+        
+        # Update the selected button's container to blue border
+        selected_container = button.parent()
+        selected_container.setStyleSheet(f"""
+            QWidget {{
+                border: 1px solid {COLORS['accent']};
+                border-radius: 8px;
+                background-color: {COLORS['secondary']};
+            }}
+        """)
+
     def create_about_tab(self) -> QWidget:
         """Create about tab"""
         tab = QWidget()
@@ -279,7 +553,7 @@ class SettingsWindow(QWidget):
         # left block (title and version/author)
         left_box = QVBoxLayout()
         left_box.setSpacing(20)
-        title_label = QLabel("<p style='font-size:48px; font-weight:bold; font-family:Inter; color: #fff;'>Tranfastic</p>")
+        title_label = QLabel(f"<p style='font-size:48px; font-weight:bold; font-family:Inter; color: #fff;'>{APP_NAME}</p>")
         left_box.addWidget(title_label)
         info_label = QLabel(
             f"<span style='font-size:12px; font-weight:600;'>Version:</span> "
@@ -294,7 +568,7 @@ class SettingsWindow(QWidget):
 
         # right block (icon)
         icon_label = QLabel()
-        icon_path = str((Path(__file__).parent.parent / "../assets/icon.png").resolve())
+        icon_path = str((Path(__file__).parent.parent.parent / APP_ICON_PATH).resolve())
         pixmap = QPixmap(icon_path)
         pixmap = pixmap.scaled(96, 96, Qt.KeepAspectRatio, Qt.SmoothTransformation)
         icon_label.setPixmap(pixmap)
@@ -315,8 +589,8 @@ class SettingsWindow(QWidget):
         # other content (github button, description, license etc.)
         main_layout.addSpacing(10)
         desc_label = QLabel(
-            "<b>About Tranfastic</b><br>"
-            "Tranfastic is a lightweight Python application for instant, real-time translation while you work."
+            f"<b>About {APP_NAME}</b><br>"
+            f"{APP_NAME} is a lightweight Python application for instant, real-time translation while you work."
             
         )
         desc_label.setWordWrap(True)
@@ -377,11 +651,47 @@ class SettingsWindow(QWidget):
         self.save_history_cb.setChecked(self.config.get("save_history", False))
         self.restore_clipboard_cb.setChecked(self.config.get("restore_clipboard", False))
         
-        # Monitor behavior setting
-        monitor_behavior = self.config.get("monitor_behavior", "cursor")
-        monitor_index = self.monitor_behavior_combo.findData(monitor_behavior)
-        if monitor_index >= 0:
-            self.monitor_behavior_combo.setCurrentIndex(monitor_index)
+        # Popup opening location setting
+        popup_opening_location = self.config.get("popup_opening_location", "cursor")
+        # Handle legacy config key
+        if popup_opening_location == "cursor" and "monitor_behavior" in self.config.config:
+            popup_opening_location = self.config.get("monitor_behavior", "cursor")
+        popup_index = self.popup_opening_location_combo.findData(popup_opening_location)
+        if popup_index >= 0:
+            self.popup_opening_location_combo.setCurrentIndex(popup_index)
+        
+        # Window size setting
+        window_size = self.config.get("window_size", "default")
+        if window_size == "small":
+            self.small_radio.setChecked(True)
+            # Update container styling
+            self.small_radio.parent().setStyleSheet(f"""
+                QWidget {{
+                    border: 1px solid {COLORS['accent']};
+                    border-radius: 8px;
+                    background-color: {COLORS['secondary']};
+                }}
+            """)
+        elif window_size == "large":
+            self.large_radio.setChecked(True)
+            # Update container styling
+            self.large_radio.parent().setStyleSheet(f"""
+                QWidget {{
+                    border: 1px solid {COLORS['accent']};
+                    border-radius: 8px;
+                    background-color: {COLORS['secondary']};
+                }}
+            """)
+        else:  # default
+            self.default_radio.setChecked(True)
+            # Update container styling
+            self.default_radio.parent().setStyleSheet(f"""
+                QWidget {{
+                    border: 1px solid {COLORS['accent']};
+                    border-radius: 8px;
+                    background-color: {COLORS['secondary']};
+                }}
+            """)
     
     def save_settings(self):
         """Save settings from UI to config"""
@@ -424,9 +734,23 @@ class SettingsWindow(QWidget):
             self.config.set("save_history", self.save_history_cb.isChecked())
             self.config.set("restore_clipboard", self.restore_clipboard_cb.isChecked())
             
-            # Monitor behavior setting
-            monitor_behavior = self.monitor_behavior_combo.currentData()
-            self.config.set("monitor_behavior", monitor_behavior)
+            # Popup opening location setting
+            popup_opening_location = self.popup_opening_location_combo.currentData()
+            self.config.set("popup_opening_location", popup_opening_location)
+            
+            # Remove legacy config key if it exists
+            if "monitor_behavior" in self.config.config:
+                del self.config.config["monitor_behavior"]
+                self.config.save_config()
+            
+            # Window size setting
+            if self.small_radio.isChecked():
+                window_size = "small"
+            elif self.large_radio.isChecked():
+                window_size = "large"
+            else:  # default_radio is checked
+                window_size = "default"
+            self.config.set("window_size", window_size)
             
             self.settings_changed.emit()
             self.close()

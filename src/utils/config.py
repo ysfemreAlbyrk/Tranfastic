@@ -14,6 +14,8 @@ APP_VERSION = "1.1.0"
 APP_AUTHOR = "Yusuf Emre Albayrak"
 GITHUB_URL = "https://github.com/ysfemrealbyrk/tranfastic"
 APP_ICON_PATH = "assets/icon.png"
+APP_TEXT_FONT_PATH = "assets/Inter/Inter-VariableFont_opsz,wght.ttf"
+APP_SYMBOL_FONT_PATH = "assets/Material_Symbols_Rounded/MaterialSymbolsRounded-VariableFont_FILL,GRAD,opsz,wght.ttf"
 
 # Supported languages
 SUPPORTED_LANGUAGES = {
@@ -59,8 +61,9 @@ class Config:
             "save_history": False,
             "restore_clipboard": False,
             "theme": "dark",
-            "monitor_behavior": "cursor",  # "cursor", "primary"
-            "preferred_monitor": 0  # 0 = primary, 1 = secondary, etc.
+            "popup_opening_location": "cursor",  # "cursor", "primary", "cursor_below"
+            "preferred_monitor": 0,  # 0 = primary, 1 = secondary, etc.
+            "window_size": "default"  # "small", "default", "large"
         }
         self.config = self.load_config()
         self._sync_startup_setting()
